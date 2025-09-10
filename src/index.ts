@@ -30,6 +30,10 @@ interface JSONUtilsElements {
   downloadBtn: HTMLButtonElement;
   inputStatus: HTMLElement;
   outputStatus: HTMLElement;
+  resizeBar: HTMLElement;
+  inputPanel: HTMLElement;
+  outputPanel: HTMLElement;
+  editorSection: HTMLElement;
 }
 
 type OutputType = 'json' | 'yaml' | 'xml' | 'text';
@@ -64,6 +68,10 @@ class JSONUtils {
       downloadBtn: this.getElementById('downloadBtn') as HTMLButtonElement,
       inputStatus: this.getElementById('inputStatus'),
       outputStatus: this.getElementById('outputStatus'),
+      resizeBar: this.getElementById('resizeBar'),
+      inputPanel: this.getElementBySelector('.input-panel'),
+      outputPanel: this.getElementBySelector('.output-panel'),
+      editorSection: this.getElementBySelector('.editor-section'),
     };
   }
 
@@ -71,6 +79,14 @@ class JSONUtils {
     const element = document.getElementById(id);
     if (!element) {
       throw new Error(`Element with id "${id}" not found`);
+    }
+    return element;
+  }
+
+  private getElementBySelector(selector: string): HTMLElement {
+    const element = document.querySelector(selector) as HTMLElement;
+    if (!element) {
+      throw new Error(`Element with selector "${selector}" not found`);
     }
     return element;
   }
@@ -131,6 +147,9 @@ class JSONUtils {
     this.elements.copyToInputBtn.addEventListener('click', () => this.copyToInput());
     this.elements.copyBtn.addEventListener('click', () => this.copyOutput());
     this.elements.downloadBtn.addEventListener('click', () => this.downloadOutput());
+    
+    // Initialize resize functionality
+    this.initializeResize();
   }
 
   private debounce<T extends (...args: any[]) => void>(func: T, wait: number): (...args: Parameters<T>) => void {
@@ -619,6 +638,95 @@ class JSONUtils {
   private displayOutput(content: string, mode: string): void {
     this.outputEditor.setValue(content);
     this.outputEditor.setOption('mode', mode);
+  }
+
+  private initializeResize(): void {
+    let isResizing = false;
+    let startX = 0;
+    let startInputWidth = 0;
+    let startOutputWidth = 0;
+
+    const handleMouseDown = (e: MouseEvent) => {
+      isResizing = true;
+      startX = e.clientX;
+      
+      // Get current widths
+      const inputRect = this.elements.inputPanel.getBoundingClientRect();
+      const outputRect = this.elements.outputPanel.getBoundingClientRect();
+      startInputWidth = inputRect.width;
+      startOutputWidth = outputRect.width;
+      
+      // Add dragging class for visual feedback
+      this.elements.resizeBar.classList.add('dragging');
+      
+      // Prevent text selection during drag
+      document.body.style.userSelect = 'none';
+      document.body.style.cursor = 'col-resize';
+      
+      e.preventDefault();
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isResizing) return;
+      
+      const deltaX = e.clientX - startX;
+      const containerWidth = this.elements.editorSection.getBoundingClientRect().width;
+      const resizeBarWidth = 12; // Width of the resize bar
+      
+      // Calculate new widths
+      const newInputWidth = startInputWidth + deltaX;
+      const newOutputWidth = startOutputWidth - deltaX;
+      
+      // Set minimum widths (200px each)
+      const minWidth = 200;
+      const maxTotalWidth = containerWidth - resizeBarWidth;
+      
+      if (newInputWidth >= minWidth && newOutputWidth >= minWidth && 
+          (newInputWidth + newOutputWidth) <= maxTotalWidth) {
+        
+        // Calculate fractions for grid-template-columns (using fr units)
+        const totalWidth = newInputWidth + newOutputWidth;
+        const inputFr = newInputWidth / totalWidth;
+        const outputFr = newOutputWidth / totalWidth;
+        
+        // Update grid template columns using fractional units
+        this.elements.editorSection.style.gridTemplateColumns = `${inputFr}fr auto ${outputFr}fr`;
+        
+        // Refresh CodeMirror editors to handle the resize
+        setTimeout(() => {
+          this.inputEditor.refresh();
+          this.outputEditor.refresh();
+        }, 0);
+      }
+      
+      e.preventDefault();
+    };
+
+    const handleMouseUp = () => {
+      if (!isResizing) return;
+      
+      isResizing = false;
+      
+      // Remove dragging class
+      this.elements.resizeBar.classList.remove('dragging');
+      
+      // Restore normal cursor and text selection
+      document.body.style.userSelect = '';
+      document.body.style.cursor = '';
+    };
+
+    // Attach event listeners
+    this.elements.resizeBar.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    
+    // Handle window resize to refresh editors
+    window.addEventListener('resize', () => {
+      setTimeout(() => {
+        this.inputEditor.refresh();
+        this.outputEditor.refresh();
+      }, 100);
+    });
   }
 }
 
