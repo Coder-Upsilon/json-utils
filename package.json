@@ -28,3 +28,4 @@
     "jsonrepair": "^3.4.0"
   }
 }
+{"scripts": {"deploy": "cp dist/index.html docs/ && cp dist/*.js docs/ && cp dist/*.css docs/"}}
