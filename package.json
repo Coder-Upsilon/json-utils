@@ -1,0 +1,30 @@
+{
+  "name": "json-utils",
+  "version": "1.0.0",
+  "description": "A comprehensive web-based JSON utility tool",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve --mode development",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": ["json", "utils", "formatter", "validator", "converter"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/codemirror": "^5.60.15",
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.5.0",
+    "typescript": "^5.2.2",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {
+    "codemirror": "^5.65.16",
+    "jsonrepair": "^3.4.0"
+  }
+}
