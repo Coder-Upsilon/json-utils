@@ -20,6 +20,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/codemirror": "^5.60.15",
+    "copy-webpack-plugin": "^13.0.1",
     "css-loader": "^6.8.1",
     "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
