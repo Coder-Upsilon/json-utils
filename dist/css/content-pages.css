@@ -7,9 +7,9 @@
 
 .content-section {
     background: white;
-    border-radius: 8px;
-    padding: 30px;
-    margin-bottom: 25px;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 15px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -37,8 +37,8 @@
 
 .feature-card {
     background: #f8f9fa;
-    border-radius: 8px;
-    padding: 25px;
+    border-radius: 6px;
+    padding: 20px;
     text-align: center;
     border: 1px solid #e9ecef;
     transition: all 0.3s ease;
@@ -79,9 +79,9 @@
     display: flex;
     align-items: flex-start;
     gap: 15px;
-    padding: 20px;
+    padding: 15px;
     background: #f8f9fa;
-    border-radius: 8px;
+    border-radius: 6px;
     border-left: 4px solid #667eea;
 }
 
@@ -151,8 +151,8 @@
 
 .sitemap-card {
     background: #f8f9fa;
-    border-radius: 8px;
-    padding: 25px;
+    border-radius: 6px;
+    padding: 20px;
     border: 1px solid #e9ecef;
     transition: all 0.3s ease;
 }
@@ -218,8 +218,8 @@
 
 .feature-group {
     background: #f8f9fa;
-    border-radius: 8px;
-    padding: 20px;
+    border-radius: 6px;
+    padding: 15px;
     border: 1px solid #e9ecef;
 }
 
@@ -304,11 +304,11 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 20px;
+    padding: 10px 16px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 6px;
     font-weight: 500;
     transition: all 0.3s ease;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);

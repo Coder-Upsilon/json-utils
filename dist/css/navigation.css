@@ -8,6 +8,21 @@
 
 .header-text {
     flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
+.header-title-group {
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
 }
 
 .header-nav {

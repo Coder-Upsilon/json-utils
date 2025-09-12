@@ -53,6 +53,14 @@ module.exports = (env, argv) => {
             from: 'src/css',
             to: 'css',
           },
+          {
+            from: 'src/assets',
+            to: 'assets',
+          },
+          {
+            from: 'src/robots.txt',
+            to: 'robots.txt',
+          },
         ],
       }),
       ...(isProduction ? [
