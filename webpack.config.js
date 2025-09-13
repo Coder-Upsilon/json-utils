@@ -42,11 +42,6 @@ module.exports = (env, argv) => {
         filename: 'about.html',
         inject: false,
       }),
-      new HtmlWebpackPlugin({
-        template: './src/sitemap.html',
-        filename: 'sitemap.html',
-        inject: false,
-      }),
       new CopyWebpackPlugin({
         patterns: [
           {
@@ -60,6 +55,10 @@ module.exports = (env, argv) => {
           {
             from: 'src/robots.txt',
             to: 'robots.txt',
+          },
+          {
+            from: 'src/sitemap.xml',
+            to: 'sitemap.xml',
           },
         ],
       }),
