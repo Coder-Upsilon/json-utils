@@ -1,0 +1,204 @@
+{{#> layouts/base 
+    title="JSON Filter - JSON Utils" 
+    description="Filter JSON data using JSONPath expressions with our interactive tool"
+    headerSubtitle="Filter JSON with JSONPath expressions"
+    isJsonFilter=true
+    includeCodeMirror=true
+}}
+
+<main class="main-content">
+    <div class="jsonpath-layout">
+            <div class="main-panel">
+                <div class="input-section">
+                    <div class="input-group">
+                        <label for="jsonFilterInput">JSON Data:</label>
+                        <div class="input-container">
+                            <div class="floating-buttons input-floating-buttons">
+                                <button id="clearFilterInputBtn" class="btn-icon" title="Clear input area">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <textarea id="jsonFilterInput" placeholder='Enter your JSON data here, e.g.:
+{
+  "store": {
+    "book": [
+      {
+        "category": "reference",
+        "author": "Nigel Rees",
+        "title": "Sayings of the Century",
+        "price": 8.95
+      },
+      {
+        "category": "fiction",
+        "author": "Evelyn Waugh",
+        "title": "Sword of Honour",
+        "price": 12.99
+      }
+    ]
+  }
+}'></textarea>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="input-group">
+                            <label for="jsonpath-input">JSONPath Expression:</label>
+                            <div class="jsonpath-input-container">
+                                <input type="text" id="jsonpath-input" placeholder="e.g., $.store.book[*].title" />
+                                <button id="drawer-trigger" class="drawer-trigger" title="Open JSONPath Guide">
+                                    <i class="fas fa-question-circle"></i>
+                                    <span>JSONPath Guide</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="button-group">
+                            <button id="filterBtn" class="btn btn-primary">Filter JSON</button>
+                            <button id="clearFilterBtn" class="btn btn-secondary">Clear</button>
+                            <button id="loadFilterSampleBtn" class="btn btn-outline">Load Example</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="output-section">
+                    <div class="output-group">
+                        <label for="filtered-output">Filtered Result:</label>
+                        <div class="output-container">
+                            <div class="floating-buttons">
+                                <button id="copyFilterBtn" class="btn-icon" title="Copy output to clipboard">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                                <button id="downloadFilterBtn" class="btn-icon" title="Download output as file">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                            <textarea id="jsonFilterOutput" readonly placeholder="Filtered JSON will appear here..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="result-info">
+                        <div id="result-count" class="info-item"></div>
+                        <div id="result-type" class="info-item"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="help-panel hidden">
+                <div class="help-header">
+                    <h3>JSONPath Guide</h3>
+                    <button id="toggle-help" class="help-toggle">×</button>
+                </div>
+                
+                <div class="help-content">
+                    <div class="help-section">
+                        <h4>Basic Syntax</h4>
+                        <div class="syntax-list">
+                            <div class="syntax-item">
+                                <code>$</code>
+                                <span>Root node</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>@</code>
+                                <span>Current node</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>.</code>
+                                <span>Child operator</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>..</code>
+                                <span>Recursive descent</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>*</code>
+                                <span>Wildcard</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>[]</code>
+                                <span>Subscript operator</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>[,]</code>
+                                <span>Union operator</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>[start:end]</code>
+                                <span>Array slice</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>[?()]</code>
+                                <span>Filter expression</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="help-section">
+                        <h4>Common Examples</h4>
+                        <div class="examples-list">
+                            <div class="example-item" data-expression="$">
+                                <code>$</code>
+                                <span>Root object</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[*]">
+                                <code>$.store.book[*]</code>
+                                <span>All books</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[0]">
+                                <code>$.store.book[0]</code>
+                                <span>First book</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[*].title">
+                                <code>$.store.book[*].title</code>
+                                <span>All book titles</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[?(@.price &lt; 10)]">
+                                <code>$.store.book[?(@.price &lt; 10)]</code>
+                                <span>Books under $10</span>
+                            </div>
+                            <div class="example-item" data-expression="$..author">
+                                <code>$..author</code>
+                                <span>All authors (recursive)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="help-section">
+                        <h4>Filter Operators</h4>
+                        <div class="operators-list">
+                            <div class="operator-item">
+                                <code>==</code>
+                                <span>Equal to</span>
+                            </div>
+                            <div class="operator-item">
+                                <code>!=</code>
+                                <span>Not equal to</span>
+                            </div>
+                            <div class="operator-item">
+                                <code>&lt;</code>
+                                <span>Less than</span>
+                            </div>
+                            <div class="operator-item">
+                                <code>&lt;=</code>
+                                <span>Less than or equal</span>
+                            </div>
+                            <div class="operator-item">
+                                <code>&gt;</code>
+                                <span>Greater than</span>
+                            </div>
+                            <div class="operator-item">
+                                <code>&gt;=</code>
+                                <span>Greater than or equal</span>
+                            </div>
+                            <div class="operator-item">
+                                <code>=~</code>
+                                <span>Regex match</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{{/layouts/base}}

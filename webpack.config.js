@@ -7,7 +7,11 @@ module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
 
   return {
-    entry: './src/index.ts',
+    entry: {
+      main: './src/main.ts',
+      jsonfilter: './src/jsonfilter.ts',
+      about: './src/about.ts',
+    },
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: isProduction ? '[name].[contenthash].js' : '[name].js',
@@ -28,6 +32,7 @@ module.exports = (env, argv) => {
           use: [
             isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
             'css-loader',
+            'postcss-loader',
           ],
         },
       ],
@@ -36,11 +41,20 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         template: './src/index.html',
         filename: 'index.html',
+        chunks: ['main', 'vendors'],
+        inject: true,
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/jsonfilter.html',
+        filename: 'jsonfilter.html',
+        chunks: ['jsonfilter', 'vendors'],
+        inject: true,
       }),
       new HtmlWebpackPlugin({
         template: './src/about.html',
         filename: 'about.html',
-        inject: false,
+        chunks: ['about', 'vendors'],
+        inject: true,
       }),
       new CopyWebpackPlugin({
         patterns: [

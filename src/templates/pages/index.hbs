@@ -1,0 +1,117 @@
+<div class="controls-section">
+    <div class="control-group-section">
+        <div class="control-group-header">
+            <i class="fas fa-code"></i>
+            <span>JSON Processing</span>
+        </div>
+        <div class="control-group">
+            <button id="formatBtn" class="btn btn-small btn-primary">
+                <i class="fas fa-indent"></i>
+                Pretty Print
+            </button>
+            <button id="minifyBtn" class="btn btn-small btn-primary">
+                <i class="fas fa-compress-alt"></i>
+                Minify
+            </button>
+            <button id="validateBtn" class="btn btn-small btn-primary">
+                <i class="fas fa-check-circle"></i>
+                Validate
+            </button>
+            <button id="fixJsonBtn" class="btn btn-small btn-primary">
+                <i class="fas fa-wrench"></i>
+                Fix JSON
+            </button>
+        </div>
+    </div>
+
+    <div class="control-group-section">
+        <div class="control-group-header">
+            <i class="fas fa-exchange-alt"></i>
+            <span>String Conversion</span>
+        </div>
+        <div class="control-group">
+            <button id="stringifyBtn" class="btn btn-small btn-primary">
+                <i class="fas fa-quote-right"></i>
+                Stringify
+            </button>
+            <button id="parseBtn" class="btn btn-small btn-primary">
+                <i class="fas fa-quote-left"></i>
+                Parse String
+            </button>
+        </div>
+    </div>
+
+    <div class="control-group-section">
+        <div class="control-group-header">
+            <i class="fas fa-file-export"></i>
+            <span>Format Conversion</span>
+        </div>
+        <div class="control-group">
+            <button id="toYamlBtn" class="btn btn-small btn-primary">
+                <i class="fas fa-file-code"></i>
+                To YAML
+            </button>
+            <button id="toXmlBtn" class="btn btn-small btn-primary">
+                <i class="fas fa-code"></i>
+                To XML
+            </button>
+        </div>
+    </div>
+
+    <div class="control-group-section">
+        <div class="control-group-header">
+            <i class="fas fa-play"></i>
+            <span>Quick Start</span>
+        </div>
+        <div class="control-group">
+            <button id="loadSampleBtn" class="btn btn-small btn-secondary">
+                <i class="fas fa-file-import"></i>
+                Load Sample
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="editor-section">
+    <div class="input-panel">
+        <div class="panel-header">
+            <h3>Input JSON</h3>
+            <div id="inputStatus" class="status-inline"></div>
+        </div>
+        <div class="input-container">
+            <div class="floating-buttons input-floating-buttons">
+                <button id="clearBtn" class="btn-icon" title="Clear input area">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+            <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
+        </div>
+    </div>
+
+    <div class="resize-bar" id="resizeBar">
+        <div class="resize-handle">
+            <i class="fas fa-grip-lines-vertical"></i>
+        </div>
+    </div>
+
+    <div class="output-panel">
+        <div class="panel-header">
+            <h3>Output</h3>
+            <div id="outputStatus" class="status-inline"></div>
+        </div>
+        <div class="output-container">
+            <div class="floating-buttons">
+                <button id="copyToInputBtn" class="btn-icon" title="Copy output back to input for further processing">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button id="copyBtn" class="btn-icon" title="Copy output to clipboard">
+                    <i class="fas fa-copy"></i>
+                </button>
+                <button id="downloadBtn" class="btn-icon" title="Download output as file">
+                    <i class="fas fa-download"></i>
+                </button>
+            </div>
+            <textarea id="output" readonly></textarea>
+        </div>
+    </div>
+</div>

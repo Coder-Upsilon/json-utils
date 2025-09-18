@@ -181,7 +181,6 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(4px);
 }
@@ -189,12 +188,10 @@ main {
 .btn-icon:hover {
     background: rgba(255, 255, 255, 1);
     color: #333;
-    transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .btn-icon:active {
-    transform: translateY(0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -305,7 +302,6 @@ textarea {
     cursor: pointer;
     font-size: 13px;
     font-weight: 500;
-    transition: all 0.3s ease;
     margin: 2px;
     min-width: 70px;
 }
@@ -322,7 +318,6 @@ textarea {
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
 }
 
@@ -333,7 +328,6 @@ textarea {
 
 .btn-secondary:hover {
     background: #5a6268;
-    transform: translateY(-1px);
 }
 
 .btn:disabled {
@@ -438,14 +432,4 @@ footer {
     .container {
         padding: 10px;
     }
-}
-
-/* Animation for status messages */
-.status {
-    animation: fadeIn 0.3s ease-in;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
