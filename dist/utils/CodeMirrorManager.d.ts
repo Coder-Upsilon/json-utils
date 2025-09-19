@@ -1,5 +1,12 @@
 import * as CodeMirror from 'codemirror';
+import 'codemirror/mode/javascript/javascript';
 import 'codemirror/addon/edit/matchbrackets';
+import 'codemirror/addon/fold/foldcode';
+import 'codemirror/addon/fold/foldgutter';
+import 'codemirror/addon/fold/brace-fold';
+import 'codemirror/theme/material-darker.css';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/addon/fold/foldgutter.css';
 export interface CodeMirrorConfig {
     mode?: string;
     theme?: string;

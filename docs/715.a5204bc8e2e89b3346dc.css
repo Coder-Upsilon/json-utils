@@ -237,23 +237,11 @@
   }
 }
 @layer utilities {
-  .visible {
-    visibility: visible;
-  }
-  .absolute {
-    position: absolute;
-  }
   .fixed {
     position: fixed;
   }
-  .relative {
-    position: relative;
-  }
   .static {
     position: static;
-  }
-  .sticky {
-    position: sticky;
   }
   .container {
     width: 100%;
@@ -273,9 +261,6 @@
       max-width: 96rem;
     }
   }
-  .block {
-    display: block;
-  }
   .flex {
     display: flex;
   }
@@ -291,17 +276,9 @@
   .rounded {
     border-radius: 0.25rem;
   }
-  .border {
-    border-style: var(--tw-border-style);
-    border-width: 1px;
-  }
   .shadow {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
   }
   .blur {
     --tw-blur: blur(8px);
@@ -339,6 +316,103 @@
   .\[start\:end\] {
     start: end;
   }
+}
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2") format("woff2");
+}
+.fas {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.fa-code::before {
+  content: "\f121";
+}
+.fa-indent::before {
+  content: "\f03c";
+}
+.fa-compress-alt::before {
+  content: "\f422";
+}
+.fa-check-circle::before {
+  content: "\f058";
+}
+.fa-wrench::before {
+  content: "\f0ad";
+}
+.fa-exchange-alt::before {
+  content: "\f362";
+}
+.fa-quote-right::before {
+  content: "\f10e";
+}
+.fa-quote-left::before {
+  content: "\f10d";
+}
+.fa-file-export::before {
+  content: "\f56e";
+}
+.fa-file-code::before {
+  content: "\f1c9";
+}
+.fa-play::before {
+  content: "\f04b";
+}
+.fa-file-import::before {
+  content: "\f56f";
+}
+.fa-trash::before {
+  content: "\f1f8";
+}
+.fa-grip-lines-vertical::before {
+  content: "\f7a5";
+}
+.fa-arrow-left::before {
+  content: "\f060";
+}
+.fa-copy::before {
+  content: "\f0c5";
+}
+.fa-download::before {
+  content: "\f019";
+}
+.fa-home::before {
+  content: "\f015";
+}
+.fa-filter::before {
+  content: "\f0b0";
+}
+.fa-info-circle::before {
+  content: "\f05a";
+}
+.fa-question-circle::before {
+  content: "\f059";
+}
+.fa-search::before {
+  content: "\f002";
+}
+.fa-shield-alt::before {
+  content: "\f3ed";
+}
+.fa-bolt::before {
+  content: "\f0e7";
+}
+.fa-lock::before {
+  content: "\f023";
+}
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #667eea;
 }
 @layer base {
   * {
@@ -1766,11 +1840,6 @@ textarea {
   syntax: "*";
   inherits: false;
 }
-@property --tw-border-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-shadow {
   syntax: "*";
   inherits: false;
@@ -1835,11 +1904,6 @@ textarea {
   syntax: "*";
   inherits: false;
   initial-value: 0 0 #0000;
-}
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
 }
 @property --tw-blur {
   syntax: "*";
@@ -1909,6 +1973,11 @@ textarea {
 @property --tw-tracking {
   syntax: "*";
   inherits: false;
+}
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
 }
 @property --tw-backdrop-blur {
   syntax: "*";
@@ -2005,7 +2074,6 @@ textarea {
       --tw-rotate-z: initial;
       --tw-skew-x: initial;
       --tw-skew-y: initial;
-      --tw-border-style: solid;
       --tw-shadow: 0 0 #0000;
       --tw-shadow-color: initial;
       --tw-shadow-alpha: 100%;
@@ -2020,7 +2088,6 @@ textarea {
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
-      --tw-outline-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
       --tw-contrast: initial;
@@ -2038,6 +2105,7 @@ textarea {
       --tw-ease: initial;
       --tw-font-weight: initial;
       --tw-tracking: initial;
+      --tw-border-style: solid;
       --tw-backdrop-blur: initial;
       --tw-backdrop-brightness: initial;
       --tw-backdrop-contrast: initial;

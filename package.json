@@ -5,8 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "build-templates": "node src/build-templates.js",
-    "clean": "rm -rf docs && mkdir docs",
+    "clean": "rm -rf dist docs && mkdir -p dist docs",
     "build": "npm run clean && npm run build-templates && webpack --mode production && cp -r dist/* docs/",
+    "build:analyze": "npm run clean && npm run build-templates && webpack --mode production --analyze && cp -r dist/* docs/",
     "dev": "npm run build-templates && webpack serve --mode development",
     "type-check": "tsc --noEmit",
     "deploy": "npm run build && cp dist/index.html docs/ && cp dist/*.js docs/ && cp dist/*.css docs/"

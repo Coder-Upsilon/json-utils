@@ -27,3 +27,7 @@ User-agent: YandexBot
 Allow: /
 
 # Disallow certain file types that shouldn't be indexed
+Disallow: /*.css$
+Disallow: /*.js$
+Disallow: /*.json$
+Disallow: /assets/

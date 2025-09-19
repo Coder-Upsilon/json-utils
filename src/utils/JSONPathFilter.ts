@@ -1,6 +1,6 @@
-import * as CodeMirror from 'codemirror';
 import * as JSONPath from 'jsonpath';
 import { CodeMirrorManager } from './CodeMirrorManager';
+import type * as CodeMirror from 'codemirror';
 
 export class JSONPathFilter {
   private inputEditor!: CodeMirror.Editor;
@@ -30,7 +30,6 @@ export class JSONPathFilter {
 
     if (inputEditor) {
       this.inputEditor = inputEditor;
-      console.log('Input editor initialized successfully');
     } else {
       throw new Error('Failed to initialize input editor');
     }
@@ -43,7 +42,6 @@ export class JSONPathFilter {
     
     if (outputEditor) {
       this.outputEditor = outputEditor;
-      console.log('Output editor readOnly status:', this.outputEditor.getOption('readOnly'));
     } else {
       throw new Error('Failed to initialize output editor');
     }

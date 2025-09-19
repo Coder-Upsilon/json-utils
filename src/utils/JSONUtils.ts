@@ -1,6 +1,6 @@
 import { jsonrepair } from 'jsonrepair';
-import * as CodeMirror from 'codemirror';
 import { CodeMirrorManager } from './CodeMirrorManager';
+import type * as CodeMirror from 'codemirror';
 
 interface JSONUtilsElements {
   clearBtn: HTMLButtonElement;

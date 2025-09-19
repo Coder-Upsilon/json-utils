@@ -1,5 +1,19 @@
+// Import only the core CodeMirror functionality
 import * as CodeMirror from 'codemirror';
+
+// Import only required modes
+import 'codemirror/mode/javascript/javascript';
+
+// Import only required addons
 import 'codemirror/addon/edit/matchbrackets';
+import 'codemirror/addon/fold/foldcode';
+import 'codemirror/addon/fold/foldgutter';
+import 'codemirror/addon/fold/brace-fold';
+
+// Import only required themes and CSS
+import 'codemirror/theme/material-darker.css';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/addon/fold/foldgutter.css';
 
 export interface CodeMirrorConfig {
   mode?: string;
@@ -75,7 +89,6 @@ export class CodeMirrorManager {
       // Store the instance
       this.instances.set(textareaId, editor);
       
-      console.log(`CodeMirror successfully initialized on textarea "${textareaId}"`);
       return editor;
     } catch (error) {
       console.error(`Failed to initialize CodeMirror on textarea "${textareaId}":`, error);
@@ -99,7 +112,6 @@ export class CodeMirrorManager {
       try {
         (editor as any).toTextArea();
         this.instances.delete(textareaId);
-        console.log(`CodeMirror instance for "${textareaId}" cleaned up`);
       } catch (error) {
         console.error(`Error cleaning up CodeMirror instance for "${textareaId}":`, error);
       }

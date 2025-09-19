@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./fontawesome-custom.css";
 
 @theme {
   --font-mono: 'Maple Mono', 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
