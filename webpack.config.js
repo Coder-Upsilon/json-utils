@@ -115,6 +115,11 @@ module.exports = (env, argv) => {
             from: 'src/sitemap.xml',
             to: 'sitemap.xml',
           },
+          {
+            from: 'CNAME',
+            to: '.',
+            toType: 'dir',
+          },
         ],
       }),
       ...(isProduction ? [
