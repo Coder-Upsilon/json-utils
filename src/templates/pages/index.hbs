@@ -1,45 +1,4 @@
 <div class="controls-section">
-    <div class="control-group-section">
-        <div class="control-group-header">
-            <i class="fas fa-code"></i>
-            <span>JSON Processing</span>
-        </div>
-        <div class="control-group">
-            <button id="formatBtn" class="btn btn-small btn-primary">
-                <i class="fas fa-indent"></i>
-                Pretty Print
-            </button>
-            <button id="minifyBtn" class="btn btn-small btn-primary">
-                <i class="fas fa-compress-alt"></i>
-                Minify
-            </button>
-            <button id="validateBtn" class="btn btn-small btn-primary">
-                <i class="fas fa-check-circle"></i>
-                Validate
-            </button>
-            <button id="fixJsonBtn" class="btn btn-small btn-primary">
-                <i class="fas fa-wrench"></i>
-                Fix JSON
-            </button>
-        </div>
-    </div>
-
-    <div class="control-group-section">
-        <div class="control-group-header">
-            <i class="fas fa-exchange-alt"></i>
-            <span>String Conversion</span>
-        </div>
-        <div class="control-group">
-            <button id="stringifyBtn" class="btn btn-small btn-primary">
-                <i class="fas fa-quote-right"></i>
-                Stringify
-            </button>
-            <button id="parseBtn" class="btn btn-small btn-primary">
-                <i class="fas fa-quote-left"></i>
-                Parse String
-            </button>
-        </div>
-    </div>
 
     <div class="control-group-section">
         <div class="control-group-header">
@@ -75,7 +34,14 @@
 <div class="editor-section">
     <div class="input-panel">
         <div class="panel-header">
-            <h3>Input JSON</h3>
+            <div class="panel-title-group">
+                <h3>Input JSON</h3>
+                <label class="parse-string-toggle">
+                    <input type="checkbox" id="parseStringToggle">
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">Parse String</span>
+                </label>
+            </div>
             <div id="inputStatus" class="status-inline"></div>
         </div>
         <div class="input-container">
@@ -88,15 +54,25 @@
         </div>
     </div>
 
-    <div class="resize-bar" id="resizeBar">
-        <div class="resize-handle">
-            <i class="fas fa-grip-lines-vertical"></i>
-        </div>
-    </div>
-
     <div class="output-panel">
         <div class="panel-header">
-            <h3>Output</h3>
+            <div class="panel-title-group">
+                <h3>Output</h3>
+                <div class="output-format-controls">
+                    <label class="format-radio">
+                        <input type="radio" name="outputFormat" value="pretty" checked>
+                        <span>Pretty</span>
+                    </label>
+                    <label class="format-radio">
+                        <input type="radio" name="outputFormat" value="minify">
+                        <span>Minify</span>
+                    </label>
+                    <label class="format-radio">
+                        <input type="radio" name="outputFormat" value="stringify">
+                        <span>Stringify</span>
+                    </label>
+                </div>
+            </div>
             <div id="outputStatus" class="status-inline"></div>
         </div>
         <div class="output-container">

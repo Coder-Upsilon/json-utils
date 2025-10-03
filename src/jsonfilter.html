@@ -260,17 +260,49 @@
                                 <code>$.store.book[0]</code>
                                 <span>First book</span>
                             </div>
+                            <div class="example-item" data-expression="$.store.book[-1]">
+                                <code>$.store.book[-1]</code>
+                                <span>Last book</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[0:2]">
+                                <code>$.store.book[0:2]</code>
+                                <span>First two books</span>
+                            </div>
                             <div class="example-item" data-expression="$.store.book[*].title">
                                 <code>$.store.book[*].title</code>
                                 <span>All book titles</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[*].author">
+                                <code>$.store.book[*].author</code>
+                                <span>All authors</span>
                             </div>
                             <div class="example-item" data-expression="$.store.book[?(@.price &lt; 10)]">
                                 <code>$.store.book[?(@.price &lt; 10)]</code>
                                 <span>Books under $10</span>
                             </div>
+                            <div class="example-item" data-expression="$.store.book[?(@.price &gt; 10)]">
+                                <code>$.store.book[?(@.price &gt; 10)]</code>
+                                <span>Books over $10</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[?(@.category == 'fiction')]">
+                                <code>$.store.book[?(@.category == 'fiction')]</code>
+                                <span>Fiction books only</span>
+                            </div>
                             <div class="example-item" data-expression="$..author">
                                 <code>$..author</code>
                                 <span>All authors (recursive)</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store..price">
+                                <code>$.store..price</code>
+                                <span>All prices in store</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[0,1]">
+                                <code>$.store.book[0,1]</code>
+                                <span>First and second books</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.*">
+                                <code>$.store.*</code>
+                                <span>All direct children of store</span>
                             </div>
                         </div>
                     </div>

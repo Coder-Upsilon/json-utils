@@ -3,19 +3,22 @@ export declare class JSONUtils {
     private inputEditor;
     private outputEditor;
     private currentOutputType;
+    private lastValidJSON;
     constructor();
     private initializeElements;
     private getElementById;
     private getElementBySelector;
     private initializeEditors;
     private attachEventListeners;
+    private handleParseStringToggle;
     private debounce;
     private clearInput;
     private loadSample;
     private validateInput;
-    private formatJSON;
-    private minifyJSON;
-    private validateJSON;
+    private parseJSONStringForValidation;
+    private attemptAutoFix;
+    private handleFormatChange;
+    private applyCurrentFormat;
     private analyzeJSON;
     private getDetailedError;
     private convertToYAML;
@@ -31,6 +34,7 @@ export declare class JSONUtils {
     private copyOutput;
     private downloadOutput;
     private showStatus;
+    private toggleErrorExpansion;
     private clearStatus;
     private displayOutput;
 }

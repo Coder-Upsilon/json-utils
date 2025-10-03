@@ -5,23 +5,15 @@ import type * as CodeMirror from 'codemirror';
 interface JSONUtilsElements {
   clearBtn: HTMLButtonElement;
   loadSampleBtn: HTMLButtonElement;
-  formatBtn: HTMLButtonElement;
-  minifyBtn: HTMLButtonElement;
-  validateBtn: HTMLButtonElement;
   toYamlBtn: HTMLButtonElement;
   toXmlBtn: HTMLButtonElement;
-  fixJsonBtn: HTMLButtonElement;
-  stringifyBtn: HTMLButtonElement;
-  parseBtn: HTMLButtonElement;
+  parseStringToggle: HTMLInputElement;
   copyToInputBtn: HTMLButtonElement;
   copyBtn: HTMLButtonElement;
   downloadBtn: HTMLButtonElement;
   inputStatus: HTMLElement;
   outputStatus: HTMLElement;
-  resizeBar: HTMLElement;
-  inputPanel: HTMLElement;
-  outputPanel: HTMLElement;
-  editorSection: HTMLElement;
+  formatRadios: NodeListOf<HTMLInputElement>;
 }
 
 type OutputType = 'json' | 'yaml' | 'xml' | 'text';
@@ -32,6 +24,7 @@ export class JSONUtils {
   private inputEditor!: CodeMirror.Editor;
   private outputEditor!: CodeMirror.Editor;
   private currentOutputType: OutputType = 'json';
+  private lastValidJSON: any = null;
 
   constructor() {
     this.initializeElements();
@@ -43,23 +36,15 @@ export class JSONUtils {
     this.elements = {
       clearBtn: this.getElementById('clearBtn') as HTMLButtonElement,
       loadSampleBtn: this.getElementById('loadSampleBtn') as HTMLButtonElement,
-      formatBtn: this.getElementById('formatBtn') as HTMLButtonElement,
-      minifyBtn: this.getElementById('minifyBtn') as HTMLButtonElement,
-      validateBtn: this.getElementById('validateBtn') as HTMLButtonElement,
       toYamlBtn: this.getElementById('toYamlBtn') as HTMLButtonElement,
       toXmlBtn: this.getElementById('toXmlBtn') as HTMLButtonElement,
-      fixJsonBtn: this.getElementById('fixJsonBtn') as HTMLButtonElement,
-      stringifyBtn: this.getElementById('stringifyBtn') as HTMLButtonElement,
-      parseBtn: this.getElementById('parseBtn') as HTMLButtonElement,
+      parseStringToggle: this.getElementById('parseStringToggle') as HTMLInputElement,
       copyToInputBtn: this.getElementById('copyToInputBtn') as HTMLButtonElement,
       copyBtn: this.getElementById('copyBtn') as HTMLButtonElement,
       downloadBtn: this.getElementById('downloadBtn') as HTMLButtonElement,
       inputStatus: this.getElementById('inputStatus'),
       outputStatus: this.getElementById('outputStatus'),
-      resizeBar: this.getElementById('resizeBar'),
-      inputPanel: this.getElementBySelector('.input-panel'),
-      outputPanel: this.getElementBySelector('.output-panel'),
-      editorSection: this.getElementBySelector('.editor-section'),
+      formatRadios: document.querySelectorAll('input[name="outputFormat"]') as NodeListOf<HTMLInputElement>,
     };
   }
 
@@ -116,18 +101,49 @@ export class JSONUtils {
   private attachEventListeners(): void {
     this.elements.clearBtn.addEventListener('click', () => this.clearInput());
     this.elements.loadSampleBtn.addEventListener('click', () => this.loadSample());
-    this.elements.formatBtn.addEventListener('click', () => this.formatJSON());
-    this.elements.minifyBtn.addEventListener('click', () => this.minifyJSON());
-    this.elements.validateBtn.addEventListener('click', () => this.validateJSON());
     this.elements.toYamlBtn.addEventListener('click', () => this.convertToYAML());
     this.elements.toXmlBtn.addEventListener('click', () => this.convertToXML());
-    this.elements.fixJsonBtn.addEventListener('click', () => this.fixJSON());
-    this.elements.stringifyBtn.addEventListener('click', () => this.stringifyJSON());
-    this.elements.parseBtn.addEventListener('click', () => this.parseJSONString());
+    this.elements.parseStringToggle.addEventListener('change', () => this.handleParseStringToggle());
     this.elements.copyToInputBtn.addEventListener('click', () => this.copyToInput());
     this.elements.copyBtn.addEventListener('click', () => this.copyOutput());
     this.elements.downloadBtn.addEventListener('click', () => this.downloadOutput());
+    
+    // Format radio buttons - format output content
+    this.elements.formatRadios.forEach(radio => {
+      radio.addEventListener('change', () => this.handleFormatChange());
+    });
+
+    // Make error status expandable
+    this.elements.inputStatus.addEventListener('click', (e) => {
+      if (this.elements.inputStatus.classList.contains('error')) {
+        e.stopPropagation();
+        this.toggleErrorExpansion(this.elements.inputStatus);
+      }
+    });
   }
+
+  private handleParseStringToggle(): void {
+    // Re-validate input with new toggle state
+    const input = this.inputEditor.getValue().trim();
+    if (input) {
+      this.validateInput();
+      
+      // If validation was successful and toggle is ON, display the parsed result
+      if (this.elements.parseStringToggle.checked && this.lastValidJSON) {
+        const formatted = JSON.stringify(this.lastValidJSON, null, 2);
+        this.displayOutput(formatted, 'application/json');
+        this.currentOutputType = 'json';
+        this.showStatus(this.elements.outputStatus, 'JSON string parsed', 'success');
+      } else if (!this.elements.parseStringToggle.checked && this.lastValidJSON) {
+        // Toggle is OFF, display normal pretty print
+        const formatted = JSON.stringify(this.lastValidJSON, null, 2);
+        this.displayOutput(formatted, 'application/json');
+        this.currentOutputType = 'json';
+        this.showStatus(this.elements.outputStatus, 'Pretty printed', 'success');
+      }
+    }
+  }
+
 
   private debounce<T extends (...args: any[]) => void>(func: T, wait: number): (...args: Parameters<T>) => void {
     let timeout: NodeJS.Timeout;
@@ -169,76 +185,119 @@ export class JSONUtils {
     const input = this.inputEditor.getValue().trim();
     if (!input) {
       this.clearStatus();
+      this.lastValidJSON = null;
+      return;
+    }
+
+    // If Parse String toggle is ON, treat input as escaped JSON string
+    if (this.elements.parseStringToggle.checked) {
+      this.parseJSONStringForValidation(input);
       return;
     }
 
     try {
-      JSON.parse(input);
+      this.lastValidJSON = JSON.parse(input);
       this.showStatus(this.elements.inputStatus, 'Valid JSON', 'success');
+      // Apply current format to output
+      this.applyCurrentFormat();
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      this.showStatus(this.elements.inputStatus, `Invalid JSON: ${errorMessage}`, 'error');
+      
+      // Always attempt auto-fix
+      this.attemptAutoFix(input, errorMessage);
     }
   }
 
-  private formatJSON(): void {
-    const input = this.inputEditor.getValue().trim();
-    if (!input) {
-      this.showStatus(this.elements.outputStatus, 'Please enter JSON data first', 'error');
+  private parseJSONStringForValidation(input: string): void {
+    try {
+      // Parse the escaped string
+      const jsonString = JSON.parse(input);
+      
+      if (typeof jsonString !== 'string') {
+        this.showStatus(this.elements.inputStatus, 'Input must be a JSON string', 'error');
+        this.lastValidJSON = null;
+        return;
+      }
+
+      // Parse the actual JSON
+      const parsed = JSON.parse(jsonString);
+      this.lastValidJSON = parsed;
+      this.showStatus(this.elements.inputStatus, 'Valid JSON string', 'success');
+      // Apply current format to output
+      this.applyCurrentFormat();
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      this.showStatus(this.elements.inputStatus, `Invalid JSON string: ${errorMessage}`, 'error');
+      this.lastValidJSON = null;
+    }
+  }
+
+  private attemptAutoFix(input: string, originalError: string): void {
+    try {
+      // Try custom repair first
+      const customFixed = this.customJSONRepair(input);
+      const parsed = JSON.parse(customFixed);
+      
+      // Store the valid JSON for format operations
+      this.lastValidJSON = parsed;
+      
+      // Apply current format to output
+      this.applyCurrentFormat();
+      this.showStatus(this.elements.inputStatus, `Fixed: ${originalError}`, 'info');
+      this.showStatus(this.elements.outputStatus, 'Fixed JSON displayed', 'success');
+    } catch (customError) {
+      // Try jsonrepair library
+      try {
+        const fixed = jsonrepair(input);
+        const parsed = JSON.parse(fixed);
+        
+        // Store the valid JSON for format operations
+        this.lastValidJSON = parsed;
+        
+        // Apply current format to output
+        this.applyCurrentFormat();
+        this.showStatus(this.elements.inputStatus, `Fixed: ${originalError}`, 'info');
+        this.showStatus(this.elements.outputStatus, 'Fixed JSON displayed', 'success');
+      } catch (fixError) {
+        // Could not auto-fix, show original error
+        this.lastValidJSON = null;
+        this.showStatus(this.elements.inputStatus, `Invalid JSON: ${originalError}`, 'error');
+      }
+    }
+  }
+
+  private handleFormatChange(): void {
+    this.applyCurrentFormat();
+  }
+
+  private applyCurrentFormat(): void {
+    // Use stored valid JSON (always the original parsed version)
+    if (!this.lastValidJSON) {
       return;
     }
 
-    try {
-      const parsed = JSON.parse(input);
-      const formatted = JSON.stringify(parsed, null, 2);
+    const selectedFormat = Array.from(this.elements.formatRadios).find(radio => radio.checked)?.value;
+    
+    // Apply the selected format to the stored valid JSON
+    if (selectedFormat === 'pretty') {
+      const formatted = JSON.stringify(this.lastValidJSON, null, 2);
       this.displayOutput(formatted, 'application/json');
       this.currentOutputType = 'json';
-      this.showStatus(this.elements.outputStatus, 'JSON formatted successfully', 'success');
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      this.showStatus(this.elements.outputStatus, `Error formatting JSON: ${errorMessage}`, 'error');
-    }
-  }
-
-  private minifyJSON(): void {
-    const input = this.inputEditor.getValue().trim();
-    if (!input) {
-      this.showStatus(this.elements.outputStatus, 'Please enter JSON data first', 'error');
-      return;
-    }
-
-    try {
-      const parsed = JSON.parse(input);
-      const minified = JSON.stringify(parsed);
+      this.showStatus(this.elements.outputStatus, 'Formatted as Pretty', 'success');
+    } else if (selectedFormat === 'minify') {
+      const minified = JSON.stringify(this.lastValidJSON);
       this.displayOutput(minified, 'application/json');
       this.currentOutputType = 'json';
-      this.showStatus(this.elements.outputStatus, 'JSON minified successfully', 'success');
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      this.showStatus(this.elements.outputStatus, `Error minifying JSON: ${errorMessage}`, 'error');
+      this.showStatus(this.elements.outputStatus, 'Minified successfully', 'success');
+    } else if (selectedFormat === 'stringify') {
+      const stringified = JSON.stringify(this.lastValidJSON);
+      const escapedString = JSON.stringify(stringified);
+      this.displayOutput(escapedString, 'text/plain');
+      this.currentOutputType = 'text';
+      this.showStatus(this.elements.outputStatus, 'Stringified successfully', 'success');
     }
   }
 
-  private validateJSON(): void {
-    const input = this.inputEditor.getValue().trim();
-    if (!input) {
-      this.showStatus(this.elements.outputStatus, 'Please enter JSON data first', 'error');
-      return;
-    }
-
-    try {
-      const parsed = JSON.parse(input);
-      const analysis = this.analyzeJSON(parsed);
-      this.displayOutput(`✅ Valid JSON!\n\n${analysis}`, 'text/plain');
-      this.currentOutputType = 'text';
-      this.showStatus(this.elements.outputStatus, 'JSON is valid', 'success');
-    } catch (error) {
-      const errorInfo = this.getDetailedError(error, input);
-      this.displayOutput(`❌ Invalid JSON!\n\n${errorInfo}`, 'text/plain');
-      this.currentOutputType = 'text';
-      this.showStatus(this.elements.outputStatus, 'JSON validation failed', 'error');
-    }
-  }
 
   private analyzeJSON(obj: any): string {
     const analysis: string[] = [];
@@ -601,8 +660,28 @@ export class JSONUtils {
   }
 
   private showStatus(element: HTMLElement, message: string, type: StatusType): void {
-    element.textContent = message;
+    element.innerHTML = '';
     element.className = `status-inline ${type}`;
+    
+    // Add collapsed class for errors by default
+    if (type === 'error') {
+      element.classList.add('collapsed');
+    }
+    
+    const contentSpan = document.createElement('span');
+    contentSpan.className = 'error-content';
+    contentSpan.textContent = message;
+    element.appendChild(contentSpan);
+  }
+
+  private toggleErrorExpansion(element: HTMLElement): void {
+    if (element.classList.contains('collapsed')) {
+      element.classList.remove('collapsed');
+      element.classList.add('expanded');
+    } else if (element.classList.contains('expanded')) {
+      element.classList.remove('expanded');
+      element.classList.add('collapsed');
+    }
   }
 
   private clearStatus(): void {

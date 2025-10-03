@@ -17,6 +17,44 @@ The JSON Utils application follows a modular architecture with separate entry po
 - **CSS Bundle Optimization**: Reduced bundle size from 62.8 KiB to 61.2 KiB through animation removal
 - **Immediate Page Loads**: Zero movement-based animations ensure instant, clean page rendering
 
+### Always-On Auto-Fix Pattern
+The application implements automatic JSON repair without requiring user action:
+
+```typescript
+private validateInput(): void {
+  try {
+    this.lastValidJSON = JSON.parse(input);
+    this.showStatus(this.elements.inputStatus, 'Valid JSON', 'success');
+  } catch (error) {
+    // Always attempt auto-fix (no toggle required)
+    this.attemptAutoFix(input, errorMessage);
+  }
+}
+
+private attemptAutoFix(input: string, originalError: string): void {
+  try {
+    const fixed = this.customJSONRepair(input);
+    const parsed = JSON.parse(fixed);
+    
+    // Store the fixed JSON for format operations
+    this.lastValidJSON = parsed;
+    
+    // Show what was fixed in the error message
+    this.showStatus(this.elements.inputStatus, `Fixed: ${originalError}`, 'info');
+    this.displayOutput(JSON.stringify(parsed, null, 2), 'application/json');
+  } catch (fixError) {
+    // Could not auto-fix, show original error
+    this.showStatus(this.elements.inputStatus, `Invalid JSON: ${originalError}`, 'error');
+  }
+}
+```
+
+**Benefits:**
+- Zero user action required for JSON repair
+- Clear feedback about what was fixed
+- Original input preserved for reference
+- Fixed JSON immediately available for formatting
+
 ### CodeMirror Management Pattern
 - **Centralized Instance Management**: `CodeMirrorManager` utility class prevents duplicate editor instances
 - **Singleton Pattern**: Each textarea ID maps to a single CodeMirror instance
@@ -65,8 +103,57 @@ export class CodeMirrorManager {
 
 ### Utility Classes
 - **JSONUtils**: Main JSON processing functionality (format, validate, convert)
+  - Implements stored JSON pattern with `lastValidJSON` property
+  - Always-on auto-fix with intelligent error recovery
+  - Consolidated format operations using stored parsed JSON
 - **JSONPathFilter**: JSONPath expression filtering and querying
 - **CodeMirrorManager**: Centralized editor instance management
+
+### Stored JSON Pattern
+The application implements a smart caching pattern to prevent duplicate parsing operations:
+
+```typescript
+export class JSONUtils {
+  private lastValidJSON: any = null;
+
+  private validateInput(): void {
+    const input = this.inputEditor.getValue().trim();
+    if (!input) {
+      this.lastValidJSON = null;
+      return;
+    }
+
+    try {
+      // Store parsed JSON on successful validation
+      this.lastValidJSON = JSON.parse(input);
+      this.showStatus(this.elements.inputStatus, 'Valid JSON', 'success');
+    } catch (error) {
+      // Always attempt auto-fix, update stored JSON if successful
+      this.attemptAutoFix(input, errorMessage);
+    }
+  }
+
+  private handleFormatChange(): void {
+    // All format operations use the stored valid JSON
+    if (!this.lastValidJSON) {
+      return;
+    }
+    
+    // Apply format to stored JSON (never re-parse)
+    if (selectedFormat === 'pretty') {
+      const formatted = JSON.stringify(this.lastValidJSON, null, 2);
+      this.displayOutput(formatted, 'application/json');
+    }
+    // ... other formats
+  }
+}
+```
+
+**Benefits:**
+- Single parse per input change
+- No duplicate operations when switching formats
+- Consistent results across all format operations
+- Better performance and user experience
 
 ### Template Architecture
 - **Base Layout**: `layouts/base.hbs` provides common structure
@@ -107,6 +194,22 @@ base.hbs (layout)
 4. Development server serves processed files
 
 ## Error Prevention Patterns
+
+### Duplicate Operation Prevention
+The stored JSON pattern prevents duplicate parsing operations:
+- Parse input once when it changes
+- Store the parsed JSON object
+- All format operations use the stored object
+- Never re-parse the output text
+- Eliminates issues with formatting already-formatted content
+
+### Expandable Error Display
+Errors are shown in a user-friendly, progressive disclosure pattern:
+- **Collapsed by default**: One-line summary (max 200px width)
+- **Click to expand**: Shows full error message with line wrapping
+- **Position preservation**: Expands in place without moving
+- **Absolute positioning**: Overlays content without resizing layout
+- **Clear feedback**: Shows original error when auto-fix succeeds
 
 ### CodeMirror Duplication Prevention
 - Instance checking before creation
