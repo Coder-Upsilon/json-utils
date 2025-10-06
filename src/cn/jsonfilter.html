@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSONPath 过滤器 - 在线查询和提取 JSON 数据 | JSON 工具</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="高级 JSONPath 查询工具，用于从复杂 JSON 中过滤和提取数据。交互式编辑器，带有语法指南、实时示例和即时结果。支持通配符、递归下降和过滤表达式。适合 API 响应分析和数据提取。">
+    <meta name="keywords" content="JSONPath过滤, JSONPath查询, JSON数据提取, JSONPath表达式, 在线过滤JSON, JSONPath语法, JSON查询工具, 提取JSON值, 嵌套JSON查询, API响应过滤, JSON路径选择器, 高级JSON过滤, JSONPath通配符, 递归JSON搜索">
+    <meta name="author" content="coderupsilon">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="zh-CN">
+    
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/jsonfilter" />
+    <link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/jsonfilter" />
+    <link rel="alternate" hreflang="x-default" href="https://www.onlinejsonutils.com/jsonfilter" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="JSONPath 过滤器 - 在线查询和提取 JSON 数据 | JSON 工具">
+    <meta property="og:description" content="高级 JSONPath 查询工具，用于从复杂 JSON 中过滤和提取数据。交互式编辑器，带有语法指南、实时示例和即时结果。支持通配符、递归下降和过滤表达式。适合 API 响应分析和数据提取。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.onlinejsonutils.com/cn/jsonfilter">
+    <meta property="og:site_name" content="JSON Utils">
+    <meta property="og:image" content="https://www.onlinejsonutils.com/assets/logo.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="zh_CN">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JSONPath 过滤器 - 在线查询和提取 JSON 数据 | JSON 工具">
+    <meta name="twitter:description" content="高级 JSONPath 查询工具，用于从复杂 JSON 中过滤和提取数据。交互式编辑器，带有语法指南、实时示例和即时结果。支持通配符、递归下降和过滤表达式。适合 API 响应分析和数据提取。">
+    <meta name="twitter:image" content="https://www.onlinejsonutils.com/assets/logo.svg">
+    <meta name="twitter:site" content="@jsonutils">
+    <meta name="twitter:creator" content="@coderupsilon">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="msapplication-TileColor" content="#667eea">
+    <meta name="application-name" content="JSON Utils">
+    <meta name="apple-mobile-web-app-title" content="JSON Utils">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="canonical" href="https://www.onlinejsonutils.com/cn/jsonfilter">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "JSON Filter - JSONPath Query Tool",
+  "description": "高级 JSONPath 查询工具，用于从复杂 JSON 中过滤和提取数据。交互式编辑器，带有语法指南、实时示例和即时结果。支持通配符、递归下降和过滤表达式。适合 API 响应分析和数据提取。",
+  "url": "https://www.onlinejsonutils.com/cn/jsonfilter",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web Browser",
+  "inLanguage": "zh-CN",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "JSONPath Expression Filtering",
+    "Interactive Query Builder",
+    "Syntax Guide and Examples",
+    "Real-time Results",
+    "Complex Data Extraction",
+    "Array and Object Filtering"
+  ]
+}
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.svg">
+    
+    <!-- Resource Hints for Performance -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8PBB4NZWX2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8PBB4NZWX2');
+    </script>
+    
+    <!-- CodeMirror CSS is now bundled with webpack -->
+    <!-- Font Awesome icons optimized - only load specific icons used -->
+    
+    <!-- Tailwind CSS (processed by webpack) -->
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="header-text">
+                    <img src="../assets/logo.svg" alt="JSON Utils Logo" class="logo">
+                    <div class="header-title-group">
+                        <h1>JSON Utils</h1>
+                        <p>使用 JSONPath 表达式过滤 JSON</p>
+                    </div>
+                </div>
+                <nav class="header-nav">
+                    <a href="/cn/index.html" class="nav-link">
+                        <i class="fas fa-home"></i> 首页
+                    </a>
+                    <a href="/cn/jsonfilter.html" class="nav-link active">
+                        <i class="fas fa-filter"></i> JSONPath 过滤
+                    </a>
+                    <a href="/cn/formatconvert.html" class="nav-link">
+                        <i class="fas fa-exchange-alt"></i> 格式转换
+                    </a>
+                    <a href="/cn/about.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i> 关于
+                    </a>
+                    <select class="language-dropdown-select" onchange="window.location.href=this.value">
+                        <option value="/jsonfilter.html">English</option>
+                        <option value="/cn/jsonfilter.html" selected>中文</option>
+                    </select>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <main class="main-content">
+    <div class="jsonpath-layout">
+            <div class="main-panel">
+                <div class="input-section">
+                    <div class="input-group">
+                        <label for="jsonFilterInput">JSON 数据：</label>
+                        <div class="input-container">
+                            <div class="floating-buttons input-floating-buttons">
+                                <button id="clearFilterInputBtn" class="btn-icon" title="清空输入区域">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <textarea id="jsonFilterInput" placeholder='Enter your JSON data here, e.g.:
+{
+  "store": {
+    "book": [
+      {
+        "category": "reference",
+        "author": "Nigel Rees",
+        "title": "Sayings of the Century",
+        "price": 8.95
+      },
+      {
+        "category": "fiction",
+        "author": "Evelyn Waugh",
+        "title": "Sword of Honour",
+        "price": 12.99
+      }
+    ]
+  }
+}'></textarea>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="input-group">
+                            <label for="jsonpath-input">JSONPath 表达式：</label>
+                            <div class="jsonpath-input-container">
+                                <input type="text" id="jsonpath-input" placeholder="例如：$.store.book[*].title" />
+                                <button id="drawer-trigger" class="drawer-trigger" title="打开 JSONPath 指南">
+                                    <i class="fas fa-question-circle"></i>
+                                    <span>JSONPath 指南</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="button-group">
+                            <button id="filterBtn" class="btn btn-primary">过滤 JSON</button>
+                            <button id="clearFilterBtn" class="btn btn-secondary">清除</button>
+                            <button id="loadFilterSampleBtn" class="btn btn-outline">加载示例</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="output-section">
+                    <div class="output-group">
+                        <label for="filtered-output">过滤结果：</label>
+                        <div class="output-container">
+                            <div class="floating-buttons">
+                                <button id="copyFilterBtn" class="btn-icon" title="复制输出到剪贴板">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                                <button id="downloadFilterBtn" class="btn-icon" title="下载输出为文件">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                            <textarea id="jsonFilterOutput" readonly placeholder="过滤后的 JSON 将在此显示..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="result-info">
+                        <div id="result-count" class="info-item"></div>
+                        <div id="result-type" class="info-item"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="help-panel hidden">
+                <div class="help-header">
+                    <h3>JSONPath 指南</h3>
+                    <button id="toggle-help" class="help-toggle">×</button>
+                </div>
+                
+                <div class="help-content">
+                    <div class="help-section">
+                        <h4>基本语法</h4>
+                        <div class="syntax-list">
+                            <div class="syntax-item">
+                                <code>$</code>
+                                <span>根节点</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>@</code>
+                                <span>当前节点</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>.</code>
+                                <span>子运算符</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>..</code>
+                                <span>递归下降</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>*</code>
+                                <span>通配符</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>[]</code>
+                                <span>下标运算符</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>[,]</code>
+                                <span>联合运算符</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>[start:end]</code>
+                                <span>数组切片</span>
+                            </div>
+                            <div class="syntax-item">
+                                <code>[?()]</code>
+                                <span>过滤表达式</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="help-section">
+                        <h4>常用示例</h4>
+                        <div class="examples-list">
+                            <div class="example-item" data-expression="$">
+                                <code>$</code>
+                                <span>根对象</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[*]">
+                                <code>$.store.book[*]</code>
+                                <span>所有书籍</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[0]">
+                                <code>$.store.book[0]</code>
+                                <span>第一本书</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[-1]">
+                                <code>$.store.book[-1]</code>
+                                <span>最后一本书</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[0:2]">
+                                <code>$.store.book[0:2]</code>
+                                <span>前两本书</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[*].title">
+                                <code>$.store.book[*].title</code>
+                                <span>所有书名</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[*].author">
+                                <code>$.store.book[*].author</code>
+                                <span>所有作者</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[?(@.price &lt; 10)]">
+                                <code>$.store.book[?(@.price &lt; 10)]</code>
+                                <span>10 美元以下的书</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[?(@.price &gt; 10)]">
+                                <code>$.store.book[?(@.price &gt; 10)]</code>
+                                <span>10 美元以上的书</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[?(@.category == 'fiction')]">
+                                <code>$.store.book[?(@.category == 'fiction')]</code>
+                                <span>仅限小说类书籍</span>
+                            </div>
+                            <div class="example-item" data-expression="$..author">
+                                <code>$..author</code>
+                                <span>所有作者（递归）</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store..price">
+                                <code>$.store..price</code>
+                                <span>商店中的所有价格</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.book[0,1]">
+                                <code>$.store.book[0,1]</code>
+                                <span>第一本和第二本书</span>
+                            </div>
+                            <div class="example-item" data-expression="$.store.*">
+                                <code>$.store.*</code>
+                                <span>商店的所有直接子项</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="help-section">
+                        <h4>过滤运算符</h4>
+                        <div class="operators-list">
+                            <div class="operator-item">
+                                <code>==</code>
+                                <span>等于</span>
+                            </div>
+                            <div class="operator-item">
+                                <code>!=</code>
+                                <span>不等于</span>
+                            </div>
+                            <div class="operator-item">
+                                <code>&lt;</code>
+                                <span>小于</span>
+                            </div>
+                            <div class="operator-item">
+                                <code>&lt;=</code>
+                                <span>小于或等于</span>
+                            </div>
+                            <div class="operator-item">
+                                <code>&gt;</code>
+                                <span>大于</span>
+                            </div>
+                            <div class="operator-item">
+                                <code>&gt;=</code>
+                                <span>大于或等于</span>
+                            </div>
+                            <div class="operator-item">
+                                <code>=~</code>
+                                <span>正则匹配</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+        </main>
+
+        <footer>
+            <p>&copy; 2025 JSON Utils - Client-side JSON processing for privacy and speed</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -20,12 +20,6 @@ export declare class JSONUtils {
     private handleFormatChange;
     private applyCurrentFormat;
     private analyzeJSON;
-    private getDetailedError;
-    private convertToYAML;
-    private jsonToYAML;
-    private convertToXML;
-    private jsonToXML;
-    private escapeXML;
     private fixJSON;
     private stringifyJSON;
     private parseJSONString;

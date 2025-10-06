@@ -10,7 +10,12 @@
     <meta name="keywords" content="JSON Utils about, privacy-focused JSON tools, client-side JSON processing, secure JSON formatter, JSON tools for developers, JSON processing platform, online JSON utilities, JSON tool features, JSON converter privacy, developer tools online">
     <meta name="author" content="coderupsilon">
     <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
+    <meta name="language" content="en">
+    
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/about" />
+    <link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/about" />
+    <link rel="alternate" hreflang="x-default" href="https://www.onlinejsonutils.com/about" />
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="About JSON Utils - Privacy-First Online JSON Processing Tools">
@@ -46,8 +51,9 @@
   "@context": "https://schema.org",
   "@type": "AboutPage",
   "name": "About JSON Utils",
-  "description": "Learn about JSON Utils - privacy-focused online JSON processing tools",
+  "description": "Discover JSON Utils - the leading privacy-focused online JSON processing platform. Learn about our client-side processing, security features, and comprehensive JSON tools for developers, analysts, and students.",
   "url": "https://www.onlinejsonutils.com/about",
+  "inLanguage": "en",
   "mainEntity": {
     "@type": "Organization",
     "name": "JSON Utils",
@@ -102,15 +108,22 @@
                     </div>
                 </div>
                 <nav class="header-nav">
-                    <a href="index.html" class="nav-link">
+                    <a href="/index.html" class="nav-link">
                         <i class="fas fa-home"></i> Home
                     </a>
-                    <a href="jsonfilter.html" class="nav-link">
-                        <i class="fas fa-filter"></i> JSON Filter
+                    <a href="/jsonfilter.html" class="nav-link">
+                        <i class="fas fa-filter"></i> JSONPath Filter
                     </a>
-                    <a href="about.html" class="nav-link active">
+                    <a href="/formatconvert.html" class="nav-link">
+                        <i class="fas fa-exchange-alt"></i> Format Converter
+                    </a>
+                    <a href="/about.html" class="nav-link active">
                         <i class="fas fa-info-circle"></i> About
                     </a>
+                    <select class="language-dropdown-select" onchange="window.location.href=this.value">
+                        <option value="/about.html" selected>English</option>
+                        <option value="/cn/about.html">中文</option>
+                    </select>
                 </nav>
             </div>
         </header>
@@ -126,7 +139,7 @@
     <div class="features-grid">
         <div class="feature-card">
             <i class="fas fa-code feature-icon"></i>
-            <h3>Pretty Print & Minify</h3>
+            <h3>Pretty Print &amp; Minify</h3>
             <p>Format your JSON for readability or minify it to reduce file size. Perfect for debugging and optimization.</p>
         </div>
         <div class="feature-card">
@@ -136,7 +149,7 @@
         </div>
         <div class="feature-card">
             <i class="fas fa-filter feature-icon"></i>
-            <h3>JSON Filter & Query</h3>
+            <h3>JSON Filter &amp; Query</h3>
             <p>Filter and extract specific data from JSON using powerful JSONPath expressions. Interactive query tool with syntax guide.</p>
         </div>
         <div class="feature-card">
@@ -158,7 +171,7 @@
 </section>
 
 <section class="content-section">
-    <h2>Privacy & Security</h2>
+    <h2>Privacy &amp; Security</h2>
     <div class="privacy-info">
         <div class="privacy-point">
             <i class="fas fa-shield-alt"></i>
@@ -170,7 +183,7 @@
         <div class="privacy-point">
             <i class="fas fa-bolt"></i>
             <div>
-                <h3>Fast & Offline</h3>
+                <h3>Fast &amp; Offline</h3>
                 <p>No server requests means lightning-fast processing and the ability to work offline once the page is loaded.</p>
             </div>
         </div>
@@ -178,7 +191,7 @@
             <i class="fas fa-lock"></i>
             <div>
                 <h3>No Data Storage</h3>
-                <p>We don't store, log, or transmit any of your JSON data. What you process stays with you.</p>
+                <p>We don&#x27;t store, log, or transmit any of your JSON data. What you process stays with you.</p>
             </div>
         </div>
     </div>

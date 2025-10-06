@@ -1,0 +1,187 @@
+{
+  "nav": {
+    "home": "Home",
+    "jsonFilter": "JSONPath Filter",
+    "formatConvert": "Format Converter",
+    "about": "About"
+  },
+  "header": {
+    "subtitle": {
+      "home": "Format, Validate, Convert & Fix your JSON data",
+      "jsonFilter": "Filter JSON with JSONPath expressions",
+      "formatConvert": "Convert JSON to YAML, XML and other formats",
+      "about": "About our JSON processing tools"
+    }
+  },
+  "controls": {
+    "formatConversion": "Format Conversion",
+    "toYaml": "To YAML",
+    "toXml": "To XML",
+    "quickStart": "Quick Start",
+    "loadSample": "Load Sample"
+  },
+  "editor": {
+    "inputJson": "Input JSON",
+    "parseString": "Parse String",
+    "output": "Output",
+    "pretty": "Pretty",
+    "minify": "Minify",
+    "stringify": "Stringify",
+    "clearInput": "Clear input area",
+    "copyToInput": "Copy output back to input for further processing",
+    "copyToClipboard": "Copy output to clipboard",
+    "downloadFile": "Download output as file",
+    "placeholder": "Paste your JSON here..."
+  },
+  "meta": {
+    "index": {
+      "title": "JSON Utils - Free Online JSON Formatter, Validator & Editor Tool",
+      "description": "Free professional JSON utility tool. Format, validate, minify, and repair JSON data instantly. Real-time syntax highlighting with auto-error detection. 100% client-side processing ensures your data privacy. Perfect for developers, API testing, and data analysis.",
+      "keywords": "JSON formatter, JSON validator, JSON minifier, JSON beautifier, online JSON editor, JSON syntax checker, fix JSON errors, JSON repair tool, pretty print JSON, validate JSON online, JSON parser, free JSON tools, JSON debugging, API testing, developer tools"
+    },
+    "jsonfilter": {
+      "title": "JSONPath Filter - Query & Extract JSON Data Online | JSON Utils",
+      "description": "Advanced JSONPath query tool for filtering and extracting data from complex JSON. Interactive editor with syntax guide, live examples, and real-time results. Support for wildcards, recursive descent, and filter expressions. Ideal for API response analysis and data extraction.",
+      "keywords": "JSONPath filter, JSONPath query, JSON data extraction, JSONPath expressions, filter JSON online, JSONPath syntax, JSON query tool, extract JSON values, nested JSON query, API response filter, JSON path selector, advanced JSON filtering, JSONPath wildcards, recursive JSON search"
+    },
+    "formatconvert": {
+      "title": "JSON Format Converter - Convert JSON ↔ YAML ↔ XML ↔ CSV | JSON Utils",
+      "description": "Free multi-format converter with real-time conversion. Convert between JSON, YAML, XML, and CSV instantly. Automatic validation and error detection. Syntax highlighting for all formats. 100% client-side processing protects your data privacy. Perfect for data transformation and API integration.",
+      "keywords": "JSON converter, YAML converter, XML converter, CSV converter, JSON to YAML, JSON to XML, JSON to CSV, YAML to JSON, XML to JSON, CSV to JSON, format converter, data transformation, file converter, multi-format converter, convert JSON online"
+    },
+    "about": {
+      "title": "About JSON Utils - Privacy-First Online JSON Processing Tools",
+      "description": "Discover JSON Utils - the leading privacy-focused online JSON processing platform. Learn about our client-side processing, security features, and comprehensive JSON tools for developers, analysts, and students.",
+      "keywords": "JSON Utils about, privacy-focused JSON tools, client-side JSON processing, secure JSON formatter, JSON tools for developers, JSON processing platform, online JSON utilities, JSON tool features, JSON converter privacy, developer tools online"
+    }
+  },
+  "languageSwitcher": {
+    "label": "Language",
+    "english": "English",
+    "chinese": "中文"
+  },
+  "about": {
+    "title": "About JSON Utils",
+    "intro": "JSON Utils is a comprehensive, free online tool designed to help developers, data analysts, and anyone working with JSON data to format, validate, convert, and fix their JSON files quickly and efficiently.",
+    "keyFeatures": "Key Features",
+    "features": {
+      "prettyPrint": {
+        "title": "Pretty Print & Minify",
+        "description": "Format your JSON for readability or minify it to reduce file size. Perfect for debugging and optimization."
+      },
+      "validation": {
+        "title": "JSON Validation",
+        "description": "Instantly validate your JSON syntax and identify errors with detailed error messages and line numbers."
+      },
+      "filter": {
+        "title": "JSON Filter & Query",
+        "description": "Filter and extract specific data from JSON using powerful JSONPath expressions. Interactive query tool with syntax guide."
+      },
+      "conversion": {
+        "title": "Format Conversion",
+        "description": "Convert JSON to YAML, XML, or other formats. Also stringify and parse JSON strings effortlessly."
+      },
+      "repair": {
+        "title": "JSON Repair",
+        "description": "Automatically fix common JSON syntax errors like missing quotes, trailing commas, and malformed structures."
+      },
+      "querying": {
+        "title": "Advanced Querying",
+        "description": "Use JSONPath expressions to search, filter, and extract nested data with complex conditions and array operations."
+      }
+    },
+    "privacy": {
+      "title": "Privacy & Security",
+      "clientSide": {
+        "title": "Client-Side Processing",
+        "description": "All JSON processing happens directly in your browser. Your data never leaves your device, ensuring complete privacy and security."
+      },
+      "fast": {
+        "title": "Fast & Offline",
+        "description": "No server requests means lightning-fast processing and the ability to work offline once the page is loaded."
+      },
+      "noStorage": {
+        "title": "No Data Storage",
+        "description": "We don't store, log, or transmit any of your JSON data. What you process stays with you."
+      }
+    },
+    "whoCanUse": {
+      "title": "Who Can Use JSON Utils?",
+      "developers": "Debug API responses, format configuration files, validate JSON schemas, and filter data with JSONPath queries",
+      "analysts": "Extract specific data points from complex JSON structures, clean and convert data formats for analysis and reporting",
+      "sysAdmins": "Manage configuration files, troubleshoot JSON-based configs, and query log files with JSONPath expressions",
+      "students": "Learn JSON syntax, practice data manipulation, and understand JSONPath query language",
+      "apiTesters": "Validate and format API request/response payloads, extract test data using advanced filtering",
+      "devOps": "Process configuration files, extract deployment data, and automate JSON data transformations"
+    }
+  },
+  "jsonfilter": {
+    "jsonData": "JSON Data:",
+    "jsonPathExpression": "JSONPath Expression:",
+    "jsonPathPlaceholder": "e.g., $.store.book[*].title",
+    "jsonPathGuide": "JSONPath Guide",
+    "openGuide": "Open JSONPath Guide",
+    "filterJson": "Filter JSON",
+    "clear": "Clear",
+    "loadExample": "Load Example",
+    "filteredResult": "Filtered Result:",
+    "filteredPlaceholder": "Filtered JSON will appear here...",
+    "clearInput": "Clear input area",
+    "copyOutput": "Copy output to clipboard",
+    "downloadOutput": "Download output as file",
+    "guide": {
+      "title": "JSONPath Guide",
+      "basicSyntax": "Basic Syntax",
+      "commonExamples": "Common Examples",
+      "filterOperators": "Filter Operators",
+      "syntax": {
+        "root": "Root node",
+        "current": "Current node",
+        "child": "Child operator",
+        "recursive": "Recursive descent",
+        "wildcard": "Wildcard",
+        "subscript": "Subscript operator",
+        "union": "Union operator",
+        "slice": "Array slice",
+        "filter": "Filter expression"
+      },
+      "examples": {
+        "rootObject": "Root object",
+        "allBooks": "All books",
+        "firstBook": "First book",
+        "lastBook": "Last book",
+        "firstTwo": "First two books",
+        "allTitles": "All book titles",
+        "allAuthors": "All authors",
+        "booksUnder10": "Books under $10",
+        "booksOver10": "Books over $10",
+        "fictionOnly": "Fiction books only",
+        "allAuthorsRecursive": "All authors (recursive)",
+        "allPrices": "All prices in store",
+        "firstSecond": "First and second books",
+        "allChildren": "All direct children of store"
+      },
+      "operators": {
+        "equal": "Equal to",
+        "notEqual": "Not equal to",
+        "lessThan": "Less than",
+        "lessEqual": "Less than or equal",
+        "greaterThan": "Greater than",
+        "greaterEqual": "Greater than or equal",
+        "regex": "Regex match"
+      }
+    }
+  },
+  "formatconvert": {
+    "input": "Input",
+    "output": "Output",
+    "format": "Format",
+    "convert": "Convert",
+    "loadSample": "Load Sample",
+    "clearInput": "Clear input area",
+    "copyToInput": "Copy output back to input for further processing",
+    "copyToClipboard": "Copy output to clipboard",
+    "downloadFile": "Download output as file",
+    "placeholder": "Paste your data here..."
+  }
+}

@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSONPath Filter Tool - Advanced JSON Query &amp; Data Extraction Online</title>
+    <title>JSONPath Filter - Query &amp; Extract JSON Data Online | JSON Utils</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Powerful JSONPath query tool for filtering and extracting data from complex JSON structures. Interactive JSONPath expressions with syntax guide, examples, and real-time results. Perfect for API testing and data analysis.">
-    <meta name="keywords" content="JSONPath query tool, JSONPath filter online, JSON data extraction, JSONPath expressions, JSON query language, filter JSON data, JSONPath syntax, JSON path finder, extract JSON values, JSON array filtering, nested JSON query, API response filtering, JSON data mining, JSONPath tutorial, advanced JSON filtering">
+    <meta name="description" content="Advanced JSONPath query tool for filtering and extracting data from complex JSON. Interactive editor with syntax guide, live examples, and real-time results. Support for wildcards, recursive descent, and filter expressions. Ideal for API response analysis and data extraction.">
+    <meta name="keywords" content="JSONPath filter, JSONPath query, JSON data extraction, JSONPath expressions, filter JSON online, JSONPath syntax, JSON query tool, extract JSON values, nested JSON query, API response filter, JSON path selector, advanced JSON filtering, JSONPath wildcards, recursive JSON search">
     <meta name="author" content="coderupsilon">
     <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
+    <meta name="language" content="en">
+    
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/jsonfilter" />
+    <link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/jsonfilter" />
+    <link rel="alternate" hreflang="x-default" href="https://www.onlinejsonutils.com/jsonfilter" />
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="JSONPath Filter Tool - Advanced JSON Query &amp; Data Extraction Online">
-    <meta property="og:description" content="Powerful JSONPath query tool for filtering and extracting data from complex JSON structures. Interactive JSONPath expressions with syntax guide, examples, and real-time results. Perfect for API testing and data analysis.">
+    <meta property="og:title" content="JSONPath Filter - Query &amp; Extract JSON Data Online | JSON Utils">
+    <meta property="og:description" content="Advanced JSONPath query tool for filtering and extracting data from complex JSON. Interactive editor with syntax guide, live examples, and real-time results. Support for wildcards, recursive descent, and filter expressions. Ideal for API response analysis and data extraction.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.onlinejsonutils.com/jsonfilter">
     <meta property="og:site_name" content="JSON Utils">
@@ -25,8 +30,8 @@
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="JSONPath Filter Tool - Advanced JSON Query &amp; Data Extraction Online">
-    <meta name="twitter:description" content="Powerful JSONPath query tool for filtering and extracting data from complex JSON structures. Interactive JSONPath expressions with syntax guide, examples, and real-time results. Perfect for API testing and data analysis.">
+    <meta name="twitter:title" content="JSONPath Filter - Query &amp; Extract JSON Data Online | JSON Utils">
+    <meta name="twitter:description" content="Advanced JSONPath query tool for filtering and extracting data from complex JSON. Interactive editor with syntax guide, live examples, and real-time results. Support for wildcards, recursive descent, and filter expressions. Ideal for API response analysis and data extraction.">
     <meta name="twitter:image" content="https://www.onlinejsonutils.com/assets/logo.svg">
     <meta name="twitter:site" content="@jsonutils">
     <meta name="twitter:creator" content="@coderupsilon">
@@ -46,10 +51,11 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "JSON Filter - JSONPath Query Tool",
-  "description": "Advanced JSONPath query tool for filtering and extracting data from JSON structures",
+  "description": "Advanced JSONPath query tool for filtering and extracting data from complex JSON. Interactive editor with syntax guide, live examples, and real-time results. Support for wildcards, recursive descent, and filter expressions. Ideal for API response analysis and data extraction.",
   "url": "https://www.onlinejsonutils.com/jsonfilter",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Web Browser",
+  "inLanguage": "en",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -104,22 +110,28 @@
                     </div>
                 </div>
                 <nav class="header-nav">
-                    <a href="index.html" class="nav-link">
+                    <a href="/index.html" class="nav-link">
                         <i class="fas fa-home"></i> Home
                     </a>
-                    <a href="jsonfilter.html" class="nav-link active">
-                        <i class="fas fa-filter"></i> JSON Filter
+                    <a href="/jsonfilter.html" class="nav-link active">
+                        <i class="fas fa-filter"></i> JSONPath Filter
                     </a>
-                    <a href="about.html" class="nav-link">
+                    <a href="/formatconvert.html" class="nav-link">
+                        <i class="fas fa-exchange-alt"></i> Format Converter
+                    </a>
+                    <a href="/about.html" class="nav-link">
                         <i class="fas fa-info-circle"></i> About
                     </a>
+                    <select class="language-dropdown-select" onchange="window.location.href=this.value">
+                        <option value="/jsonfilter.html" selected>English</option>
+                        <option value="/cn/jsonfilter.html">中文</option>
+                    </select>
                 </nav>
             </div>
         </header>
 
         <main>
-            
-<main class="main-content">
+            <main class="main-content">
     <div class="jsonpath-layout">
             <div class="main-panel">
                 <div class="input-section">
@@ -345,7 +357,6 @@
         </div>
     </div>
 </main>
-
 
         </main>
 

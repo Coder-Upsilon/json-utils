@@ -1,21 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <!-- English Home Page -->
     <url>
         <loc>https://www.onlinejsonutils.com/</loc>
-        <lastmod>2025-10-03</lastmod>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/"/>
+        <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/"/>
+        <lastmod>2025-10-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
+    
+    <!-- Chinese Home Page -->
+    <url>
+        <loc>https://www.onlinejsonutils.com/cn/</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/"/>
+        <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/"/>
+        <lastmod>2025-10-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- English JSONPath Filter Page -->
     <url>
         <loc>https://www.onlinejsonutils.com/jsonfilter.html</loc>
-        <lastmod>2025-10-03</lastmod>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/jsonfilter.html"/>
+        <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/jsonfilter.html"/>
+        <lastmod>2025-10-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
+    
+    <!-- Chinese JSONPath Filter Page -->
+    <url>
+        <loc>https://www.onlinejsonutils.com/cn/jsonfilter.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/jsonfilter.html"/>
+        <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/jsonfilter.html"/>
+        <lastmod>2025-10-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- English Format Converter Page -->
+    <url>
+        <loc>https://www.onlinejsonutils.com/formatconvert.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/formatconvert.html"/>
+        <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/formatconvert.html"/>
+        <lastmod>2025-10-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Chinese Format Converter Page -->
+    <url>
+        <loc>https://www.onlinejsonutils.com/cn/formatconvert.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/formatconvert.html"/>
+        <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/formatconvert.html"/>
+        <lastmod>2025-10-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- English About Page -->
     <url>
         <loc>https://www.onlinejsonutils.com/about.html</loc>
-        <lastmod>2025-10-03</lastmod>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/about.html"/>
+        <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/about.html"/>
+        <lastmod>2025-10-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- Chinese About Page -->
+    <url>
+        <loc>https://www.onlinejsonutils.com/cn/about.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/about.html"/>
+        <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/about.html"/>
+        <lastmod>2025-10-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>

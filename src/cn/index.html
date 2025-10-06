@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON 工具 - 免费在线 JSON 格式化、验证和编辑器工具</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="免费专业的 JSON 实用工具。即时格式化、验证、压缩和修复 JSON 数据。实时语法高亮，自动错误检测。100% 客户端处理确保数据隐私。适合开发人员、API 测试和数据分析。">
+    <meta name="keywords" content="JSON格式化, JSON验证, JSON压缩, JSON美化, 在线JSON编辑器, JSON语法检查, 修复JSON错误, JSON修复工具, JSON美化打印, 在线验证JSON, JSON解析器, 免费JSON工具, JSON调试, API测试, 开发者工具">
+    <meta name="author" content="coderupsilon">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="zh-CN">
+    
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.onlinejsonutils.com/" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="JSON 工具 - 免费在线 JSON 格式化、验证和编辑器工具">
+    <meta property="og:description" content="免费专业的 JSON 实用工具。即时格式化、验证、压缩和修复 JSON 数据。实时语法高亮，自动错误检测。100% 客户端处理确保数据隐私。适合开发人员、API 测试和数据分析。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.onlinejsonutils.com/cn/">
+    <meta property="og:site_name" content="JSON Utils">
+    <meta property="og:image" content="https://www.onlinejsonutils.com/assets/logo.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="zh_CN">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JSON 工具 - 免费在线 JSON 格式化、验证和编辑器工具">
+    <meta name="twitter:description" content="免费专业的 JSON 实用工具。即时格式化、验证、压缩和修复 JSON 数据。实时语法高亮，自动错误检测。100% 客户端处理确保数据隐私。适合开发人员、API 测试和数据分析。">
+    <meta name="twitter:image" content="https://www.onlinejsonutils.com/assets/logo.svg">
+    <meta name="twitter:site" content="@jsonutils">
+    <meta name="twitter:creator" content="@coderupsilon">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="msapplication-TileColor" content="#667eea">
+    <meta name="application-name" content="JSON Utils">
+    <meta name="apple-mobile-web-app-title" content="JSON Utils">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="canonical" href="https://www.onlinejsonutils.com/cn/">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "JSON Utils",
+  "description": "免费专业的 JSON 实用工具。即时格式化、验证、压缩和修复 JSON 数据。实时语法高亮，自动错误检测。100% 客户端处理确保数据隐私。适合开发人员、API 测试和数据分析。",
+  "url": "https://www.onlinejsonutils.com/cn/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web Browser",
+  "inLanguage": "zh-CN",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "JSON Formatting and Pretty Print",
+    "JSON Validation and Error Detection",
+    "JSON Minification",
+    "JSON to YAML Conversion",
+    "JSON to XML Conversion",
+    "JSON Repair and Fix",
+    "JSON String Processing"
+  ]
+}
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.svg">
+    
+    <!-- Resource Hints for Performance -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8PBB4NZWX2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8PBB4NZWX2');
+    </script>
+    
+    <!-- CodeMirror CSS is now bundled with webpack -->
+    <!-- Font Awesome icons optimized - only load specific icons used -->
+    
+    <!-- Tailwind CSS (processed by webpack) -->
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="header-text">
+                    <img src="../assets/logo.svg" alt="JSON Utils Logo" class="logo">
+                    <div class="header-title-group">
+                        <h1>JSON Utils</h1>
+                        <p>格式化、验证、转换和修复您的 JSON 数据</p>
+                    </div>
+                </div>
+                <nav class="header-nav">
+                    <a href="/cn/index.html" class="nav-link active">
+                        <i class="fas fa-home"></i> 首页
+                    </a>
+                    <a href="/cn/jsonfilter.html" class="nav-link">
+                        <i class="fas fa-filter"></i> JSONPath 过滤
+                    </a>
+                    <a href="/cn/formatconvert.html" class="nav-link">
+                        <i class="fas fa-exchange-alt"></i> 格式转换
+                    </a>
+                    <a href="/cn/about.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i> 关于
+                    </a>
+                    <select class="language-dropdown-select" onchange="window.location.href=this.value">
+                        <option value="/index.html">English</option>
+                        <option value="/cn/index.html" selected>中文</option>
+                    </select>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <div class="editor-section">
+    <div class="input-panel">
+        <div class="panel-header">
+            <div class="panel-title-group">
+                <h3>输入 JSON</h3>
+                <label class="parse-string-toggle">
+                    <input type="checkbox" id="parseStringToggle">
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">解析字符串</span>
+                </label>
+            </div>
+            <button id="loadSampleBtn" class="btn-link">
+                加载示例
+            </button>
+            <div id="inputStatus" class="status-inline"></div>
+        </div>
+        <div class="input-container">
+            <div class="floating-buttons input-floating-buttons">
+                <button id="clearBtn" class="btn-icon" title="清空输入区域">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+            <textarea id="jsonInput" placeholder="在此粘贴您的 JSON..."></textarea>
+        </div>
+    </div>
+
+    <div class="output-panel">
+        <div class="panel-header">
+            <div class="panel-title-group">
+                <h3>输出</h3>
+                <div class="output-format-controls">
+                    <label class="format-radio">
+                        <input type="radio" name="outputFormat" value="pretty" checked>
+                        <span>美化</span>
+                    </label>
+                    <label class="format-radio">
+                        <input type="radio" name="outputFormat" value="minify">
+                        <span>压缩</span>
+                    </label>
+                    <label class="format-radio">
+                        <input type="radio" name="outputFormat" value="stringify">
+                        <span>字符串化</span>
+                    </label>
+                </div>
+            </div>
+            <div id="outputStatus" class="status-inline"></div>
+        </div>
+        <div class="output-container">
+            <div class="floating-buttons">
+                <button id="copyToInputBtn" class="btn-icon" title="将输出复制回输入以进行进一步处理">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button id="copyBtn" class="btn-icon" title="复制输出到剪贴板">
+                    <i class="fas fa-copy"></i>
+                </button>
+                <button id="downloadBtn" class="btn-icon" title="下载输出为文件">
+                    <i class="fas fa-download"></i>
+                </button>
+            </div>
+            <textarea id="output" readonly></textarea>
+        </div>
+    </div>
+</div>
+
+        </main>
+
+        <footer>
+            <p>&copy; 2025 JSON Utils - Client-side JSON processing for privacy and speed</p>
+        </footer>
+    </div>
+</body>
+</html>

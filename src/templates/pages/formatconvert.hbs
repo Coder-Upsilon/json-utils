@@ -1,0 +1,60 @@
+<div class="editor-section">
+    <div class="input-panel">
+        <div class="panel-header">
+            <div class="panel-title-group">
+                <h3>{{t "formatconvert.input"}}</h3>
+                <div class="format-selector-prominent">
+                    <select id="inputFormat" class="format-dropdown-prominent">
+                        <option value="json" selected>JSON</option>
+                        <option value="xml">XML</option>
+                        <option value="yaml">YAML</option>
+                        <option value="csv">CSV</option>
+                    </select>
+                </div>
+            </div>
+            <button id="loadSampleBtn" class="btn-link">
+                {{t "formatconvert.loadSample"}}
+            </button>
+            <div id="inputStatus" class="status-inline"></div>
+        </div>
+        <div class="input-container">
+            <div class="floating-buttons input-floating-buttons">
+                <button id="clearBtn" class="btn-icon" title="{{t "formatconvert.clearInput"}}">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+            <textarea id="jsonInput" placeholder="{{t "formatconvert.placeholder"}}"></textarea>
+        </div>
+    </div>
+
+    <div class="output-panel">
+        <div class="panel-header">
+            <div class="panel-title-group">
+                <h3>{{t "formatconvert.output"}}</h3>
+                <div class="format-selector-prominent">
+                    <select id="outputFormat" class="format-dropdown-prominent">
+                        <option value="json">JSON</option>
+                        <option value="xml">XML</option>
+                        <option value="yaml" selected>YAML</option>
+                        <option value="csv">CSV</option>
+                    </select>
+                </div>
+            </div>
+            <div id="outputStatus" class="status-inline"></div>
+        </div>
+        <div class="output-container">
+            <div class="floating-buttons">
+                <button id="copyToInputBtn" class="btn-icon" title="{{t "formatconvert.copyToInput"}}">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button id="copyBtn" class="btn-icon" title="{{t "formatconvert.copyToClipboard"}}">
+                    <i class="fas fa-copy"></i>
+                </button>
+                <button id="downloadBtn" class="btn-icon" title="{{t "formatconvert.downloadFile"}}">
+                    <i class="fas fa-download"></i>
+                </button>
+            </div>
+            <textarea id="output" readonly></textarea>
+        </div>
+    </div>
+</div>

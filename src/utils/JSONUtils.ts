@@ -5,8 +5,6 @@ import type * as CodeMirror from 'codemirror';
 interface JSONUtilsElements {
   clearBtn: HTMLButtonElement;
   loadSampleBtn: HTMLButtonElement;
-  toYamlBtn: HTMLButtonElement;
-  toXmlBtn: HTMLButtonElement;
   parseStringToggle: HTMLInputElement;
   copyToInputBtn: HTMLButtonElement;
   copyBtn: HTMLButtonElement;
@@ -16,7 +14,7 @@ interface JSONUtilsElements {
   formatRadios: NodeListOf<HTMLInputElement>;
 }
 
-type OutputType = 'json' | 'yaml' | 'xml' | 'text';
+type OutputType = 'json' | 'text';
 type StatusType = 'success' | 'error' | 'info';
 
 export class JSONUtils {
@@ -36,8 +34,6 @@ export class JSONUtils {
     this.elements = {
       clearBtn: this.getElementById('clearBtn') as HTMLButtonElement,
       loadSampleBtn: this.getElementById('loadSampleBtn') as HTMLButtonElement,
-      toYamlBtn: this.getElementById('toYamlBtn') as HTMLButtonElement,
-      toXmlBtn: this.getElementById('toXmlBtn') as HTMLButtonElement,
       parseStringToggle: this.getElementById('parseStringToggle') as HTMLInputElement,
       copyToInputBtn: this.getElementById('copyToInputBtn') as HTMLButtonElement,
       copyBtn: this.getElementById('copyBtn') as HTMLButtonElement,
@@ -101,8 +97,6 @@ export class JSONUtils {
   private attachEventListeners(): void {
     this.elements.clearBtn.addEventListener('click', () => this.clearInput());
     this.elements.loadSampleBtn.addEventListener('click', () => this.loadSample());
-    this.elements.toYamlBtn.addEventListener('click', () => this.convertToYAML());
-    this.elements.toXmlBtn.addEventListener('click', () => this.convertToXML());
     this.elements.parseStringToggle.addEventListener('change', () => this.handleParseStringToggle());
     this.elements.copyToInputBtn.addEventListener('click', () => this.copyToInput());
     this.elements.copyBtn.addEventListener('click', () => this.copyOutput());
@@ -316,152 +310,6 @@ export class JSONUtils {
     return analysis.join('\n');
   }
 
-  private getDetailedError(error: unknown, input: string): string {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    const lines = input.split('\n');
-    const errorInfo = [`Error: ${errorMessage}`];
-    
-    // Try to find line number from error message
-    const lineMatch = errorMessage.match(/line (\d+)/i);
-    if (lineMatch) {
-      const lineNum = parseInt(lineMatch[1]);
-      errorInfo.push(`Line ${lineNum}: ${lines[lineNum - 1] || 'N/A'}`);
-    }
-    
-    // Common JSON errors and suggestions
-    if (errorMessage.includes('Unexpected token')) {
-      errorInfo.push('\nCommon fixes:');
-      errorInfo.push('• Check for missing commas between properties');
-      errorInfo.push('• Ensure all strings are quoted with double quotes');
-      errorInfo.push('• Remove trailing commas');
-      errorInfo.push('• Check for unescaped quotes in strings');
-    }
-    
-    return errorInfo.join('\n');
-  }
-
-  private convertToYAML(): void {
-    const input = this.inputEditor.getValue().trim();
-    if (!input) {
-      this.showStatus(this.elements.outputStatus, 'Please enter JSON data first', 'error');
-      return;
-    }
-
-    try {
-      const parsed = JSON.parse(input);
-      const yaml = this.jsonToYAML(parsed);
-      this.displayOutput(yaml, 'text/x-yaml');
-      this.currentOutputType = 'yaml';
-      this.showStatus(this.elements.outputStatus, 'Converted to YAML successfully', 'success');
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      this.showStatus(this.elements.outputStatus, `Error converting to YAML: ${errorMessage}`, 'error');
-    }
-  }
-
-  private jsonToYAML(obj: any, indent = 0): string {
-    const spaces = '  '.repeat(indent);
-    
-    if (obj === null) return 'null';
-    if (typeof obj === 'boolean') return obj.toString();
-    if (typeof obj === 'number') return obj.toString();
-    if (typeof obj === 'string') {
-      // Escape special characters and quote if necessary
-      if (obj.includes('\n') || obj.includes(':') || obj.includes('#') || obj.includes('[') || obj.includes(']')) {
-        return `"${obj.replace(/"/g, '\\"')}"`;
-      }
-      return obj;
-    }
-    
-    if (Array.isArray(obj)) {
-      if (obj.length === 0) return '[]';
-      return obj.map(item => `${spaces}- ${this.jsonToYAML(item, indent + 1).replace(/^\s+/, '')}`).join('\n');
-    }
-    
-    if (typeof obj === 'object') {
-      const keys = Object.keys(obj);
-      if (keys.length === 0) return '{}';
-      
-      return keys.map(key => {
-        const value = obj[key];
-        const yamlValue = this.jsonToYAML(value, indent + 1);
-        
-        if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-          return `${spaces}${key}:\n${yamlValue}`;
-        } else if (Array.isArray(value) && value.length > 0) {
-          return `${spaces}${key}:\n${yamlValue}`;
-        } else {
-          return `${spaces}${key}: ${yamlValue}`;
-        }
-      }).join('\n');
-    }
-    
-    return obj.toString();
-  }
-
-  private convertToXML(): void {
-    const input = this.inputEditor.getValue().trim();
-    if (!input) {
-      this.showStatus(this.elements.outputStatus, 'Please enter JSON data first', 'error');
-      return;
-    }
-
-    try {
-      const parsed = JSON.parse(input);
-      const xml = this.jsonToXML(parsed);
-      const fullXml = `<?xml version="1.0" encoding="UTF-8"?>\n<root>\n${xml}\n</root>`;
-      this.displayOutput(fullXml, 'application/xml');
-      this.currentOutputType = 'xml';
-      this.showStatus(this.elements.outputStatus, 'Converted to XML successfully', 'success');
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      this.showStatus(this.elements.outputStatus, `Error converting to XML: ${errorMessage}`, 'error');
-    }
-  }
-
-  private jsonToXML(obj: any, indent = 1): string {
-    const spaces = '  '.repeat(indent);
-    
-    if (obj === null) return `${spaces}<null/>`;
-    if (typeof obj === 'boolean') return `${spaces}<boolean>${obj}</boolean>`;
-    if (typeof obj === 'number') return `${spaces}<number>${obj}</number>`;
-    if (typeof obj === 'string') return `${spaces}<string>${this.escapeXML(obj)}</string>`;
-    
-    if (Array.isArray(obj)) {
-      return obj.map((item, index) => 
-        `${spaces}<item index="${index}">\n${this.jsonToXML(item, indent + 1)}\n${spaces}</item>`
-      ).join('\n');
-    }
-    
-    if (typeof obj === 'object') {
-      return Object.keys(obj).map(key => {
-        const value = obj[key];
-        const sanitizedKey = key.replace(/[^a-zA-Z0-9_-]/g, '_');
-        
-        if (typeof value === 'object' && value !== null) {
-          return `${spaces}<${sanitizedKey}>\n${this.jsonToXML(value, indent + 1)}\n${spaces}</${sanitizedKey}>`;
-        } else {
-          return `${spaces}<${sanitizedKey}>${this.escapeXML(String(value))}</${sanitizedKey}>`;
-        }
-      }).join('\n');
-    }
-    
-    return `${spaces}<value>${this.escapeXML(String(obj))}</value>`;
-  }
-
-  private escapeXML(str: string): string {
-    return str.replace(/[<>&'"]/g, (char) => {
-      switch (char) {
-        case '<': return '&lt;';
-        case '>': return '&gt;';
-        case '&': return '&amp;';
-        case "'": return '&apos;';
-        case '"': return '&quot;';
-        default: return char;
-      }
-    });
-  }
-
   private fixJSON(): void {
     const input = this.inputEditor.getValue().trim();
     if (!input) {
@@ -637,8 +485,6 @@ export class JSONUtils {
 
     const extensions: Record<OutputType, string> = {
       'json': 'json',
-      'yaml': 'yaml',
-      'xml': 'xml',
       'text': 'txt'
     };
 

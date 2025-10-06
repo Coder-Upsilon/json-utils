@@ -1,75 +1,45 @@
-<div class="controls-section">
-
-    <div class="control-group-section">
-        <div class="control-group-header">
-            <i class="fas fa-file-export"></i>
-            <span>Format Conversion</span>
-        </div>
-        <div class="control-group">
-            <button id="toYamlBtn" class="btn btn-small btn-primary">
-                <i class="fas fa-file-code"></i>
-                To YAML
-            </button>
-            <button id="toXmlBtn" class="btn btn-small btn-primary">
-                <i class="fas fa-code"></i>
-                To XML
-            </button>
-        </div>
-    </div>
-
-    <div class="control-group-section">
-        <div class="control-group-header">
-            <i class="fas fa-play"></i>
-            <span>Quick Start</span>
-        </div>
-        <div class="control-group">
-            <button id="loadSampleBtn" class="btn btn-small btn-secondary">
-                <i class="fas fa-file-import"></i>
-                Load Sample
-            </button>
-        </div>
-    </div>
-</div>
-
 <div class="editor-section">
     <div class="input-panel">
         <div class="panel-header">
             <div class="panel-title-group">
-                <h3>Input JSON</h3>
+                <h3>{{t "editor.inputJson"}}</h3>
                 <label class="parse-string-toggle">
                     <input type="checkbox" id="parseStringToggle">
                     <span class="toggle-slider"></span>
-                    <span class="toggle-label">Parse String</span>
+                    <span class="toggle-label">{{t "editor.parseString"}}</span>
                 </label>
             </div>
+            <button id="loadSampleBtn" class="btn-link">
+                {{t "controls.loadSample"}}
+            </button>
             <div id="inputStatus" class="status-inline"></div>
         </div>
         <div class="input-container">
             <div class="floating-buttons input-floating-buttons">
-                <button id="clearBtn" class="btn-icon" title="Clear input area">
+                <button id="clearBtn" class="btn-icon" title="{{t "editor.clearInput"}}">
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
-            <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
+            <textarea id="jsonInput" placeholder="{{t "editor.placeholder"}}"></textarea>
         </div>
     </div>
 
     <div class="output-panel">
         <div class="panel-header">
             <div class="panel-title-group">
-                <h3>Output</h3>
+                <h3>{{t "editor.output"}}</h3>
                 <div class="output-format-controls">
                     <label class="format-radio">
                         <input type="radio" name="outputFormat" value="pretty" checked>
-                        <span>Pretty</span>
+                        <span>{{t "editor.pretty"}}</span>
                     </label>
                     <label class="format-radio">
                         <input type="radio" name="outputFormat" value="minify">
-                        <span>Minify</span>
+                        <span>{{t "editor.minify"}}</span>
                     </label>
                     <label class="format-radio">
                         <input type="radio" name="outputFormat" value="stringify">
-                        <span>Stringify</span>
+                        <span>{{t "editor.stringify"}}</span>
                     </label>
                 </div>
             </div>
@@ -77,13 +47,13 @@
         </div>
         <div class="output-container">
             <div class="floating-buttons">
-                <button id="copyToInputBtn" class="btn-icon" title="Copy output back to input for further processing">
+                <button id="copyToInputBtn" class="btn-icon" title="{{t "editor.copyToInput"}}">
                     <i class="fas fa-arrow-left"></i>
                 </button>
-                <button id="copyBtn" class="btn-icon" title="Copy output to clipboard">
+                <button id="copyBtn" class="btn-icon" title="{{t "editor.copyToClipboard"}}">
                     <i class="fas fa-copy"></i>
                 </button>
-                <button id="downloadBtn" class="btn-icon" title="Download output as file">
+                <button id="downloadBtn" class="btn-icon" title="{{t "editor.downloadFile"}}">
                     <i class="fas fa-download"></i>
                 </button>
             </div>

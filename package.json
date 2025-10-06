@@ -32,6 +32,8 @@
     "handlebars-loader": "^1.7.3",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.5.3",
+    "i18next": "^25.5.3",
+    "i18next-fs-backend": "^2.6.0",
     "mini-css-extract-plugin": "^2.7.6",
     "postcss": "^8.5.6",
     "postcss-loader": "^8.2.0",

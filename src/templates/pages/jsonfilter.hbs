@@ -1,20 +1,12 @@
-{{#> layouts/base 
-    title="JSON Filter - JSON Utils" 
-    description="Filter JSON data using JSONPath expressions with our interactive tool"
-    headerSubtitle="Filter JSON with JSONPath expressions"
-    isJsonFilter=true
-    includeCodeMirror=true
-}}
-
 <main class="main-content">
     <div class="jsonpath-layout">
             <div class="main-panel">
                 <div class="input-section">
                     <div class="input-group">
-                        <label for="jsonFilterInput">JSON Data:</label>
+                        <label for="jsonFilterInput">{{t "jsonfilter.jsonData"}}</label>
                         <div class="input-container">
                             <div class="floating-buttons input-floating-buttons">
-                                <button id="clearFilterInputBtn" class="btn-icon" title="Clear input area">
+                                <button id="clearFilterInputBtn" class="btn-icon" title="{{t "jsonfilter.clearInput"}}">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -42,37 +34,37 @@
 
                     <div class="filter-section">
                         <div class="input-group">
-                            <label for="jsonpath-input">JSONPath Expression:</label>
+                            <label for="jsonpath-input">{{t "jsonfilter.jsonPathExpression"}}</label>
                             <div class="jsonpath-input-container">
-                                <input type="text" id="jsonpath-input" placeholder="e.g., $.store.book[*].title" />
-                                <button id="drawer-trigger" class="drawer-trigger" title="Open JSONPath Guide">
+                                <input type="text" id="jsonpath-input" placeholder="{{t "jsonfilter.jsonPathPlaceholder"}}" />
+                                <button id="drawer-trigger" class="drawer-trigger" title="{{t "jsonfilter.openGuide"}}">
                                     <i class="fas fa-question-circle"></i>
-                                    <span>JSONPath Guide</span>
+                                    <span>{{t "jsonfilter.jsonPathGuide"}}</span>
                                 </button>
                             </div>
                         </div>
 
                         <div class="button-group">
-                            <button id="filterBtn" class="btn btn-primary">Filter JSON</button>
-                            <button id="clearFilterBtn" class="btn btn-secondary">Clear</button>
-                            <button id="loadFilterSampleBtn" class="btn btn-outline">Load Example</button>
+                            <button id="filterBtn" class="btn btn-primary">{{t "jsonfilter.filterJson"}}</button>
+                            <button id="clearFilterBtn" class="btn btn-secondary">{{t "jsonfilter.clear"}}</button>
+                            <button id="loadFilterSampleBtn" class="btn btn-outline">{{t "jsonfilter.loadExample"}}</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="output-section">
                     <div class="output-group">
-                        <label for="filtered-output">Filtered Result:</label>
+                        <label for="filtered-output">{{t "jsonfilter.filteredResult"}}</label>
                         <div class="output-container">
                             <div class="floating-buttons">
-                                <button id="copyFilterBtn" class="btn-icon" title="Copy output to clipboard">
+                                <button id="copyFilterBtn" class="btn-icon" title="{{t "jsonfilter.copyOutput"}}">
                                     <i class="fas fa-copy"></i>
                                 </button>
-                                <button id="downloadFilterBtn" class="btn-icon" title="Download output as file">
+                                <button id="downloadFilterBtn" class="btn-icon" title="{{t "jsonfilter.downloadOutput"}}">
                                     <i class="fas fa-download"></i>
                                 </button>
                             </div>
-                            <textarea id="jsonFilterOutput" readonly placeholder="Filtered JSON will appear here..."></textarea>
+                            <textarea id="jsonFilterOutput" readonly placeholder="{{t "jsonfilter.filteredPlaceholder"}}"></textarea>
                         </div>
                     </div>
 
@@ -85,145 +77,145 @@
 
             <div class="help-panel hidden">
                 <div class="help-header">
-                    <h3>JSONPath Guide</h3>
+                    <h3>{{t "jsonfilter.guide.title"}}</h3>
                     <button id="toggle-help" class="help-toggle">×</button>
                 </div>
                 
                 <div class="help-content">
                     <div class="help-section">
-                        <h4>Basic Syntax</h4>
+                        <h4>{{t "jsonfilter.guide.basicSyntax"}}</h4>
                         <div class="syntax-list">
                             <div class="syntax-item">
                                 <code>$</code>
-                                <span>Root node</span>
+                                <span>{{t "jsonfilter.guide.syntax.root"}}</span>
                             </div>
                             <div class="syntax-item">
                                 <code>@</code>
-                                <span>Current node</span>
+                                <span>{{t "jsonfilter.guide.syntax.current"}}</span>
                             </div>
                             <div class="syntax-item">
                                 <code>.</code>
-                                <span>Child operator</span>
+                                <span>{{t "jsonfilter.guide.syntax.child"}}</span>
                             </div>
                             <div class="syntax-item">
                                 <code>..</code>
-                                <span>Recursive descent</span>
+                                <span>{{t "jsonfilter.guide.syntax.recursive"}}</span>
                             </div>
                             <div class="syntax-item">
                                 <code>*</code>
-                                <span>Wildcard</span>
+                                <span>{{t "jsonfilter.guide.syntax.wildcard"}}</span>
                             </div>
                             <div class="syntax-item">
                                 <code>[]</code>
-                                <span>Subscript operator</span>
+                                <span>{{t "jsonfilter.guide.syntax.subscript"}}</span>
                             </div>
                             <div class="syntax-item">
                                 <code>[,]</code>
-                                <span>Union operator</span>
+                                <span>{{t "jsonfilter.guide.syntax.union"}}</span>
                             </div>
                             <div class="syntax-item">
                                 <code>[start:end]</code>
-                                <span>Array slice</span>
+                                <span>{{t "jsonfilter.guide.syntax.slice"}}</span>
                             </div>
                             <div class="syntax-item">
                                 <code>[?()]</code>
-                                <span>Filter expression</span>
+                                <span>{{t "jsonfilter.guide.syntax.filter"}}</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="help-section">
-                        <h4>Common Examples</h4>
+                        <h4>{{t "jsonfilter.guide.commonExamples"}}</h4>
                         <div class="examples-list">
                             <div class="example-item" data-expression="$">
                                 <code>$</code>
-                                <span>Root object</span>
+                                <span>{{t "jsonfilter.guide.examples.rootObject"}}</span>
                             </div>
                             <div class="example-item" data-expression="$.store.book[*]">
                                 <code>$.store.book[*]</code>
-                                <span>All books</span>
+                                <span>{{t "jsonfilter.guide.examples.allBooks"}}</span>
                             </div>
                             <div class="example-item" data-expression="$.store.book[0]">
                                 <code>$.store.book[0]</code>
-                                <span>First book</span>
+                                <span>{{t "jsonfilter.guide.examples.firstBook"}}</span>
                             </div>
                             <div class="example-item" data-expression="$.store.book[-1]">
                                 <code>$.store.book[-1]</code>
-                                <span>Last book</span>
+                                <span>{{t "jsonfilter.guide.examples.lastBook"}}</span>
                             </div>
                             <div class="example-item" data-expression="$.store.book[0:2]">
                                 <code>$.store.book[0:2]</code>
-                                <span>First two books</span>
+                                <span>{{t "jsonfilter.guide.examples.firstTwo"}}</span>
                             </div>
                             <div class="example-item" data-expression="$.store.book[*].title">
                                 <code>$.store.book[*].title</code>
-                                <span>All book titles</span>
+                                <span>{{t "jsonfilter.guide.examples.allTitles"}}</span>
                             </div>
                             <div class="example-item" data-expression="$.store.book[*].author">
                                 <code>$.store.book[*].author</code>
-                                <span>All authors</span>
+                                <span>{{t "jsonfilter.guide.examples.allAuthors"}}</span>
                             </div>
                             <div class="example-item" data-expression="$.store.book[?(@.price &lt; 10)]">
                                 <code>$.store.book[?(@.price &lt; 10)]</code>
-                                <span>Books under $10</span>
+                                <span>{{t "jsonfilter.guide.examples.booksUnder10"}}</span>
                             </div>
                             <div class="example-item" data-expression="$.store.book[?(@.price &gt; 10)]">
                                 <code>$.store.book[?(@.price &gt; 10)]</code>
-                                <span>Books over $10</span>
+                                <span>{{t "jsonfilter.guide.examples.booksOver10"}}</span>
                             </div>
                             <div class="example-item" data-expression="$.store.book[?(@.category == 'fiction')]">
                                 <code>$.store.book[?(@.category == 'fiction')]</code>
-                                <span>Fiction books only</span>
+                                <span>{{t "jsonfilter.guide.examples.fictionOnly"}}</span>
                             </div>
                             <div class="example-item" data-expression="$..author">
                                 <code>$..author</code>
-                                <span>All authors (recursive)</span>
+                                <span>{{t "jsonfilter.guide.examples.allAuthorsRecursive"}}</span>
                             </div>
                             <div class="example-item" data-expression="$.store..price">
                                 <code>$.store..price</code>
-                                <span>All prices in store</span>
+                                <span>{{t "jsonfilter.guide.examples.allPrices"}}</span>
                             </div>
                             <div class="example-item" data-expression="$.store.book[0,1]">
                                 <code>$.store.book[0,1]</code>
-                                <span>First and second books</span>
+                                <span>{{t "jsonfilter.guide.examples.firstSecond"}}</span>
                             </div>
                             <div class="example-item" data-expression="$.store.*">
                                 <code>$.store.*</code>
-                                <span>All direct children of store</span>
+                                <span>{{t "jsonfilter.guide.examples.allChildren"}}</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="help-section">
-                        <h4>Filter Operators</h4>
+                        <h4>{{t "jsonfilter.guide.filterOperators"}}</h4>
                         <div class="operators-list">
                             <div class="operator-item">
                                 <code>==</code>
-                                <span>Equal to</span>
+                                <span>{{t "jsonfilter.guide.operators.equal"}}</span>
                             </div>
                             <div class="operator-item">
                                 <code>!=</code>
-                                <span>Not equal to</span>
+                                <span>{{t "jsonfilter.guide.operators.notEqual"}}</span>
                             </div>
                             <div class="operator-item">
                                 <code>&lt;</code>
-                                <span>Less than</span>
+                                <span>{{t "jsonfilter.guide.operators.lessThan"}}</span>
                             </div>
                             <div class="operator-item">
                                 <code>&lt;=</code>
-                                <span>Less than or equal</span>
+                                <span>{{t "jsonfilter.guide.operators.lessEqual"}}</span>
                             </div>
                             <div class="operator-item">
                                 <code>&gt;</code>
-                                <span>Greater than</span>
+                                <span>{{t "jsonfilter.guide.operators.greaterThan"}}</span>
                             </div>
                             <div class="operator-item">
                                 <code>&gt;=</code>
-                                <span>Greater than or equal</span>
+                                <span>{{t "jsonfilter.guide.operators.greaterEqual"}}</span>
                             </div>
                             <div class="operator-item">
                                 <code>=~</code>
-                                <span>Regex match</span>
+                                <span>{{t "jsonfilter.guide.operators.regex"}}</span>
                             </div>
                         </div>
                     </div>
@@ -232,5 +224,3 @@
         </div>
     </div>
 </main>
-
-{{/layouts/base}}

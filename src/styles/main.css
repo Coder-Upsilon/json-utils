@@ -622,6 +622,62 @@
   .tech-badge {
     @apply px-4 py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white text-sm font-semibold rounded-full shadow-md hover:shadow-lg;
   }
+
+  /* Prominent Format Dropdowns */
+  .format-selector-prominent {
+    @apply flex items-center;
+  }
+
+  .format-dropdown-prominent {
+    @apply px-3 py-1.5 text-sm font-bold rounded-lg cursor-pointer shadow-md appearance-none;
+    min-width: 100px;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    border: none;
+    background-image: 
+      linear-gradient(135deg, #3b82f6 0%, #2563eb 100%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='white' d='M5 7.5L1 3.5h8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center, right 8px center;
+    padding-right: 28px;
+  }
+
+  .format-dropdown-prominent:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    box-shadow: 0 8px 16px rgba(59, 130, 246, 0.4);
+  }
+
+  .format-dropdown-prominent:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3), 0 8px 16px rgba(59, 130, 246, 0.4);
+  }
+
+  .format-dropdown-prominent option {
+    @apply font-semibold bg-white text-gray-800;
+  }
+
+  /* Link-styled Button */
+  .btn-link {
+    @apply bg-transparent border-0 text-primary-600 cursor-pointer text-sm font-medium underline hover:text-primary-700 hover:no-underline px-0 py-0 shadow-none;
+  }
+
+  .btn-link:hover {
+    @apply shadow-none;
+  }
+
+  /* Language Dropdown Select */
+  .language-dropdown-select {
+    @apply px-3 py-2 text-sm font-semibold rounded-lg cursor-pointer shadow-sm appearance-none bg-white/20 text-white border border-white/30 hover:bg-white/30 hover:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 backdrop-blur-sm;
+    min-width: 100px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='white' d='M5 7.5L1 3.5h8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 28px;
+  }
+
+  .language-dropdown-select option {
+    @apply bg-gray-800 text-white font-semibold;
+  }
 }
 
 /* Custom utilities */

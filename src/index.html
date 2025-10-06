@@ -3,20 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON Utils - Free Online JSON Formatter, Validator &amp; Converter Tool</title>
+    <title>JSON Utils - Free Online JSON Formatter, Validator &amp; Editor Tool</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Professional JSON utility tool for developers. Format, validate, minify, repair JSON data instantly. Convert JSON to YAML/XML. Client-side processing ensures privacy. Free online JSON formatter with advanced features.">
-    <meta name="keywords" content="JSON formatter online, JSON validator tool, JSON minifier, JSON to YAML converter, JSON to XML converter, JSON repair tool, fix JSON syntax errors, online JSON editor, JSON pretty print, validate JSON syntax, JSON string converter, JSON parser online, free JSON tools, developer JSON utilities, API response formatter, JSON data processor">
+    <meta name="description" content="Free professional JSON utility tool. Format, validate, minify, and repair JSON data instantly. Real-time syntax highlighting with auto-error detection. 100% client-side processing ensures your data privacy. Perfect for developers, API testing, and data analysis.">
+    <meta name="keywords" content="JSON formatter, JSON validator, JSON minifier, JSON beautifier, online JSON editor, JSON syntax checker, fix JSON errors, JSON repair tool, pretty print JSON, validate JSON online, JSON parser, free JSON tools, JSON debugging, API testing, developer tools">
     <meta name="author" content="coderupsilon">
     <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
+    <meta name="language" content="en">
+    
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.onlinejsonutils.com/" />
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="JSON Utils - Free Online JSON Formatter, Validator &amp; Converter Tool">
-    <meta property="og:description" content="Professional JSON utility tool for developers. Format, validate, minify, repair JSON data instantly. Convert JSON to YAML/XML. Client-side processing ensures privacy. Free online JSON formatter with advanced features.">
+    <meta property="og:title" content="JSON Utils - Free Online JSON Formatter, Validator &amp; Editor Tool">
+    <meta property="og:description" content="Free professional JSON utility tool. Format, validate, minify, and repair JSON data instantly. Real-time syntax highlighting with auto-error detection. 100% client-side processing ensures your data privacy. Perfect for developers, API testing, and data analysis.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.onlinejsonutils.com">
+    <meta property="og:url" content="https://www.onlinejsonutils.com/">
     <meta property="og:site_name" content="JSON Utils">
     <meta property="og:image" content="https://www.onlinejsonutils.com/assets/logo.svg">
     <meta property="og:image:width" content="1200">
@@ -25,8 +30,8 @@
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="JSON Utils - Free Online JSON Formatter, Validator &amp; Converter Tool">
-    <meta name="twitter:description" content="Professional JSON utility tool for developers. Format, validate, minify, repair JSON data instantly. Convert JSON to YAML/XML. Client-side processing ensures privacy. Free online JSON formatter with advanced features.">
+    <meta name="twitter:title" content="JSON Utils - Free Online JSON Formatter, Validator &amp; Editor Tool">
+    <meta name="twitter:description" content="Free professional JSON utility tool. Format, validate, minify, and repair JSON data instantly. Real-time syntax highlighting with auto-error detection. 100% client-side processing ensures your data privacy. Perfect for developers, API testing, and data analysis.">
     <meta name="twitter:image" content="https://www.onlinejsonutils.com/assets/logo.svg">
     <meta name="twitter:site" content="@jsonutils">
     <meta name="twitter:creator" content="@coderupsilon">
@@ -38,7 +43,7 @@
     <meta name="apple-mobile-web-app-title" content="JSON Utils">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link rel="canonical" href="https://www.onlinejsonutils.com">
+    <link rel="canonical" href="https://www.onlinejsonutils.com/">
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -46,10 +51,11 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "JSON Utils",
-  "description": "Professional online JSON formatter, validator, and converter tool for developers",
-  "url": "https://www.onlinejsonutils.com",
+  "description": "Free professional JSON utility tool. Format, validate, minify, and repair JSON data instantly. Real-time syntax highlighting with auto-error detection. 100% client-side processing ensures your data privacy. Perfect for developers, API testing, and data analysis.",
+  "url": "https://www.onlinejsonutils.com/",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Web Browser",
+  "inLanguage": "en",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -105,54 +111,28 @@
                     </div>
                 </div>
                 <nav class="header-nav">
-                    <a href="index.html" class="nav-link active">
+                    <a href="/index.html" class="nav-link active">
                         <i class="fas fa-home"></i> Home
                     </a>
-                    <a href="jsonfilter.html" class="nav-link">
-                        <i class="fas fa-filter"></i> JSON Filter
+                    <a href="/jsonfilter.html" class="nav-link">
+                        <i class="fas fa-filter"></i> JSONPath Filter
                     </a>
-                    <a href="about.html" class="nav-link">
+                    <a href="/formatconvert.html" class="nav-link">
+                        <i class="fas fa-exchange-alt"></i> Format Converter
+                    </a>
+                    <a href="/about.html" class="nav-link">
                         <i class="fas fa-info-circle"></i> About
                     </a>
+                    <select class="language-dropdown-select" onchange="window.location.href=this.value">
+                        <option value="/index.html" selected>English</option>
+                        <option value="/cn/index.html">中文</option>
+                    </select>
                 </nav>
             </div>
         </header>
 
         <main>
-            <div class="controls-section">
-
-    <div class="control-group-section">
-        <div class="control-group-header">
-            <i class="fas fa-file-export"></i>
-            <span>Format Conversion</span>
-        </div>
-        <div class="control-group">
-            <button id="toYamlBtn" class="btn btn-small btn-primary">
-                <i class="fas fa-file-code"></i>
-                To YAML
-            </button>
-            <button id="toXmlBtn" class="btn btn-small btn-primary">
-                <i class="fas fa-code"></i>
-                To XML
-            </button>
-        </div>
-    </div>
-
-    <div class="control-group-section">
-        <div class="control-group-header">
-            <i class="fas fa-play"></i>
-            <span>Quick Start</span>
-        </div>
-        <div class="control-group">
-            <button id="loadSampleBtn" class="btn btn-small btn-secondary">
-                <i class="fas fa-file-import"></i>
-                Load Sample
-            </button>
-        </div>
-    </div>
-</div>
-
-<div class="editor-section">
+            <div class="editor-section">
     <div class="input-panel">
         <div class="panel-header">
             <div class="panel-title-group">
@@ -163,6 +143,9 @@
                     <span class="toggle-label">Parse String</span>
                 </label>
             </div>
+            <button id="loadSampleBtn" class="btn-link">
+                Load Sample
+            </button>
             <div id="inputStatus" class="status-inline"></div>
         </div>
         <div class="input-container">

@@ -1,15 +1,75 @@
 # System Patterns
 
 ## Architecture Overview
-The JSON Utils application follows a modular architecture with separate entry points for different functionality, built with TypeScript and Webpack.
+The JSON Utils application follows a modular architecture with separate entry points for different functionality, built with TypeScript and Webpack. The application supports internationalization (i18n) with multiple languages through a build-time translation system.
 
 ## Key Technical Decisions
+
+### Internationalization Architecture
+The application implements a build-time i18n system that generates separate pages for each language:
+
+```javascript
+// Language configuration in build-templates.js
+const languages = {
+  en: {
+    code: 'en',
+    name: 'English',
+    path: '',           // Root path for English
+    locale: 'en_US',
+    htmlLang: 'en'
+  },
+  zh: {
+    code: 'zh',
+    name: '中文',
+    path: 'cn/',        // /cn/ subpath for Chinese
+    locale: 'zh_CN',
+    htmlLang: 'zh-CN'
+  }
+};
+
+// Build pages for each language
+for (const [langCode, langConfig] of Object.entries(languages)) {
+  await i18next.changeLanguage(langCode);
+  const t = i18next.t.bind(i18next);
+  
+  // Generate page with translations
+  const pageData = config.getData(t);
+  const html = layout({ ...pageData, content: pageContent });
+}
+```
+
+**Translation System Features:**
+- **Build-time Translation**: Pages generated with translations during build
+- **i18next Integration**: Professional i18n framework with fallback support
+- **Handlebars Helper**: `{{t "key"}}` helper for template translations
+- **Language-specific Paths**: English at root (`/`), Chinese at `/cn/`
+- **SEO Optimization**: Proper hreflang tags, language-specific meta tags
+- **Asset Path Management**: Relative paths adjusted for subdirectories
+
+**URL Structure Pattern:**
+```
+English:  /              → index.html
+          /jsonfilter    → jsonfilter.html
+          /about         → about.html
+
+Chinese:  /cn/           → cn/index.html
+          /cn/jsonfilter → cn/jsonfilter.html
+          /cn/about      → cn/about.html
+```
+
+**Benefits:**
+- Zero runtime overhead (translations compiled at build time)
+- SEO-friendly with language-specific URLs
+- Easy to add new languages (just add translation file and config)
+- Proper search engine indexing with hreflang tags
+
 
 ### Build System
 - **Webpack Configuration**: Multi-entry setup with separate bundles for main (`main.ts`) and JSON filter (`jsonfilter.ts`) functionality
 - **Code Splitting**: Vendor chunks are shared between entry points to optimize bundle size
-- **Template System**: Handlebars templates with automated HTML generation via `build-templates.js`
+- **Template System**: Handlebars templates with automated HTML generation via `build-templates.js` and i18n integration
 - **CSS Processing**: Tailwind CSS with PostCSS processing pipeline
+- **Internationalization**: i18next-based translation system with build-time page generation for multiple languages
 
 ### Animation-Free CSS Architecture
 - **No Page Load Animations**: Complete removal of all `transition: all` properties that cause movement during page initialization

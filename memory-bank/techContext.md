@@ -14,12 +14,17 @@
 - **jsonrepair**: Utility for automatically fixing common JSON formatting issues
 - **Tailwind CSS**: Utility-first CSS framework for responsive design
 
+### Internationalization
+- **i18next**: Professional i18n framework for translation management
+- **i18next-fs-backend**: File system backend for loading translation files
+
 ### Build Tools & Processing
 - **PostCSS**: CSS processing with Autoprefixer for browser compatibility
 - **CSS Loader**: Webpack loader for processing CSS files
 - **TS Loader**: TypeScript compilation within webpack
 - **MiniCssExtractPlugin**: CSS extraction for production builds
 - **HtmlWebpackPlugin**: Automated HTML generation with proper asset injection
+- **Handlebars**: Template engine for HTML generation with i18n helper support
 
 ## Development Setup
 
@@ -60,6 +65,11 @@ src/
 - `jsonpath`: JSONPath query processing
 - `jsonrepair`: JSON error correction
 
+### Development Dependencies (i18n)
+- `i18next`: Core i18n framework for translation management
+- `i18next-fs-backend`: Backend for loading translation files from filesystem
+- `handlebars`: Template engine with i18n helper registration
+
 ### Development Dependencies
 - `webpack` & plugins: Build system and optimization
 - `typescript`: Type checking and compilation
@@ -69,11 +79,13 @@ src/
 ## Tool Usage Patterns
 
 ### Development Workflow
-1. **Template Processing**: Handlebars templates compiled to HTML
-2. **TypeScript Compilation**: Source code compiled with type checking
-3. **CSS Processing**: Tailwind CSS processed through PostCSS
-4. **Asset Bundling**: Webpack bundles and optimizes all assets
-5. **Development Server**: Live reload for rapid iteration
+1. **Translation Loading**: i18next loads translation files for all languages
+2. **Template Processing**: Handlebars templates compiled to HTML with i18n helper
+3. **Multi-language Generation**: Build system generates pages for each language
+4. **TypeScript Compilation**: Source code compiled with type checking
+5. **CSS Processing**: Tailwind CSS processed through PostCSS
+6. **Asset Bundling**: Webpack bundles and optimizes all assets
+7. **Development Server**: Live reload for rapid iteration
 
 ### Production Build
 1. **Code Minification**: JavaScript and CSS minified for production
@@ -92,6 +104,15 @@ src/
 - **Webpack Injection**: Automatic script tag generation and injection
 - **Entry Point Separation**: Each page loads only required functionality
 - **No Manual Scripts**: Template system relies entirely on webpack
+- **Language-specific Assets**: Proper asset path handling for subdirectory pages
+
+### Internationalization Architecture
+- **Build-time Translation**: Pages generated with translations during build process
+- **i18next Integration**: Professional i18n framework with Handlebars helper
+- **Translation Files**: JSON files in `src/locales/` directory (en.json, zh.json)
+- **Language Configuration**: Language codes, paths, and locales defined in build script
+- **SEO Optimization**: Language-specific meta tags and hreflang links generated
+- **URL Structure**: English at root, Chinese at `/cn/` subpath
 
 ### CSS Architecture
 - **Utility-First**: Tailwind CSS for rapid development and consistency

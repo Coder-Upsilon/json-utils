@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON 格式转换器 - 转换 JSON ↔ YAML ↔ XML ↔ CSV | JSON 工具</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="免费的多格式转换器，实时转换。在 JSON、YAML、XML 和 CSV 之间即时转换。自动验证和错误检测。所有格式的语法高亮。100% 客户端处理保护数据隐私。适合数据转换和 API 集成。">
+    <meta name="keywords" content="JSON转换器, YAML转换器, XML转换器, CSV转换器, JSON转YAML, JSON转XML, JSON转CSV, YAML转JSON, XML转JSON, CSV转JSON, 格式转换器, 数据转换, 文件转换器, 多格式转换器, 在线转换JSON">
+    <meta name="author" content="coderupsilon">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="zh-CN">
+    
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/formatconvert" />
+    <link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/formatconvert" />
+    <link rel="alternate" hreflang="x-default" href="https://www.onlinejsonutils.com/formatconvert" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="JSON 格式转换器 - 转换 JSON ↔ YAML ↔ XML ↔ CSV | JSON 工具">
+    <meta property="og:description" content="免费的多格式转换器，实时转换。在 JSON、YAML、XML 和 CSV 之间即时转换。自动验证和错误检测。所有格式的语法高亮。100% 客户端处理保护数据隐私。适合数据转换和 API 集成。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.onlinejsonutils.com/cn/formatconvert">
+    <meta property="og:site_name" content="JSON Utils">
+    <meta property="og:image" content="https://www.onlinejsonutils.com/assets/logo.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="zh_CN">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JSON 格式转换器 - 转换 JSON ↔ YAML ↔ XML ↔ CSV | JSON 工具">
+    <meta name="twitter:description" content="免费的多格式转换器，实时转换。在 JSON、YAML、XML 和 CSV 之间即时转换。自动验证和错误检测。所有格式的语法高亮。100% 客户端处理保护数据隐私。适合数据转换和 API 集成。">
+    <meta name="twitter:image" content="https://www.onlinejsonutils.com/assets/logo.svg">
+    <meta name="twitter:site" content="@jsonutils">
+    <meta name="twitter:creator" content="@coderupsilon">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="msapplication-TileColor" content="#667eea">
+    <meta name="application-name" content="JSON Utils">
+    <meta name="apple-mobile-web-app-title" content="JSON Utils">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="canonical" href="https://www.onlinejsonutils.com/cn/formatconvert">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "JSON Format Converter",
+  "description": "免费的多格式转换器，实时转换。在 JSON、YAML、XML 和 CSV 之间即时转换。自动验证和错误检测。所有格式的语法高亮。100% 客户端处理保护数据隐私。适合数据转换和 API 集成。",
+  "url": "https://www.onlinejsonutils.com/cn/formatconvert",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web Browser",
+  "inLanguage": "zh-CN",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "JSON to YAML Conversion",
+    "JSON to XML Conversion",
+    "Format Validation",
+    "Auto-Fix JSON Errors",
+    "Syntax Highlighting",
+    "Client-Side Processing"
+  ]
+}
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.svg">
+    
+    <!-- Resource Hints for Performance -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8PBB4NZWX2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8PBB4NZWX2');
+    </script>
+    
+    <!-- CodeMirror CSS is now bundled with webpack -->
+    <!-- Font Awesome icons optimized - only load specific icons used -->
+    
+    <!-- Tailwind CSS (processed by webpack) -->
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="header-text">
+                    <img src="../assets/logo.svg" alt="JSON Utils Logo" class="logo">
+                    <div class="header-title-group">
+                        <h1>JSON Utils</h1>
+                        <p>将 JSON 转换为 YAML、XML 和其他格式</p>
+                    </div>
+                </div>
+                <nav class="header-nav">
+                    <a href="/cn/index.html" class="nav-link">
+                        <i class="fas fa-home"></i> 首页
+                    </a>
+                    <a href="/cn/jsonfilter.html" class="nav-link">
+                        <i class="fas fa-filter"></i> JSONPath 过滤
+                    </a>
+                    <a href="/cn/formatconvert.html" class="nav-link active">
+                        <i class="fas fa-exchange-alt"></i> 格式转换
+                    </a>
+                    <a href="/cn/about.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i> 关于
+                    </a>
+                    <select class="language-dropdown-select" onchange="window.location.href=this.value">
+                        <option value="/formatconvert.html">English</option>
+                        <option value="/cn/formatconvert.html" selected>中文</option>
+                    </select>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <div class="editor-section">
+    <div class="input-panel">
+        <div class="panel-header">
+            <div class="panel-title-group">
+                <h3>输入</h3>
+                <div class="format-selector-prominent">
+                    <select id="inputFormat" class="format-dropdown-prominent">
+                        <option value="json" selected>JSON</option>
+                        <option value="xml">XML</option>
+                        <option value="yaml">YAML</option>
+                        <option value="csv">CSV</option>
+                    </select>
+                </div>
+            </div>
+            <button id="loadSampleBtn" class="btn-link">
+                加载示例
+            </button>
+            <div id="inputStatus" class="status-inline"></div>
+        </div>
+        <div class="input-container">
+            <div class="floating-buttons input-floating-buttons">
+                <button id="clearBtn" class="btn-icon" title="清空输入区域">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+            <textarea id="jsonInput" placeholder="在此粘贴您的数据..."></textarea>
+        </div>
+    </div>
+
+    <div class="output-panel">
+        <div class="panel-header">
+            <div class="panel-title-group">
+                <h3>输出</h3>
+                <div class="format-selector-prominent">
+                    <select id="outputFormat" class="format-dropdown-prominent">
+                        <option value="json">JSON</option>
+                        <option value="xml">XML</option>
+                        <option value="yaml" selected>YAML</option>
+                        <option value="csv">CSV</option>
+                    </select>
+                </div>
+            </div>
+            <div id="outputStatus" class="status-inline"></div>
+        </div>
+        <div class="output-container">
+            <div class="floating-buttons">
+                <button id="copyToInputBtn" class="btn-icon" title="将输出复制回输入以进行进一步处理">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button id="copyBtn" class="btn-icon" title="复制输出到剪贴板">
+                    <i class="fas fa-copy"></i>
+                </button>
+                <button id="downloadBtn" class="btn-icon" title="下载输出为文件">
+                    <i class="fas fa-download"></i>
+                </button>
+            </div>
+            <textarea id="output" readonly></textarea>
+        </div>
+    </div>
+</div>
+
+        </main>
+
+        <footer>
+            <p>&copy; 2025 JSON Utils - Client-side JSON processing for privacy and speed</p>
+        </footer>
+    </div>
+</body>
+</html>
