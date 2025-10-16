@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Schema Inference - Analyze JSON Structure Online | JSON Utils</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Automatically infer schema from JSON data. Detect types, enums, and structure. Perfect for understanding data patterns and documenting APIs. 100% client-side processing.">
+    <meta name="keywords" content="JSON schema inference, JSON type detection, JSON enum detection, analyze JSON structure, JSON schema generator, understand JSON data, JSON patterns, API documentation">
+    <meta name="author" content="coderupsilon">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="en">
+    
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/schema" />
+    <link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/schema" />
+    <link rel="alternate" hreflang="x-default" href="https://www.onlinejsonutils.com/schema" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="JSON Schema Inference - Analyze JSON Structure Online | JSON Utils">
+    <meta property="og:description" content="Automatically infer schema from JSON data. Detect types, enums, and structure. Perfect for understanding data patterns and documenting APIs. 100% client-side processing.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.onlinejsonutils.com/schema">
+    <meta property="og:site_name" content="JSON Utils">
+    <meta property="og:image" content="https://www.onlinejsonutils.com/assets/logo.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JSON Schema Inference - Analyze JSON Structure Online | JSON Utils">
+    <meta name="twitter:description" content="Automatically infer schema from JSON data. Detect types, enums, and structure. Perfect for understanding data patterns and documenting APIs. 100% client-side processing.">
+    <meta name="twitter:image" content="https://www.onlinejsonutils.com/assets/logo.svg">
+    <meta name="twitter:site" content="@jsonutils">
+    <meta name="twitter:creator" content="@coderupsilon">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="msapplication-TileColor" content="#667eea">
+    <meta name="application-name" content="JSON Utils">
+    <meta name="apple-mobile-web-app-title" content="JSON Utils">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="canonical" href="https://www.onlinejsonutils.com/schema">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "JSON Schema Inference Tool",
+  "description": "Automatically infer schema from JSON data showing types, enums, and structure",
+  "url": "https://www.onlinejsonutils.com/schema",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web Browser",
+  "inLanguage": "en",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Automatic Type Detection",
+    "Enum Value Inference",
+    "Array Schema Analysis",
+    "Nested Structure Support",
+    "Client-Side Processing",
+    "Privacy-First Design"
+  ]
+}
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.svg">
+    
+    <!-- Resource Hints for Performance -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8PBB4NZWX2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8PBB4NZWX2');
+    </script>
+    
+    <!-- CodeMirror CSS is now bundled with webpack -->
+    <!-- Font Awesome icons optimized - only load specific icons used -->
+    
+    <!-- Tailwind CSS (processed by webpack) -->
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="header-text">
+                    <img src="assets/logo.svg" alt="JSON Utils Logo" class="logo">
+                    <div class="header-title-group">
+                        <h1>JSON Utils</h1>
+                        <p>Detect schema from JSON data automatically</p>
+                    </div>
+                </div>
+                <nav class="header-nav">
+                    <a href="/index.html" class="nav-link">
+                        Home
+                    </a>
+                    <a href="/jsonfilter.html" class="nav-link">
+                        JSONPath Filter
+                    </a>
+                    <a href="/formatconvert.html" class="nav-link">
+                        Format Converter
+                    </a>
+                    <a href="/schema.html" class="nav-link active">
+                        Schema Detector
+                    </a>
+                    <a href="/about.html" class="nav-link">
+                        About
+                    </a>
+                    <select class="language-dropdown-select" onchange="window.location.href=this.value">
+                        <option value="/index.html" selected>English</option>
+                        <option value="/cn/index.html">中文</option>
+                    </select>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <!-- Editor Section -->
+    <div class="editor-section">
+        <!-- Input Panel -->
+        <div class="input-panel">
+            <div class="panel-header">
+                <h3>Input JSON</h3>
+                <button id="loadSampleBtn" class="btn-link">
+                    Load Sample
+                </button>
+                <div id="inputStatus" class="status-inline"></div>
+            </div>
+            <div class="input-container">
+                <textarea id="jsonInput" placeholder='Paste your JSON here...'></textarea>
+                <div class="floating-buttons input-floating-buttons">
+                    <button id="clearBtn2" class="btn-icon" title="Clear">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Output Panel -->
+        <div class="output-panel">
+            <div class="panel-header">
+                <h3>Inferred Schema</h3>
+                <div class="output-format-controls">
+                    <label class="format-radio">
+                        <input type="radio" name="schemaFormat" value="simplified" checked>
+                        <span>Simple</span>
+                    </label>
+                    <label class="format-radio">
+                        <input type="radio" name="schemaFormat" value="jsonschema">
+                        <span>JSON Schema</span>
+                    </label>
+                </div>
+                <div id="outputStatus" class="status-inline"></div>
+            </div>
+            <div class="output-container">
+                <textarea id="output" placeholder='Schema will appear here after inference...' readonly></textarea>
+                <div class="floating-buttons">
+                    <button id="copyBtn2" class="btn-icon" title="Copy">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <button id="downloadBtn2" class="btn-icon" title="Download">
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </main>
+
+        <footer>
+            <p>&copy; 2025 JSON Utils - Client-side JSON processing for privacy and speed</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,8 +1,9 @@
 {
   "nav": {
     "home": "首页",
-    "jsonFilter": "JSONPath 过滤",
+    "jsonFilter": "JSONPath 过滤器",
     "formatConvert": "格式转换",
+    "schema": "Schema 检测",
     "about": "关于"
   },
   "header": {
@@ -10,6 +11,7 @@
       "home": "格式化、验证、转换和修复您的 JSON 数据",
       "jsonFilter": "使用 JSONPath 表达式过滤 JSON",
       "formatConvert": "将 JSON 转换为 YAML、XML 和其他格式",
+      "schema": "自动检测 JSON 数据的 Schema",
       "about": "关于我们的 JSON 处理工具"
     }
   },
@@ -84,6 +86,10 @@
       "repair": {
         "title": "JSON 修复",
         "description": "自动修复常见的 JSON 语法错误，如缺少引号、尾随逗号和格式错误的结构。"
+      },
+      "schema": {
+        "title": "Schema 检测",
+        "description": "自动检测并从 JSON 数据生成模式。支持简单的 TypeScript 风格格式和标准 JSON Schema。"
       },
       "querying": {
         "title": "高级查询",
@@ -183,5 +189,11 @@
     "copyToClipboard": "复制输出到剪贴板",
     "downloadFile": "下载输出为文件",
     "placeholder": "在此粘贴您的数据..."
+  },
+  "schema": {
+    "format": {
+      "simplified": "简单",
+      "jsonSchema": "JSON Schema"
+    }
   }
 }

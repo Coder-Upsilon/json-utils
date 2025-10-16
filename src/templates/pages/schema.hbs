@@ -1,0 +1,50 @@
+<!-- Editor Section -->
+    <div class="editor-section">
+        <!-- Input Panel -->
+        <div class="input-panel">
+            <div class="panel-header">
+                <h3>{{t "editor.inputJson"}}</h3>
+                <button id="loadSampleBtn" class="btn-link">
+                    {{t "controls.loadSample"}}
+                </button>
+                <div id="inputStatus" class="status-inline"></div>
+            </div>
+            <div class="input-container">
+                <textarea id="jsonInput" placeholder='{{t "editor.inputPlaceholder"}}'></textarea>
+                <div class="floating-buttons input-floating-buttons">
+                    <button id="clearBtn2" class="btn-icon" title="{{t 'controls.clear'}}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Output Panel -->
+        <div class="output-panel">
+            <div class="panel-header">
+                <h3>{{t "editor.schema"}}</h3>
+                <div class="output-format-controls">
+                    <label class="format-radio">
+                        <input type="radio" name="schemaFormat" value="simplified" checked>
+                        <span>{{t "schema.format.simplified"}}</span>
+                    </label>
+                    <label class="format-radio">
+                        <input type="radio" name="schemaFormat" value="jsonschema">
+                        <span>{{t "schema.format.jsonSchema"}}</span>
+                    </label>
+                </div>
+                <div id="outputStatus" class="status-inline"></div>
+            </div>
+            <div class="output-container">
+                <textarea id="output" placeholder='{{t "editor.schemaPlaceholder"}}' readonly></textarea>
+                <div class="floating-buttons">
+                    <button id="copyBtn2" class="btn-icon" title="{{t 'controls.copy'}}">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <button id="downloadBtn2" class="btn-icon" title="{{t 'controls.download'}}">
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -876,11 +876,11 @@ textarea {
 
 @media (max-width: 768px) {
   .button-group {
-    @apply flex-col;
+    @apply flex-col gap-3;
   }
   
   .result-info {
-    @apply flex-col gap-2.5;
+    @apply flex-col gap-3;
   }
   
   .help-content {
@@ -911,25 +911,41 @@ textarea {
     @apply gap-2;
   }
 
-  /* Button group responsive design */
+  /* Button group responsive design - improved touch targets */
   .controls-section {
     @apply gap-4 p-4;
   }
   
   .control-group-section {
-    @apply min-w-[180px] p-3;
+    @apply min-w-full p-3;
   }
   
   .control-group-header {
-    @apply text-xs;
+    @apply text-sm;
   }
   
   .control-group {
-    @apply gap-1.5;
+    @apply gap-2;
   }
   
+  /* Larger touch targets for buttons */
   .btn-small {
-    @apply px-2 py-1.5 text-xs min-w-[60px];
+    @apply px-3 py-2.5 text-sm min-w-[80px];
+    min-height: 44px;
+  }
+  
+  .btn {
+    min-height: 44px;
+  }
+  
+  /* Format controls stacking */
+  .output-format-controls {
+    @apply flex-wrap gap-2;
+  }
+  
+  .format-radio {
+    @apply px-4 py-2.5;
+    min-height: 44px;
   }
 }
 

@@ -209,6 +209,52 @@ function getPageConfig(lang, langConfig) {
                 }
             })
         },
+        'schema.html': {
+            template: 'schema.hbs',
+            getData: (t) => ({
+                title: 'JSON Schema Inference - Analyze JSON Structure Online | JSON Utils',
+                description: 'Automatically infer schema from JSON data. Detect types, enums, and structure. Perfect for understanding data patterns and documenting APIs. 100% client-side processing.',
+                keywords: 'JSON schema inference, JSON type detection, JSON enum detection, analyze JSON structure, JSON schema generator, understand JSON data, JSON patterns, API documentation',
+                canonical: `${baseUrl}${basePath}schema`,
+                headerSubtitle: t('header.subtitle.schema'),
+                includeCodeMirror: true,
+                includeScript: false,
+                isSchema: true,
+                isContentPage: false,
+                lang: lang,
+                langPath: langConfig.path,
+                currentLang: langConfig.code,
+                htmlLang: langConfig.htmlLang,
+                locale: langConfig.locale,
+                alternateUrls: {
+                    en: `${baseUrl}/schema`,
+                    zh: `${baseUrl}/cn/schema`
+                },
+                structuredData: {
+                    "@context": "https://schema.org",
+                    "@type": "WebApplication",
+                    "name": "JSON Schema Inference Tool",
+                    "description": 'Automatically infer schema from JSON data showing types, enums, and structure',
+                    "url": `${baseUrl}${basePath}schema`,
+                    "applicationCategory": "DeveloperApplication",
+                    "operatingSystem": "Web Browser",
+                    "inLanguage": langConfig.htmlLang,
+                    "offers": {
+                        "@type": "Offer",
+                        "price": "0",
+                        "priceCurrency": "USD"
+                    },
+                    "featureList": [
+                        "Automatic Type Detection",
+                        "Enum Value Inference",
+                        "Array Schema Analysis",
+                        "Nested Structure Support",
+                        "Client-Side Processing",
+                        "Privacy-First Design"
+                    ]
+                }
+            })
+        },
         'about.html': {
             template: 'about.hbs',
             getData: (t) => ({

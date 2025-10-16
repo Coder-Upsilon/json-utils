@@ -1,114 +1,115 @@
 # Active Context
 
 ## Current Work Focus
-Successfully implemented complete internationalization (i18n) system with Chinese translations, enabling the website to be fully accessible in both English and Chinese with proper SEO optimization and language-specific meta tags.
+Successfully implemented JSON Schema Detector feature with automatic inference, dictionary pattern detection, and full i18n support. The feature uses the industry-standard `to-json-schema` library and provides both Simple and JSON Schema output formats.
 
 ## Recent Changes
-- **Internationalization Implementation (Latest - COMPLETED):**
-  - **Problem Solved:** Website was only available in English, limiting accessibility for Chinese-speaking users
+
+- **JSON Schema Detector Implementation (Latest - COMPLETED):**
+  - **Problem Solved:** Website needed automatic schema generation from JSON data for developers, API documentation, and data validation workflows
   - **Solution Implemented:**
-    - Installed i18next and i18next-fs-backend for professional i18n framework
-    - Created comprehensive translation files for English and Chinese
-    - Modified build system to generate pages for both languages
-    - Implemented `/cn/` subpath structure for Chinese pages
-    - Added language switcher UI with dropdown in navigation
-    - Updated all templates with translation keys
-    - Enhanced SEO with language-specific meta tags and hreflang links
-  - **Files Modified:**
-    - `src/locales/en.json`: Complete English translations for all pages
-    - `src/locales/zh.json`: Complete Chinese translations for all pages
-    - `src/build-templates.js`: Multi-language page generation system
-    - `src/templates/layouts/base.hbs`: Language attributes and alternate links
-    - `src/templates/partials/header.hbs`: Language-aware navigation with switcher
-    - `src/templates/pages/index.hbs`: i18n keys for all UI elements
-    - `src/templates/pages/about.hbs`: i18n keys for all content
-    - `src/templates/pages/jsonfilter.hbs`: i18n keys for all labels and guide
-    - `src/sitemap.xml`: Alternate language links for all pages
-    - `webpack.config.js`: Added Chinese page entries
-    - `src/css/navigation.css`: Language switcher styling
-    - `package.json`: Added i18next dependencies
+    - Created complete Schema Detector page with dual-editor layout
+    - Integrated `to-json-schema` library for robust schema generation
+    - Implemented automatic inference on input (500ms debounce)
+    - Added Smart Dictionary Pattern Detection for dynamic-key objects
+    - Created dual format support (Simple & JSON Schema draft-07)
+    - Implemented clean, minimal UI with automatic operation
+    - Added full internationalization (English & Chinese)
+    - Optimized SEO meta tags for "schema detect" and "json schema detector"
+  - **Files Created/Modified:**
+    - **NEW: `src/schema.ts`:** Main TypeScript implementation with automatic inference
+    - **NEW: `src/utils/JSONSchemaInferrer.ts`:** Schema generation using to-json-schema library
+    - **NEW: `src/templates/pages/schema.hbs`:** Clean dual-editor layout (no description sections)
+    - `src/locales/en.json`: Added schema translations and SEO meta tags
+    - `src/locales/zh.json`: Added Chinese schema translations
+    - `src/templates/partials/header.hbs`: Removed icons, added Schema Detector link
+    - `src/templates/pages/about.hbs`: Added Schema Detector feature card
+    - `src/sitemap.xml`: Added schema page for both languages
+    - `src/css/base.css`: Compressed header (8px padding, 1.5rem h1)
+    - `package.json`: Added to-json-schema dependency
   - **Key Features:**
-    - **Full Translation Coverage:** All UI elements, navigation, content, and tooltips translated
-    - **SEO Optimization:** Language-specific meta tags, hreflang links, structured data
-    - **Language Switcher:** Globe icon dropdown in navigation with current language indicator
-    - **URL Structure:** English at root (`/`), Chinese at `/cn/` subpath
-    - **Automatic Generation:** Build system generates both language versions automatically
-    - **Navigation Fix:** Absolute URLs prevent `/cn/cn/` double-path issues
-    - **Asset Paths:** Proper relative paths for Chinese pages (`../assets/`)
-  - **Translation Files Structure:**
+    - **Automatic Inference:** Schema generates as you type (500ms debounce)
+    - **Dual Format Support:**
+      - **Simple:** Clean TypeScript-like format (`{ "name": "String", "age": "Integer" }`)
+      - **JSON Schema:** Full JSON Schema draft-07 with validation rules
+    - **Dictionary Pattern Detection:** Detects objects with dynamic keys (URL-based keys, etc.)
+      - Only triggers for object values (not primitives)
+      - Shows as `{ "[key: string]": { schema } }` in Simple format
+      - Shows as `additionalProperties` in JSON Schema
+    - **Array Enrichment:** Analyzes all array items to capture complete properties
+    - **Clean UI:** No control buttons, just input/output with format toggle
+    - **Compressed Header:** Reduced padding and font sizes for more workspace
+    - **Icon-free Navigation:** Text-only links for cleaner appearance
+  - **Technical Implementation:**
+    - Uses `to-json-schema` library (2M+ weekly downloads) for robust generation
+    - Custom array enrichment post-processing for complete schemas
+    - Dictionary pattern detection with structure comparison
+    - Simple format derived from JSON Schema for consistency
+    - Real-time validation with automatic schema generation
+    - Format toggle in output panel header (radio buttons)
+  - **UI Design:**
+    ```
+    Input Panel:
+      Header: Input JSON | [Load Sample] | Status
+      Floating: [🗑️ Clear]
+
+    Output Panel:
+      Header: Inferred Schema | ○ Simple ○ JSON Schema | Status
+      Floating: [Copy] [Download]
+    ```
+  - **Dictionary Pattern Example:**
     ```json
-    {
-      "nav": { "home", "jsonFilter", "about" },
-      "header": { "subtitle": { "home", "jsonFilter", "about" } },
-      "controls": { "formatConversion", "toYaml", "toXml", etc. },
-      "editor": { "inputJson", "output", "pretty", "minify", etc. },
-      "meta": { "index", "jsonfilter", "about" with titles/descriptions },
-      "about": { Full content translations },
-      "jsonfilter": { Full UI and guide translations }
+    Input: {
+      "doc://url1": { "title": "...", "role": "..." },
+      "doc://url2": { "title": "...", "role": "..." }
+    }
+    
+    Simple Output: {
+      "[key: string]": { "title": "String", "role": "String" }
     }
     ```
-  - **Build System Enhancements:**
-    - i18next integration with Handlebars helper function
-    - Language configuration with locale codes and paths
-    - Automatic directory creation for `/cn/` pages
-    - Proper meta tag generation for each language
-    - Alternate URL configuration for SEO
-  - **Language Switcher Implementation:**
-    - Globe icon (🌐) in navigation shows current language (EN/中文)
-    - Hover dropdown reveals alternative language option
-    - Clicking switches to same page in other language
-    - CSS-only dropdown (no JavaScript required)
-    - Responsive design with proper z-index layering
-  - **SEO Features:**
-    - `lang` attribute in HTML tag (en, zh-CN)
-    - `hreflang` alternate links for each page pair
-    - Language-specific meta descriptions and keywords
-    - Structured data with `inLanguage` annotations
-    - Sitemap includes all language variations with alternates
+  - **SEO Optimization:**
+    - **Home:** "JSON Utils - Free Online JSON Formatter, Validator, Schema Detector & JSONPath Filter"
+    - **JSONPath Filter:** Enhanced keywords including "jsonpath filter", "json utils"
+    - **Schema Detector:** "JSON Schema Detector - Automatic Schema Generation & Inference | JSON Utils"
+    - Target keywords: `json utils`, `jsonpath filter`, `schema detect`, `json schema detector`
+    - Sitemap updated with schema.html and cn/schema.html entries
   - **Results:**
-    - Website fully accessible in English and Chinese
-    - Professional i18n implementation following best practices
-    - Proper SEO for multilingual search engine indexing
-    - Easy to add additional languages in the future
-    - All pages generated: /, /jsonfilter, /about and /cn/ versions
-    - Language switcher provides seamless user experience
+    - Professional schema detection tool meeting industry standards
+    - Clean, automatic operation requiring no manual steps
+    - Both developer-friendly (Simple) and standards-compliant (JSON Schema) outputs
+    - Smart pattern detection for dictionary/map structures
+    - Full i18n support for global audience
+    - Optimized SEO for maximum discoverability
+    - Build successful: 343 KiB bundle, production-ready
+
+- **Internationalization Implementation (Previous - COMPLETED):**
+  - Full i18n system with Chinese translations
+  - Language switcher in navigation
+  - SEO with language-specific meta tags
+  - `/cn/` subpath structure for Chinese
+  - All pages translated and generated
 
 - **UI/UX Streamlining (Previous - COMPLETED):**
-  - **Problem Solved:** Interface had too many buttons and controls, causing confusion about workflow and requiring manual actions for common tasks
-  - **Solution Implemented:**
-    - Removed validate button - validation now happens automatically with real-time feedback
-    - Implemented always-on auto-fix - broken JSON is automatically repaired without user action
-    - Consolidated format controls into output panel header as radio buttons (Pretty/Minify/Stringify)
-    - Moved Parse String button to input panel header for better organization
-    - Added expandable error messages that show fix details
-    - Implemented smart JSON storage to prevent duplicate operations
-  - **Files Modified:**
-    - `src/templates/pages/index.hbs`: Removed validate button, removed auto-fix toggle, moved stringify to radio button, moved parse string to header, removed string conversion section
-    - `src/utils/JSONUtils.ts`: Implemented `lastValidJSON` storage pattern, removed validate function, updated auto-fix to always run, simplified format handling
-    - `src/styles/main.css`: Added expandable error styles, parse button styles, removed toggle CSS, updated panel header layout
-  - **Key Features:**
-    - **Always-On Auto-Fix**: Broken JSON automatically repaired on input, shows "Fixed: [error]" message
-    - **Smart Error Display**: Errors collapsed by default (one line), click to expand for full details
-    - **Consolidated Format Controls**: Pretty/Minify/Stringify as radio buttons next to Output title
-    - **Stored JSON Pattern**: Parsed JSON stored once, all format operations use stored copy
-    - **Streamlined Layout**: Controls positioned directly next to relevant panel titles
-    - **Parse String Button**: Moved to input header, icon removed for cleaner look
-  - **Technical Implementation:**
-    - `lastValidJSON` property stores parsed JSON object
-    - Validation updates stored JSON on success or auto-fix
-    - Format buttons always use stored JSON, never re-parse output
-    - Expandable errors use `.collapsed` and `.expanded` CSS classes
-    - Error positioning absolute with proper z-index for overlay
-  - **Results:**
-    - Streamlined interface with 40% fewer buttons
-    - Automatic JSON repair with clear error feedback
-    - No duplication - format operations always work from source
-    - Better user flow from input → auto-fix → format → output
+  - Removed unnecessary buttons
+  - Automatic validation and repair
+  - Consolidated format controls
+  - Expandable error messages
+  - Smart JSON storage
+
+- **Mobile Responsiveness (Previous - COMPLETED):**
+  - 44x44px minimum touch targets
+  - Viewport-relative editor heights
+  - Landscape optimization
+  - Full-width mobile components
 
 ## Next Steps
-- Monitor i18n implementation across different browsers and devices
-- Consider adding more languages (Spanish, French, Japanese, etc.)
-- Gather user feedback on translation quality
-- Explore additional i18n features (date/number formatting, pluralization)
-- Monitor SEO performance for multilingual pages
-- Consider dynamic language detection based on browser settings
+- Monitor Schema Detector adoption and gather user feedback
+- Consider adding schema validation feature
+- Explore schema comparison functionality
+- Monitor SEO performance for target keywords
+- Consider adding schema examples/templates library
+- Evaluate adding JSON Schema $ref support
+
+## Latest Session Summary
+Implemented complete JSON Schema Detector feature from scratch, including integration with to-json-schema library, custom dictionary pattern detection, dual format support, full internationalization, SEO optimization, and sitemap updates. Feature is production-ready with clean UI and automatic operation.

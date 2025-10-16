@@ -46,7 +46,7 @@
         <loc>https://www.onlinejsonutils.com/formatconvert.html</loc>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/formatconvert.html"/>
         <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/formatconvert.html"/>
-        <lastmod>2025-10-06</lastmod>
+        <lastmod>2025-10-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -56,7 +56,27 @@
         <loc>https://www.onlinejsonutils.com/cn/formatconvert.html</loc>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/formatconvert.html"/>
         <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/formatconvert.html"/>
-        <lastmod>2025-10-06</lastmod>
+        <lastmod>2025-10-16</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- English Schema Detector Page -->
+    <url>
+        <loc>https://www.onlinejsonutils.com/schema.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/schema.html"/>
+        <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/schema.html"/>
+        <lastmod>2025-10-16</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Chinese Schema Detector Page -->
+    <url>
+        <loc>https://www.onlinejsonutils.com/cn/schema.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.onlinejsonutils.com/schema.html"/>
+        <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.onlinejsonutils.com/cn/schema.html"/>
+        <lastmod>2025-10-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>

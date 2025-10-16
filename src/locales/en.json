@@ -3,13 +3,16 @@
     "home": "Home",
     "jsonFilter": "JSONPath Filter",
     "formatConvert": "Format Converter",
+    "schema": "Schema Detector",
     "about": "About"
   },
   "header": {
+    "title": "JSON Utils",
     "subtitle": {
       "home": "Format, Validate, Convert & Fix your JSON data",
       "jsonFilter": "Filter JSON with JSONPath expressions",
       "formatConvert": "Convert JSON to YAML, XML and other formats",
+      "schema": "Detect schema from JSON data automatically",
       "about": "About our JSON processing tools"
     }
   },
@@ -18,12 +21,21 @@
     "toYaml": "To YAML",
     "toXml": "To XML",
     "quickStart": "Quick Start",
-    "loadSample": "Load Sample"
+    "loadSample": "Load Sample",
+    "input": "Input",
+    "schema": "Schema",
+    "output": "Output",
+    "clear": "Clear",
+    "inferSchema": "Infer Schema",
+    "copy": "Copy",
+    "download": "Download",
+    "copyToInput": "Copy to Input"
   },
   "editor": {
     "inputJson": "Input JSON",
     "parseString": "Parse String",
     "output": "Output",
+    "schema": "Inferred Schema",
     "pretty": "Pretty",
     "minify": "Minify",
     "stringify": "Stringify",
@@ -31,23 +43,30 @@
     "copyToInput": "Copy output back to input for further processing",
     "copyToClipboard": "Copy output to clipboard",
     "downloadFile": "Download output as file",
-    "placeholder": "Paste your JSON here..."
+    "placeholder": "Paste your JSON here...",
+    "inputPlaceholder": "Paste your JSON here...",
+    "schemaPlaceholder": "Schema will appear here after inference..."
   },
   "meta": {
     "index": {
-      "title": "JSON Utils - Free Online JSON Formatter, Validator & Editor Tool",
-      "description": "Free professional JSON utility tool. Format, validate, minify, and repair JSON data instantly. Real-time syntax highlighting with auto-error detection. 100% client-side processing ensures your data privacy. Perfect for developers, API testing, and data analysis.",
-      "keywords": "JSON formatter, JSON validator, JSON minifier, JSON beautifier, online JSON editor, JSON syntax checker, fix JSON errors, JSON repair tool, pretty print JSON, validate JSON online, JSON parser, free JSON tools, JSON debugging, API testing, developer tools"
+      "title": "JSON Utils - Free Online JSON Formatter, Validator, Schema Detector & JSONPath Filter",
+      "description": "Free professional JSON Utils toolkit. Format, validate, minify, repair JSON data, detect schemas automatically, and filter with JSONPath. Real-time syntax highlighting with auto-error detection. 100% client-side processing ensures your data privacy. Perfect for developers, API testing, data analysis, and schema generation.",
+      "keywords": "json utils, JSON formatter, JSON validator, JSON minifier, JSON beautifier, online JSON editor, JSON syntax checker, fix JSON errors, JSON repair tool, pretty print JSON, validate JSON online, JSON parser, free JSON tools, JSON debugging, API testing, developer tools, JSON schema detector, JSONPath filter"
     },
     "jsonfilter": {
       "title": "JSONPath Filter - Query & Extract JSON Data Online | JSON Utils",
-      "description": "Advanced JSONPath query tool for filtering and extracting data from complex JSON. Interactive editor with syntax guide, live examples, and real-time results. Support for wildcards, recursive descent, and filter expressions. Ideal for API response analysis and data extraction.",
-      "keywords": "JSONPath filter, JSONPath query, JSON data extraction, JSONPath expressions, filter JSON online, JSONPath syntax, JSON query tool, extract JSON values, nested JSON query, API response filter, JSON path selector, advanced JSON filtering, JSONPath wildcards, recursive JSON search"
+      "description": "Advanced JSONPath filter for querying and extracting data from complex JSON structures. Interactive JSONPath editor with comprehensive syntax guide, live examples, and real-time results. Support for wildcards, recursive descent, filter expressions, and array operations. Ideal for API response analysis, data extraction, and JSON data manipulation. 100% free JSON Utils tool.",
+      "keywords": "jsonpath filter, JSONPath query, JSON data extraction, JSONPath expressions, filter JSON online, JSONPath syntax, JSON query tool, extract JSON values, nested JSON query, API response filter, JSON path selector, advanced JSON filtering, JSONPath wildcards, recursive JSON search, json utils, jsonpath online, query json data"
     },
     "formatconvert": {
       "title": "JSON Format Converter - Convert JSON ↔ YAML ↔ XML ↔ CSV | JSON Utils",
       "description": "Free multi-format converter with real-time conversion. Convert between JSON, YAML, XML, and CSV instantly. Automatic validation and error detection. Syntax highlighting for all formats. 100% client-side processing protects your data privacy. Perfect for data transformation and API integration.",
       "keywords": "JSON converter, YAML converter, XML converter, CSV converter, JSON to YAML, JSON to XML, JSON to CSV, YAML to JSON, XML to JSON, CSV to JSON, format converter, data transformation, file converter, multi-format converter, convert JSON online"
+    },
+    "schema": {
+      "title": "JSON Schema Detector - Automatic Schema Generation & Inference | JSON Utils",
+      "description": "Free JSON Schema detector automatically generates schemas from JSON data. Detect data types, structures, and patterns instantly. Supports simple TypeScript-like format and standard JSON Schema draft-07. Real-time schema inference with dictionary pattern detection. Perfect for API documentation, data validation, and schema design. 100% free JSON Utils tool.",
+      "keywords": "json schema detector, schema detect, JSON schema generator, infer JSON schema, automatic schema generation, JSON schema inference, detect JSON schema, generate schema from JSON, JSON to schema, schema validation, JSON schema draft-07, TypeScript schema, json utils, schema detection tool, API schema generator"
     },
     "about": {
       "title": "About JSON Utils - Privacy-First Online JSON Processing Tools",
@@ -84,6 +103,10 @@
       "repair": {
         "title": "JSON Repair",
         "description": "Automatically fix common JSON syntax errors like missing quotes, trailing commas, and malformed structures."
+      },
+      "schema": {
+        "title": "Schema Detector",
+        "description": "Automatically detect and generate schemas from JSON data. Supports both simple TypeScript-like format and standard JSON Schema."
       },
       "querying": {
         "title": "Advanced Querying",
@@ -183,5 +206,53 @@
     "copyToClipboard": "Copy output to clipboard",
     "downloadFile": "Download output as file",
     "placeholder": "Paste your data here..."
+  },
+  "schema": {
+    "format": {
+      "simplified": "Simple",
+      "jsonSchema": "JSON Schema"
+    },
+    "whatIs": {
+      "title": "What is JSON Schema Inference?",
+      "description": "JSON Schema Inference automatically analyzes your JSON data and generates a schema showing data types, enum values, and structure. Choose between a simplified TypeScript-like format for easy reading, or standard JSON Schema for validation and documentation."
+    },
+    "examples": {
+      "title": "Schema Examples",
+      "basic": {
+        "title": "Basic Types",
+        "description": "Detects String, Number, Integer, Boolean, and null types automatically"
+      },
+      "enum": {
+        "title": "Enum Detection",
+        "description": "Shows possible values when a field has limited options (e.g., 'active | inactive | pending')"
+      },
+      "array": {
+        "title": "Array Analysis",
+        "description": "Analyzes array contents and shows element types or schemas for complex arrays"
+      },
+      "nested": {
+        "title": "Nested Objects",
+        "description": "Handles deeply nested structures and shows complete object hierarchies"
+      }
+    },
+    "features": {
+      "title": "Key Features",
+      "types": {
+        "title": "Type Detection",
+        "description": "Automatically identifies data types: String, Number, Integer, Boolean, null, Object, Array"
+      },
+      "enums": {
+        "title": "Enum Inference",
+        "description": "Detects fields with limited value sets (up to 10 unique values) and displays them as enums"
+      },
+      "arrays": {
+        "title": "Array Schemas",
+        "description": "Analyzes array elements and infers schemas for both primitive and complex arrays"
+      },
+      "nested": {
+        "title": "Nested Structure Support",
+        "description": "Handles arbitrarily nested objects and arrays, showing complete data structure"
+      }
+    }
   }
 }

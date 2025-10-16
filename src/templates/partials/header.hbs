@@ -9,16 +9,19 @@
         </div>
         <nav class="header-nav">
             <a href="{{#if langPath}}/{{langPath}}{{else}}/{{/if}}index.html" class="nav-link{{#if isHome}} active{{/if}}">
-                <i class="fas fa-home"></i> {{t "nav.home"}}
+                {{t "nav.home"}}
             </a>
             <a href="{{#if langPath}}/{{langPath}}{{else}}/{{/if}}jsonfilter.html" class="nav-link{{#if isJsonFilter}} active{{/if}}">
-                <i class="fas fa-filter"></i> {{t "nav.jsonFilter"}}
+                {{t "nav.jsonFilter"}}
             </a>
             <a href="{{#if langPath}}/{{langPath}}{{else}}/{{/if}}formatconvert.html" class="nav-link{{#if isFormatConvert}} active{{/if}}">
-                <i class="fas fa-exchange-alt"></i> {{t "nav.formatConvert"}}
+                {{t "nav.formatConvert"}}
+            </a>
+            <a href="{{#if langPath}}/{{langPath}}{{else}}/{{/if}}schema.html" class="nav-link{{#if isSchema}} active{{/if}}">
+                {{t "nav.schema"}}
             </a>
             <a href="{{#if langPath}}/{{langPath}}{{else}}/{{/if}}about.html" class="nav-link{{#if isAbout}} active{{/if}}">
-                <i class="fas fa-info-circle"></i> {{t "nav.about"}}
+                {{t "nav.about"}}
             </a>
             <select class="language-dropdown-select" onchange="window.location.href=this.value">
                 {{#ifEqual currentLang "en"}}

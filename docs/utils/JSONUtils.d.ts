@@ -23,6 +23,7 @@ export declare class JSONUtils {
     private fixJSON;
     private stringifyJSON;
     private parseJSONString;
+    inferSchema(): void;
     private customJSONRepair;
     private copyToInput;
     private copyOutput;

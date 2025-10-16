@@ -1,0 +1,39 @@
+🎉 Introducing JSON Utils - Your Privacy-First JSON Toolkit
+
+I'm excited to share JSON Utils (https://www.onlinejsonutils.com), a free, open-source web tool designed for developers who care about privacy and performance.
+
+What makes it special?
+
+✅ 100% Client-Side Processing - Your JSON data never leaves your browser. No servers, no tracking, complete privacy.
+
+✅ Comprehensive Feature Set:
+   • Real-time JSON validation with intelligent auto-fix
+   • Format conversion (JSON ↔ YAML ↔ XML)
+   • JSONPath filtering for complex data extraction
+   • Pretty print, minify, and string escape/unescape
+   • Advanced syntax highlighting with CodeMirror
+
+✅ Mobile-Optimized - Fully responsive design with proper touch targets (44x44px) following iOS/Android standards. Works beautifully on phones, tablets, and desktops.
+
+✅ Multilingual Support - Available in English and Chinese, with more languages coming soon.
+
+✅ Lightning Fast - No server round-trips means instant processing, even with large JSON files.
+
+✅ Developer-Friendly:
+   • Keyboard shortcuts for efficiency
+   • Dark theme editor for comfortable viewing
+   • Bracket matching and code folding
+   • One-click copy and download
+
+Perfect for:
+• API developers testing responses
+• Data analysts transforming datasets
+• DevOps engineers managing configs
+• Students learning JSON structure
+• Anyone who needs quick JSON processing
+
+Built with TypeScript, Webpack, and Tailwind CSS. Open-source and actively maintained.
+
+Try it out and let me know what you think! Feedback and contributions are always welcome. 
+
+#JSON #WebDev #OpenSource #DeveloperTools #Privacy #JavaScript #TypeScript

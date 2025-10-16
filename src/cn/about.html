@@ -109,16 +109,19 @@
                 </div>
                 <nav class="header-nav">
                     <a href="/cn/index.html" class="nav-link">
-                        <i class="fas fa-home"></i> 首页
+                        首页
                     </a>
                     <a href="/cn/jsonfilter.html" class="nav-link">
-                        <i class="fas fa-filter"></i> JSONPath 过滤
+                        JSONPath 过滤器
                     </a>
                     <a href="/cn/formatconvert.html" class="nav-link">
-                        <i class="fas fa-exchange-alt"></i> 格式转换
+                        格式转换
+                    </a>
+                    <a href="/cn/schema.html" class="nav-link">
+                        Schema 检测
                     </a>
                     <a href="/cn/about.html" class="nav-link active">
-                        <i class="fas fa-info-circle"></i> 关于
+                        关于
                     </a>
                     <select class="language-dropdown-select" onchange="window.location.href=this.value">
                         <option value="/about.html">English</option>
@@ -161,6 +164,11 @@
             <i class="fas fa-wrench feature-icon"></i>
             <h3>JSON 修复</h3>
             <p>自动修复常见的 JSON 语法错误，如缺少引号、尾随逗号和格式错误的结构。</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-sitemap feature-icon"></i>
+            <h3>Schema 检测</h3>
+            <p>自动检测并从 JSON 数据生成模式。支持简单的 TypeScript 风格格式和标准 JSON Schema。</p>
         </div>
         <div class="feature-card">
             <i class="fas fa-search feature-icon"></i>

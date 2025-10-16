@@ -109,16 +109,19 @@
                 </div>
                 <nav class="header-nav">
                     <a href="/index.html" class="nav-link">
-                        <i class="fas fa-home"></i> Home
+                        Home
                     </a>
                     <a href="/jsonfilter.html" class="nav-link">
-                        <i class="fas fa-filter"></i> JSONPath Filter
+                        JSONPath Filter
                     </a>
                     <a href="/formatconvert.html" class="nav-link">
-                        <i class="fas fa-exchange-alt"></i> Format Converter
+                        Format Converter
+                    </a>
+                    <a href="/schema.html" class="nav-link">
+                        Schema Detector
                     </a>
                     <a href="/about.html" class="nav-link active">
-                        <i class="fas fa-info-circle"></i> About
+                        About
                     </a>
                     <select class="language-dropdown-select" onchange="window.location.href=this.value">
                         <option value="/about.html" selected>English</option>
@@ -161,6 +164,11 @@
             <i class="fas fa-wrench feature-icon"></i>
             <h3>JSON Repair</h3>
             <p>Automatically fix common JSON syntax errors like missing quotes, trailing commas, and malformed structures.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-sitemap feature-icon"></i>
+            <h3>Schema Detector</h3>
+            <p>Automatically detect and generate schemas from JSON data. Supports both simple TypeScript-like format and standard JSON Schema.</p>
         </div>
         <div class="feature-card">
             <i class="fas fa-search feature-icon"></i>

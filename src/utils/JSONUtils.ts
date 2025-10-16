@@ -1,5 +1,6 @@
 import { jsonrepair } from 'jsonrepair';
 import { CodeMirrorManager } from './CodeMirrorManager';
+import { JSONSchemaInferrer } from './JSONSchemaInferrer';
 import type * as CodeMirror from 'codemirror';
 
 interface JSONUtilsElements {
@@ -413,6 +414,26 @@ export class JSONUtils {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         this.showStatus(this.elements.outputStatus, `Error parsing JSON string: ${errorMessage}`, 'error');
       }
+    }
+  }
+
+  public inferSchema(): void {
+    if (!this.lastValidJSON) {
+      this.showStatus(this.elements.outputStatus, 'Please enter valid JSON first', 'error');
+      return;
+    }
+
+    try {
+      const inferrer = new JSONSchemaInferrer();
+      const schema = inferrer.inferSchema(this.lastValidJSON);
+      const formatted = inferrer.formatSchema(schema);
+      
+      this.displayOutput(formatted, 'application/json');
+      this.currentOutputType = 'json';
+      this.showStatus(this.elements.outputStatus, 'Schema inferred successfully', 'success');
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      this.showStatus(this.elements.outputStatus, `Error inferring schema: ${errorMessage}`, 'error');
     }
   }
 
