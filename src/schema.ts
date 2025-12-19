@@ -3,6 +3,14 @@ import './styles/main.css';
 import { CodeMirrorManager } from './utils/CodeMirrorManager';
 import { JSONSchemaInferrer } from './utils/JSONSchemaInferrer';
 import { LocalStorageManager, STORAGE_KEYS } from './utils/LocalStorageManager';
+import { 
+  trackSchemaInference, 
+  trackCopy, 
+  trackDownload, 
+  trackButtonClick,
+  trackError,
+  EventName 
+} from './utils/Analytics';
 import type * as CodeMirror from 'codemirror';
 
 interface SchemaElements {
@@ -130,6 +138,7 @@ class SchemaInferrer {
   }
 
   private loadSample(): void {
+    trackButtonClick('loadSampleBtn', 'Load Sample');
     const sampleJSON = {
       "users": [
         {
@@ -218,9 +227,11 @@ class SchemaInferrer {
       
       this.outputEditor.setValue(formatted);
       this.outputEditor.setOption('mode', 'application/json');
+      trackSchemaInference(selectedFormat, this.inputEditor.getValue().length, true);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       this.showStatus(this.elements.outputStatus, `Error inferring schema: ${errorMessage}`, 'error');
+      trackError(EventName.JSON_PARSE_ERROR, errorMessage, 'schema_inference');
     }
   }
 
@@ -234,6 +245,7 @@ class SchemaInferrer {
     try {
       await navigator.clipboard.writeText(outputText);
       this.showStatus(this.elements.outputStatus, 'Schema copied to clipboard!', 'success');
+      trackCopy('schema', outputText.length);
     } catch (error) {
       // Fallback for older browsers
       const textArea = document.createElement('textarea');
@@ -243,6 +255,7 @@ class SchemaInferrer {
       document.execCommand('copy');
       document.body.removeChild(textArea);
       this.showStatus(this.elements.outputStatus, 'Schema copied to clipboard!', 'success');
+      trackCopy('schema', outputText.length);
     }
   }
 
@@ -266,6 +279,7 @@ class SchemaInferrer {
     URL.revokeObjectURL(url);
     
     this.showStatus(this.elements.outputStatus, `Schema downloaded as ${filename}`, 'success');
+    trackDownload('json', outputText.length);
   }
 
   private showStatus(element: HTMLElement, message: string, type: StatusType): void {

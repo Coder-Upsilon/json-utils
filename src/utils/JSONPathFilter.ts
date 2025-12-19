@@ -1,6 +1,14 @@
 import * as JSONPath from 'jsonpath';
 import { CodeMirrorManager } from './CodeMirrorManager';
 import { LocalStorageManager, STORAGE_KEYS } from './LocalStorageManager';
+import { 
+  trackJsonPathQuery, 
+  trackButtonClick, 
+  trackCopy, 
+  trackDownload, 
+  trackError,
+  EventName 
+} from './Analytics';
 import type * as CodeMirror from 'codemirror';
 
 export class JSONPathFilter {
@@ -156,9 +164,11 @@ export class JSONPathFilter {
       
       this.displayResults(results);
       this.updateResultInfo(results);
+      trackJsonPathQuery(jsonPathExpression, results.length, true);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       this.displayError(`Error: ${errorMessage}`);
+      trackError(EventName.JSONPATH_ERROR, errorMessage, 'jsonpath_filter');
     }
   }
 
@@ -235,6 +245,7 @@ export class JSONPathFilter {
 
 
   private loadExample(): void {
+    trackButtonClick('loadFilterSampleBtn', 'Load Sample');
     const exampleJSON = {
       "store": {
         "book": [
@@ -294,6 +305,7 @@ export class JSONPathFilter {
     try {
       await navigator.clipboard.writeText(result);
       alert('Result copied to clipboard!');
+      trackCopy('jsonpath_result', result.length);
     } catch (error) {
       // Fallback for older browsers
       const textArea = document.createElement('textarea');
@@ -303,6 +315,7 @@ export class JSONPathFilter {
       document.execCommand('copy');
       document.body.removeChild(textArea);
       alert('Result copied to clipboard!');
+      trackCopy('jsonpath_result', result.length);
     }
   }
 
@@ -323,6 +336,7 @@ export class JSONPathFilter {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+    trackDownload('json', result.length);
   }
 
   private openDrawer(): void {

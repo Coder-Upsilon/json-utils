@@ -2,6 +2,13 @@ import { jsonrepair } from 'jsonrepair';
 import { CodeMirrorManager } from './CodeMirrorManager';
 import { JSONSchemaInferrer } from './JSONSchemaInferrer';
 import { LocalStorageManager, STORAGE_KEYS } from './LocalStorageManager';
+import { 
+  trackJsonOperation, 
+  trackError, 
+  trackCopy, 
+  trackDownload,
+  EventName 
+} from './Analytics';
 import type * as CodeMirror from 'codemirror';
 
 interface JSONUtilsElements {
@@ -167,6 +174,7 @@ export class JSONUtils {
     this.inputEditor.setValue('');
     this.storageManager.clear();
     this.clearStatus();
+    trackJsonOperation(EventName.CLEAR_INPUT);
   }
 
   private loadSample(): void {
@@ -186,6 +194,7 @@ export class JSONUtils {
     const formatted = JSON.stringify(sampleJSON, null, 2);
     this.inputEditor.setValue(formatted);
     this.validateInput();
+    trackJsonOperation(EventName.LOAD_SAMPLE);
   }
 
   private validateInput(): void {
@@ -285,23 +294,28 @@ export class JSONUtils {
 
     const selectedFormat = Array.from(this.elements.formatRadios).find(radio => radio.checked)?.value;
     
+    const inputSize = this.inputEditor.getValue().length;
+    
     // Apply the selected format to the stored valid JSON
     if (selectedFormat === 'pretty') {
       const formatted = JSON.stringify(this.lastValidJSON, null, 2);
       this.displayOutput(formatted, 'application/json');
       this.currentOutputType = 'json';
       this.showStatus(this.elements.outputStatus, 'Formatted as Pretty', 'success');
+      trackJsonOperation(EventName.FORMAT_JSON, inputSize);
     } else if (selectedFormat === 'minify') {
       const minified = JSON.stringify(this.lastValidJSON);
       this.displayOutput(minified, 'application/json');
       this.currentOutputType = 'json';
       this.showStatus(this.elements.outputStatus, 'Minified successfully', 'success');
+      trackJsonOperation(EventName.MINIFY_JSON, inputSize);
     } else if (selectedFormat === 'stringify') {
       const stringified = JSON.stringify(this.lastValidJSON);
       const escapedString = JSON.stringify(stringified);
       this.displayOutput(escapedString, 'text/plain');
       this.currentOutputType = 'text';
       this.showStatus(this.elements.outputStatus, 'Stringified successfully', 'success');
+      trackJsonOperation(EventName.STRINGIFY_JSON, inputSize);
     }
   }
 
@@ -485,6 +499,7 @@ export class JSONUtils {
     this.inputEditor.setValue(outputText);
     this.validateInput();
     this.showStatus(this.elements.outputStatus, 'Output copied to input!', 'success');
+    trackJsonOperation(EventName.COPY_TO_INPUT, outputText.length);
   }
 
   private async copyOutput(): Promise<void> {
@@ -497,6 +512,7 @@ export class JSONUtils {
     try {
       await navigator.clipboard.writeText(outputText);
       this.showStatus(this.elements.outputStatus, 'Output copied to clipboard!', 'success');
+      trackCopy(this.currentOutputType, outputText.length);
     } catch (error) {
       // Fallback for older browsers
       const textArea = document.createElement('textarea');
@@ -506,6 +522,7 @@ export class JSONUtils {
       document.execCommand('copy');
       document.body.removeChild(textArea);
       this.showStatus(this.elements.outputStatus, 'Output copied to clipboard!', 'success');
+      trackCopy(this.currentOutputType, outputText.length);
     }
   }
 
@@ -536,6 +553,7 @@ export class JSONUtils {
     URL.revokeObjectURL(url);
     
     this.showStatus(this.elements.outputStatus, `File downloaded as ${filename}`, 'success');
+    trackDownload(extension, outputText.length);
   }
 
   private showStatus(element: HTMLElement, message: string, type: StatusType): void {

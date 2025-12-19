@@ -1,6 +1,14 @@
 import { jsonrepair } from 'jsonrepair';
 import { CodeMirrorManager } from './CodeMirrorManager';
 import { LocalStorageManager, STORAGE_KEYS } from './LocalStorageManager';
+import { 
+  trackFormatConversion, 
+  trackCopy, 
+  trackDownload, 
+  trackButtonClick,
+  trackError,
+  EventName 
+} from './Analytics';
 import type * as CodeMirror from 'codemirror';
 
 interface FormatConverterElements {
@@ -165,6 +173,7 @@ export class FormatConverter {
   }
 
   private loadSample(): void {
+    trackButtonClick('loadSampleBtn', 'Load Sample');
     const sampleJSON = {
       "name": "John Doe",
       "age": 30,
@@ -210,10 +219,12 @@ export class FormatConverter {
       const output = this.formatOutput(this.parsedData, outputFormat);
       this.displayOutput(output);
       this.showStatus(this.elements.outputStatus, `Converted to ${outputFormat.toUpperCase()} successfully`, 'success');
+      trackFormatConversion(inputFormat, outputFormat, true, input.length);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       this.showStatus(this.elements.inputStatus, `Error: ${errorMessage}`, 'error');
       this.parsedData = null;
+      trackError(EventName.CONVERSION_ERROR, errorMessage, `${inputFormat}_to_${outputFormat}`);
     }
   }
 
@@ -585,6 +596,7 @@ export class FormatConverter {
     try {
       await navigator.clipboard.writeText(outputText);
       this.showStatus(this.elements.outputStatus, 'Output copied to clipboard!', 'success');
+      trackCopy(this.elements.outputFormat.value, outputText.length);
     } catch (error) {
       const textArea = document.createElement('textarea');
       textArea.value = outputText;
@@ -593,6 +605,7 @@ export class FormatConverter {
       document.execCommand('copy');
       document.body.removeChild(textArea);
       this.showStatus(this.elements.outputStatus, 'Output copied to clipboard!', 'success');
+      trackCopy(this.elements.outputFormat.value, outputText.length);
     }
   }
 
@@ -618,6 +631,7 @@ export class FormatConverter {
     URL.revokeObjectURL(url);
     
     this.showStatus(this.elements.outputStatus, `File downloaded as ${filename}`, 'success');
+    trackDownload(format, outputText.length);
   }
 
   private showStatus(element: HTMLElement, message: string, type: StatusType): void {
