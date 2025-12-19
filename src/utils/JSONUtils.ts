@@ -1,6 +1,7 @@
 import { jsonrepair } from 'jsonrepair';
 import { CodeMirrorManager } from './CodeMirrorManager';
 import { JSONSchemaInferrer } from './JSONSchemaInferrer';
+import { LocalStorageManager, STORAGE_KEYS } from './LocalStorageManager';
 import type * as CodeMirror from 'codemirror';
 
 interface JSONUtilsElements {
@@ -24,11 +25,19 @@ export class JSONUtils {
   private outputEditor!: CodeMirror.Editor;
   private currentOutputType: OutputType = 'json';
   private lastValidJSON: any = null;
+  private storageManager: LocalStorageManager;
 
   constructor() {
+    this.storageManager = new LocalStorageManager({
+      key: STORAGE_KEYS.JSON_FORMATTER,
+      autoSave: true,
+      debounceMs: 500
+    });
     this.initializeElements();
     this.initializeEditors();
     this.attachEventListeners();
+    this.loadSavedContent();
+    this.setupSyncEnabledListener();
   }
 
   private initializeElements(): void {
@@ -74,8 +83,10 @@ export class JSONUtils {
       // Explicitly ensure the editor is not read-only
       this.inputEditor.setOption('readOnly', false);
       
-      // Set up real-time validation
+      // Set up real-time validation and auto-save
       this.inputEditor.on('change', () => {
+        const content = this.inputEditor.getValue();
+        this.storageManager.save(content);
         this.debounce(() => this.validateInput(), 500)();
       });
     } else {
@@ -154,6 +165,7 @@ export class JSONUtils {
 
   private clearInput(): void {
     this.inputEditor.setValue('');
+    this.storageManager.clear();
     this.clearStatus();
   }
 
@@ -561,5 +573,24 @@ export class JSONUtils {
   private displayOutput(content: string, mode: string): void {
     this.outputEditor.setValue(content);
     this.outputEditor.setOption('mode', mode);
+  }
+
+  /**
+   * Load saved content from localStorage on page load
+   */
+  private loadSavedContent(): void {
+    const savedContent = this.storageManager.load();
+    if (savedContent && savedContent.trim()) {
+      this.inputEditor.setValue(savedContent);
+      // Trigger validation after loading
+      this.validateInput();
+    }
+  }
+
+  /**
+   * Listen for syncEnabled event and save current content
+   */
+  private setupSyncEnabledListener(): void {
+    this.storageManager.setupSyncEnabledListener(() => this.inputEditor.getValue());
   }
 }

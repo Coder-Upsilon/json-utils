@@ -2,6 +2,7 @@
 import './styles/main.css';
 import { CodeMirrorManager } from './utils/CodeMirrorManager';
 import { JSONSchemaInferrer } from './utils/JSONSchemaInferrer';
+import { LocalStorageManager, STORAGE_KEYS } from './utils/LocalStorageManager';
 import type * as CodeMirror from 'codemirror';
 
 interface SchemaElements {
@@ -22,12 +23,20 @@ class SchemaInferrer {
   private outputEditor!: CodeMirror.Editor;
   private lastValidJSON: any = null;
   private inferrer: JSONSchemaInferrer;
+  private storageManager: LocalStorageManager;
 
   constructor() {
     this.inferrer = new JSONSchemaInferrer();
+    this.storageManager = new LocalStorageManager({
+      key: STORAGE_KEYS.SCHEMA_DETECTOR,
+      autoSave: true,
+      debounceMs: 500
+    });
     this.initializeElements();
     this.initializeEditors();
     this.attachEventListeners();
+    this.loadSavedContent();
+    this.storageManager.setupSyncEnabledListener(() => this.inputEditor.getValue());
   }
 
   private initializeElements(): void {
@@ -61,8 +70,10 @@ class SchemaInferrer {
       this.inputEditor = inputEditor;
       this.inputEditor.setOption('readOnly', false);
       
-      // Set up real-time validation
+      // Set up real-time validation and auto-save
       this.inputEditor.on('change', () => {
+        const content = this.inputEditor.getValue();
+        this.storageManager.save(content);
         this.debounce(() => this.validateInput(), 500)();
       });
     } else {
@@ -113,6 +124,7 @@ class SchemaInferrer {
   private clearInput(): void {
     this.inputEditor.setValue('');
     this.outputEditor.setValue('');
+    this.storageManager.clear();
     this.clearStatus();
     this.lastValidJSON = null;
   }
@@ -275,6 +287,18 @@ class SchemaInferrer {
     this.elements.inputStatus.className = 'status-inline';
     this.elements.outputStatus.textContent = '';
     this.elements.outputStatus.className = 'status-inline';
+  }
+
+  /**
+   * Load saved content from localStorage on page load
+   */
+  private loadSavedContent(): void {
+    const savedContent = this.storageManager.load();
+    if (savedContent && savedContent.trim()) {
+      this.inputEditor.setValue(savedContent);
+      // Trigger validation after loading
+      this.validateInput();
+    }
   }
 }
 

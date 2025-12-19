@@ -1,16 +1,20 @@
 /* Header Navigation Styles */
+
+/* Main header container - horizontal layout */
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    gap: 24px;
 }
 
+/* Left side: Logo and title */
 .header-text {
-    flex: 1;
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-shrink: 0;
 }
 
 .logo {
@@ -23,12 +27,26 @@
     display: flex;
     align-items: baseline;
     gap: 15px;
+    white-space: nowrap;
 }
 
+/* Right side: Navigation and config in vertical stack */
+.header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex: 1;
+    min-width: 0;
+}
+
+/* Navigation row - horizontal flex */
 .header-nav {
     display: flex;
     gap: 15px;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-bottom: 8px;
 }
 
 .nav-link {
@@ -60,7 +78,48 @@
     font-size: 14px;
 }
 
-/* Language Switcher */
+/* Configuration Row - horizontal flex layout */
+.header-config-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+/* Language Dropdown Select */
+.language-dropdown-select {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    min-width: 120px;
+}
+
+.language-dropdown-select:hover {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.language-dropdown-select:focus {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.language-dropdown-select option {
+    background: #667eea;
+    color: white;
+    padding: 10px;
+}
+
+/* Legacy language switcher styles (kept for compatibility) */
 .language-switcher {
     position: relative;
     margin-left: 10px;
@@ -144,4 +203,53 @@
 
 .lang-name {
     flex: 1;
+}
+
+.config-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.config-toggle input[type="checkbox"] {
+    display: none;
+}
+
+.config-toggle-slider {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    transition: background 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.config-toggle-slider::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.config-toggle input[type="checkbox"]:checked + .config-toggle-slider {
+    background: var(--primary-color);
+}
+
+.config-toggle input[type="checkbox"]:checked + .config-toggle-slider::before {
+    transform: translateX(20px);
+}
+
+.config-label {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
 }

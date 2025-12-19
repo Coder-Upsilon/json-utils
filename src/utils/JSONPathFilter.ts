@@ -1,5 +1,6 @@
 import * as JSONPath from 'jsonpath';
 import { CodeMirrorManager } from './CodeMirrorManager';
+import { LocalStorageManager, STORAGE_KEYS } from './LocalStorageManager';
 import type * as CodeMirror from 'codemirror';
 
 export class JSONPathFilter {
@@ -8,11 +9,19 @@ export class JSONPathFilter {
   private jsonPathInput!: HTMLInputElement;
   private resultCount!: HTMLElement;
   private resultType!: HTMLElement;
+  private storageManager: LocalStorageManager;
 
   constructor() {
+    this.storageManager = new LocalStorageManager({
+      key: STORAGE_KEYS.JSON_FILTER,
+      autoSave: true,
+      debounceMs: 500
+    });
     this.initializeElements();
     this.initializeEditors();
     this.attachEventListeners();
+    this.loadSavedContent();
+    this.storageManager.setupSyncEnabledListener(() => this.inputEditor.getValue());
   }
 
   private initializeElements(): void {
@@ -30,6 +39,12 @@ export class JSONPathFilter {
 
     if (inputEditor) {
       this.inputEditor = inputEditor;
+      
+      // Set up auto-save on input change
+      this.inputEditor.on('change', () => {
+        const content = this.inputEditor.getValue();
+        this.storageManager.save(content);
+      });
     } else {
       throw new Error('Failed to initialize input editor');
     }
@@ -204,6 +219,7 @@ export class JSONPathFilter {
   private clearInput(): void {
     if (this.inputEditor) {
       this.inputEditor.setValue('');
+      this.storageManager.clear();
     }
   }
 
@@ -408,5 +424,19 @@ export class JSONPathFilter {
         this.inputEditor.refresh();
       }, 350); // Wait for CSS transition to complete
     });
+  }
+
+  /**
+   * Load saved content from localStorage on page load
+   */
+  private loadSavedContent(): void {
+    const savedContent = this.storageManager.load();
+    if (savedContent && savedContent.trim()) {
+      this.inputEditor.setValue(savedContent);
+      // Trigger filtering after loading if there's a JSONPath expression
+      if (this.jsonPathInput && this.jsonPathInput.value.trim()) {
+        this.filterJSON();
+      }
+    }
   }
 }

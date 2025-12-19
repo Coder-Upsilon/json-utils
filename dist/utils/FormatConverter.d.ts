@@ -3,6 +3,7 @@ export declare class FormatConverter {
     private inputEditor;
     private outputEditor;
     private parsedData;
+    private storageManager;
     constructor();
     private initializeElements;
     private getElementById;
@@ -36,5 +37,9 @@ export declare class FormatConverter {
     private toggleErrorExpansion;
     private clearStatus;
     private displayOutput;
+    /**
+     * Load saved content from localStorage on page load
+     */
+    private loadSavedContent;
 }
 //# sourceMappingURL=FormatConverter.d.ts.map

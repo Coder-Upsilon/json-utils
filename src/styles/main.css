@@ -1,6 +1,14 @@
 @import "tailwindcss";
 @import "./fontawesome-custom.css";
 
+/* Prevent transitions on page load */
+.preload *,
+.preload *::before,
+.preload *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
 @theme {
   --font-mono: 'Maple Mono', 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
   --font-sans: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
@@ -71,8 +79,6 @@
   .header {
     @apply text-left mb-4 p-6 text-white rounded-2xl shadow-xl flex items-center gap-6 relative overflow-hidden;
     background: linear-gradient(-45deg, #4c63d2, #5a3d7a, #d946ef, #4c63d2);
-    background-size: 400% 400%;
-    animation: headerColorShift 8s ease-in-out infinite;
   }
 
   .header::before {
@@ -107,10 +113,11 @@
   /* Header Navigation Styles */
   .header-content {
     @apply flex justify-between items-center w-full relative z-10;
+    gap: 24px;
   }
 
   .header-text {
-    @apply flex items-center gap-4;
+    @apply flex items-center gap-4 flex-shrink-0;
   }
 
   .logo {
@@ -119,14 +126,30 @@
 
   .header-title-group {
     @apply flex items-center gap-4;
+    white-space: nowrap;
   }
 
+  /* Right side container - vertical stack */
+  .header-right {
+    @apply flex flex-col items-end flex-1;
+    min-width: 0;
+  }
+
+  /* Navigation row */
   .header-nav {
-    @apply flex gap-3 items-center;
+    @apply flex gap-2 items-center flex-wrap justify-end;
+    margin-bottom: 8px;
+  }
+
+  /* Configuration row */
+  .header-config-row {
+    @apply flex items-center justify-end gap-2 flex-wrap;
+    margin-top: 8px;
   }
 
   .nav-link {
-    @apply flex items-center gap-2 px-5 py-3 bg-white/15 text-white no-underline rounded-xl text-sm font-semibold border border-white/20 hover:bg-white/25 hover:shadow-lg backdrop-blur-sm;
+    @apply flex items-center gap-1.5 px-3 py-1.5 bg-white/15 text-white no-underline rounded-lg text-xs font-semibold border border-white/20 hover:bg-white/25 hover:shadow-lg backdrop-blur-sm;
+    transition: all 0.2s ease;
   }
 
   .nav-link.active {
@@ -134,7 +157,7 @@
   }
 
   .nav-link i {
-    @apply text-base;
+    @apply text-sm;
   }
 
   /* Main layout */
@@ -603,6 +626,21 @@
     @apply text-gray-600 text-sm leading-relaxed mb-0;
   }
 
+  /* GitHub text link - styled like a URL */
+  .github-text-link {
+    @apply items-center gap-2 text-base font-medium;
+    color: #0066cc !important;
+  }
+
+  .github-text-link:hover {
+    color: #004499 !important;
+  }
+
+  .github-text-link i {
+    @apply text-lg;
+    color: #0066cc !important;
+  }
+
   .use-cases {
     @apply space-y-3 mt-6 pl-0 list-none;
   }
@@ -665,18 +703,73 @@
     @apply shadow-none;
   }
 
-  /* Language Dropdown Select */
+  /* Language Dropdown Select - Compact */
   .language-dropdown-select {
-    @apply px-3 py-2 text-sm font-semibold rounded-lg cursor-pointer shadow-sm appearance-none bg-white/20 text-white border border-white/30 hover:bg-white/30 hover:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 backdrop-blur-sm;
-    min-width: 100px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='white' d='M5 7.5L1 3.5h8z'/%3E%3C/svg%3E");
+    @apply px-2 py-1 text-xs font-semibold rounded-md cursor-pointer shadow-sm appearance-none bg-white/20 text-white border border-white/30 hover:bg-white/30 hover:border-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 backdrop-blur-sm;
+    min-width: 60px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 10 10'%3E%3Cpath fill='white' d='M5 7.5L1 3.5h8z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 8px center;
-    padding-right: 28px;
+    background-position: right 6px center;
+    padding-right: 20px;
   }
 
   .language-dropdown-select option {
     @apply bg-gray-800 text-white font-semibold;
+  }
+
+  /* Compact Config Toggle - Icon with tooltip */
+  .config-toggle-compact {
+    @apply flex items-center gap-1.5 cursor-pointer select-none relative;
+  }
+
+  .config-toggle-icon {
+    @apply text-white text-xs;
+    opacity: 0.9;
+  }
+
+  .config-toggle-compact input[type="checkbox"] {
+    @apply sr-only;
+  }
+
+  .config-toggle-slider-compact {
+    @apply relative inline-block w-9 h-5 bg-white/20 rounded-full border border-white/30 backdrop-blur-sm;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .config-toggle-slider-compact::before {
+    content: '';
+    @apply absolute left-0.5 w-4 h-4 bg-white rounded-full shadow-md;
+    top: 1px;
+    transition: transform 0.2s ease;
+  }
+
+  .config-toggle-compact input[type="checkbox"]:checked + .config-toggle-slider-compact {
+    @apply bg-primary-500 border-primary-400;
+  }
+
+  .config-toggle-compact input[type="checkbox"]:checked + .config-toggle-slider-compact::before {
+    transform: translateX(16px);
+  }
+
+  .config-toggle-compact:hover .config-toggle-slider-compact {
+    @apply bg-white/30 border-white/50;
+  }
+
+  .config-toggle-compact:hover .config-toggle-icon {
+    opacity: 1;
+  }
+
+  .config-toggle-compact input[type="checkbox"]:checked + .config-toggle-slider-compact:hover {
+    @apply bg-primary-600 border-primary-500;
+  }
+
+  .config-toggle-label {
+    @apply text-white text-xs font-medium;
+    opacity: 0.9;
+  }
+
+  .config-toggle-compact:hover .config-toggle-label {
+    opacity: 1;
   }
 }
 

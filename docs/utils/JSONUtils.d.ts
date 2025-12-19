@@ -4,6 +4,7 @@ export declare class JSONUtils {
     private outputEditor;
     private currentOutputType;
     private lastValidJSON;
+    private storageManager;
     constructor();
     private initializeElements;
     private getElementById;
@@ -32,5 +33,13 @@ export declare class JSONUtils {
     private toggleErrorExpansion;
     private clearStatus;
     private displayOutput;
+    /**
+     * Load saved content from localStorage on page load
+     */
+    private loadSavedContent;
+    /**
+     * Listen for syncEnabled event and save current content
+     */
+    private setupSyncEnabledListener;
 }
 //# sourceMappingURL=JSONUtils.d.ts.map

@@ -96,7 +96,13 @@
     
     <!-- Tailwind CSS (processed by webpack) -->
 </head>
-<body>
+<body class="preload">
+    <script>
+        // Remove preload class after page load to enable transitions
+        window.addEventListener('load', function() {
+            document.body.classList.remove('preload');
+        });
+    </script>
     <div class="container">
         <header class="header">
             <div class="header-content">
@@ -107,27 +113,31 @@
                         <p>关于我们的 JSON 处理工具</p>
                     </div>
                 </div>
-                <nav class="header-nav">
-                    <a href="/cn/index.html" class="nav-link">
-                        首页
-                    </a>
-                    <a href="/cn/jsonfilter.html" class="nav-link">
-                        JSONPath 过滤器
-                    </a>
-                    <a href="/cn/formatconvert.html" class="nav-link">
-                        格式转换
-                    </a>
-                    <a href="/cn/schema.html" class="nav-link">
-                        Schema 检测
-                    </a>
-                    <a href="/cn/about.html" class="nav-link active">
-                        关于
-                    </a>
-                    <select class="language-dropdown-select" onchange="window.location.href=this.value">
-                        <option value="/about.html">English</option>
-                        <option value="/cn/about.html" selected>中文</option>
-                    </select>
-                </nav>
+                <div class="header-right">
+                    <nav class="header-nav">
+                        <a href="/cn/index.html" class="nav-link">
+                            首页
+                        </a>
+                        <a href="/cn/jsonfilter.html" class="nav-link">
+                            JSONPath 过滤器
+                        </a>
+                        <a href="/cn/formatconvert.html" class="nav-link">
+                            格式转换
+                        </a>
+                        <a href="/cn/schema.html" class="nav-link">
+                            Schema 检测
+                        </a>
+                        <a href="/cn/about.html" class="nav-link active">
+                            关于
+                        </a>
+                    </nav>
+                            <div class="header-config-row">
+                                <select class="language-dropdown-select" onchange="window.location.href=this.value">
+                                    <option value="/about.html">EN</option>
+                                    <option value="/cn/about.html" selected>中文</option>
+                                </select>
+                            </div>
+                </div>
             </div>
         </header>
 
@@ -217,11 +227,77 @@
     </ul>
 </section>
 
+<section class="content-section">
+    <h2>反馈</h2>
+    <div class="github-section">
+        <div class="github-info">
+            <i class="fab fa-github github-icon"></i>
+            <div>
+                <h3>帮助我们改进</h3>
+                <p>发现问题或有建议？请在 GitHub 上告诉我们。您的反馈帮助 JSON 工具变得更好。</p>
+            </div>
+        </div>
+        <div class="contribute-actions">
+            <div class="contribute-item">
+                <i class="fas fa-bug"></i>
+                <div>
+                    <h4>报告问题</h4>
+                    <p>发现了问题？创建一个 Issue，我们会修复它。</p>
+                </div>
+            </div>
+            <div class="contribute-item">
+                <i class="fas fa-lightbulb"></i>
+                <div>
+                    <h4>功能建议</h4>
+                    <p>有新功能的想法？告诉我们。</p>
+                </div>
+            </div>
+        </div>
+        <div class="github-issue-link">
+            <a href="https://github.com/Coder-Upsilon/json-utils/issues" target="_blank" rel="noopener noreferrer" class="github-text-link">
+                <i class="fab fa-github"></i> 提交 Issue
+            </a>
+        </div>
+    </div>
+</section>
+
         </main>
 
         <footer>
             <p>&copy; 2025 JSON Utils - Client-side JSON processing for privacy and speed</p>
         </footer>
     </div>
+    <script>
+    // Handle share across pages toggle
+    (function() {
+        const toggle = document.getElementById('shareAcrossPagesToggle');
+        if (toggle) {
+            // Set initial state from localStorage
+            try {
+                const saved = localStorage.getItem('json_utils_share_across_pages');
+                toggle.checked = saved === null ? true : saved === 'true';
+            } catch (e) {
+                toggle.checked = true;
+            }
+            
+            // Handle toggle change
+            toggle.addEventListener('change', function() {
+                try {
+                    localStorage.setItem('json_utils_share_across_pages', toggle.checked.toString());
+                    
+                    if (!toggle.checked) {
+                        // Clear shared input when sync is disabled
+                        localStorage.removeItem('json_utils_shared_input');
+                    } else {
+                        // Dispatch event to save current content when sync is enabled
+                        window.dispatchEvent(new CustomEvent('syncEnabled'));
+                    }
+                } catch (e) {
+                    console.error('Failed to save preference:', e);
+                }
+            });
+        }
+    })();
+    </script>
 </body>
 </html>

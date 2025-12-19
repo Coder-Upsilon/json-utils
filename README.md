@@ -1,129 +1,101 @@
-# JSON Utils
+<div align="center">
 
-A comprehensive, free online JSON processing toolkit with automatic schema detection, JSONPath filtering, format conversion, and more.
+# 🔧 JSON Utils
 
-🔗 **Live Site:** [https://www.onlinejsonutils.com](https://www.onlinejsonutils.com)
+### A comprehensive, free online JSON processing toolkit
 
-## Features
+[![Live Site](https://img.shields.io/badge/🌐_Live_Site-onlinejsonutils.com-667eea?style=for-the-badge)](https://www.onlinejsonutils.com)
+[![GitHub](https://img.shields.io/badge/GitHub-Coder--Upsilon%2Fjson--utils-181717?style=for-the-badge&logo=github)](https://github.com/Coder-Upsilon/json-utils/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+
+**Format • Validate • Convert • Filter • Detect Schema**
+
+[🚀 Try It Now](https://www.onlinejsonutils.com) • [📖 Documentation](#features) • [🐛 Report Bug](https://github.com/Coder-Upsilon/json-utils/issues) • [✨ Request Feature](https://github.com/Coder-Upsilon/json-utils/issues)
+
+</div>
+
+---
+
+## ✨ Features
 
 ### 🎯 Core Tools
 
-1. **JSON Formatter & Validator**
-   - Real-time syntax validation with detailed error messages
-   - Automatic JSON repair for common syntax errors
-   - Pretty print, minify, and stringify operations
-   - Syntax highlighting with CodeMirror
+<table>
+<tr>
+<td width="50%">
 
-2. **JSON Schema Detector** 
-   - Automatic schema generation from JSON data
-   - Dual format support: Simple (TypeScript-like) and JSON Schema draft-07
-   - Smart dictionary pattern detection for dynamic-key objects
-   - Real-time inference as you type (500ms debounce)
-   - Comprehensive array analysis
+#### 📝 JSON Formatter & Validator
+- ✅ Real-time syntax validation
+- 🔧 Automatic JSON repair
+- 🎨 Pretty print, minify, stringify
+- 💡 Syntax highlighting
 
-3. **JSONPath Filter**
-   - Query and extract data with JSONPath expressions
-   - Interactive syntax guide with examples
-   - Support for wildcards, recursive descent, and filter expressions
-   - Real-time filtering with instant results
+</td>
+<td width="50%">
 
-4. **Format Converter**
-   - Convert between JSON, YAML, XML, and CSV
-   - Bidirectional conversion support
-   - Automatic validation for all formats
-   - Syntax highlighting for all supported formats
+#### 🔍 JSON Schema Detector
+- 🤖 Automatic schema generation
+- 📋 Dual format support
+- 🎯 Dictionary pattern detection
+- ⚡ Real-time inference
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+#### 🔎 JSONPath Filter
+- 🎯 Query with JSONPath expressions
+- 📚 Interactive syntax guide
+- 🌟 Wildcards & filters
+- ⚡ Real-time results
+
+</td>
+<td width="50%">
+
+#### 🔄 Format Converter
+- 🔀 JSON ↔ YAML ↔ XML ↔ CSV
+- ↔️ Bidirectional conversion
+- ✔️ Automatic validation
+- 🎨 Syntax highlighting
+
+</td>
+</tr>
+</table>
 
 ### 🌍 Internationalization
 
-- Full support for English and Chinese (Simplified)
-- Language switcher in navigation
-- SEO-optimized with hreflang tags
-- Chinese pages available at `/cn/` subpath
+- 🇬🇧 English & 🇨🇳 Chinese (Simplified)
+- 🔀 Easy language switcher
+- 🔍 SEO-optimized with hreflang tags
 
 ### 🔒 Privacy & Security
 
-- **100% Client-Side Processing** - All data processing happens in your browser
-- **No Data Storage** - We don't store, log, or transmit your data
-- **Offline Capable** - Works offline once the page is loaded
-- **No Server Requests** - Lightning-fast processing with complete privacy
+<table>
+<tr>
+<td align="center">💻</td>
+<td><strong>100% Client-Side</strong><br/>All processing happens in your browser</td>
+<td align="center">🚫</td>
+<td><strong>No Data Storage</strong><br/>We never store or transmit your data</td>
+</tr>
+<tr>
+<td align="center">⚡</td>
+<td><strong>Lightning Fast</strong><br/>No server requests needed</td>
+<td align="center">📴</td>
+<td><strong>Offline Capable</strong><br/>Works offline once loaded</td>
+</tr>
+</table>
 
-### 📱 Mobile Optimized
+---
 
-- Responsive design with mobile-first approach
-- Touch targets meeting iOS/Android standards (44x44px minimum)
-- Optimized editor heights using viewport-relative sizing
-- Landscape orientation support
+## 🚀 Quick Start
 
-## Technology Stack
-
-- **TypeScript** - Type-safe application code
-- **Webpack 5** - Module bundling and build optimization
-- **CodeMirror** - Advanced code editor with syntax highlighting
-- **Handlebars** - Template engine for HTML generation
-- **i18next** - Internationalization framework
-- **Tailwind CSS** - Utility-first CSS framework
-- **PostCSS** - CSS processing and optimization
-
-### Key Libraries
-
-- `codemirror` - Code editor
-- `jsonpath-plus` - JSONPath query engine
-- `js-yaml` - YAML parser and serializer
-- `xml-js` - XML converter
-- `jsonrepair` - Automatic JSON repair
-- `to-json-schema` - Schema generation
-
-## Project Structure
-
-```
-json-utils/
-├── src/
-│   ├── assets/           # Images and static files
-│   ├── css/              # Stylesheets
-│   │   ├── base.css
-│   │   ├── components.css
-│   │   ├── navigation.css
-│   │   ├── responsive.css
-│   │   └── content-pages.css
-│   ├── locales/          # Translation files
-│   │   ├── en.json
-│   │   └── zh.json
-│   ├── styles/           # Additional styles
-│   │   └── main.css
-│   ├── templates/        # Handlebars templates
-│   │   ├── layouts/
-│   │   ├── pages/
-│   │   └── partials/
-│   ├── utils/            # Utility classes
-│   │   ├── CodeMirrorManager.ts
-│   │   ├── FormatConverter.ts
-│   │   ├── JSONPathFilter.ts
-│   │   ├── JSONSchemaInferrer.ts
-│   │   └── JSONUtils.ts
-│   ├── build-templates.js  # Template builder
-│   ├── main.ts           # Home page
-│   ├── jsonfilter.ts     # JSONPath filter page
-│   ├── formatconvert.ts  # Format converter page
-│   ├── schema.ts         # Schema detector page
-│   ├── about.ts          # About page
-│   └── sitemap.xml       # SEO sitemap
-├── docs/                 # Build output (GitHub Pages)
-├── memory-bank/          # Project documentation
-├── package.json
-├── tsconfig.json
-├── webpack.config.js
-├── tailwind.config.js
-└── postcss.config.js
-```
-
-## Development Setup
-
-### Prerequisites
+### 📋 Prerequisites
 
 - Node.js (v16 or higher)
 - npm or pnpm
 
-### Installation
+### 💿 Installation
 
 ```bash
 # Clone the repository
@@ -132,18 +104,13 @@ cd json-utils
 
 # Install dependencies
 npm install
-# or
-pnpm install
 ```
 
-### Development Commands
+### 🛠️ Development
 
 ```bash
-# Build templates and start development
+# Build templates
 npm run build-templates
-
-# Start development server (if configured)
-npm run dev
 
 # Build for production
 npm run build
@@ -152,136 +119,187 @@ npm run build
 npm run clean
 ```
 
-### Build Process
+---
 
-The build process consists of three main steps:
+## 🏗️ Technology Stack
 
-1. **Template Generation** (`npm run build-templates`)
-   - Compiles Handlebars templates
-   - Generates HTML pages for both English and Chinese
-   - Injects translations using i18next
+<div align="center">
 
-2. **Webpack Bundling** (`webpack --mode production`)
-   - Compiles TypeScript to JavaScript
-   - Bundles all dependencies
-   - Optimizes CSS with PostCSS and Tailwind
-   - Generates source maps
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Webpack](https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=webpack&logoColor=black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![CodeMirror](https://img.shields.io/badge/CodeMirror-D30707?style=for-the-badge&logo=codemirror&logoColor=white)
 
-3. **Deployment** (`cp -r dist/* docs/`)
-   - Copies built files to docs/ for GitHub Pages
-   - Includes HTML, CSS, JS, and assets
+</div>
 
-## Features in Detail
+### Core Technologies
 
-### Schema Detector
+- **TypeScript** - Type-safe application code
+- **Webpack 5** - Module bundling and optimization
+- **CodeMirror** - Advanced code editor with syntax highlighting
+- **Handlebars** - Template engine for HTML generation
+- **Tailwind CSS** - Utility-first CSS framework
+- **PostCSS** - CSS processing and optimization
 
-The Schema Detector automatically analyzes JSON data and generates schemas in two formats:
+### Key Libraries
 
-**Simple Format** (TypeScript-like):
-```json
+- `jsonpath-plus` - JSONPath query engine
+- `js-yaml` - YAML parser and serializer
+- `jsonrepair` - Automatic JSON repair
+- `to-json-schema` - Schema generation
+
+---
+
+## 📁 Project Structure
+
+```
+json-utils/
+├── src/
+│   ├── assets/           # Images and static files
+│   ├── css/              # Stylesheets
+│   ├── locales/          # i18n translation files
+│   ├── templates/        # Handlebars templates
+│   ├── utils/            # TypeScript utilities
+│   └── *.ts              # Page-specific TypeScript
+├── docs/                 # Build output (GitHub Pages)
+├── memory-bank/          # Project documentation
+└── webpack.config.js     # Build configuration
+```
+
+---
+
+## 📚 Features in Detail
+
+### 🔍 Schema Detector
+
+Automatically analyzes JSON and generates schemas in two formats:
+
+**Simple Format (TypeScript-like):**
+```typescript
 {
   "name": "String",
   "age": "Integer",
-  "active": "Boolean"
+  "active": "Boolean",
+  "tags": "String[]"
 }
 ```
 
-**JSON Schema Format** (Draft-07):
+**JSON Schema Format (Draft-07):**
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
     "name": { "type": "string" },
-    "age": { "type": "integer" },
-    "active": { "type": "boolean" }
+    "age": { "type": "integer" }
   }
 }
 ```
 
-**Dictionary Pattern Detection:**
-Automatically detects objects with dynamic keys:
-```json
-Input: {
-  "user_123": { "name": "Alice" },
-  "user_456": { "name": "Bob" }
-}
-
-Output: {
-  "[key: string]": { "name": "String" }
-}
-```
-
-### JSONPath Filter
+### 🔎 JSONPath Filter
 
 Supports standard JSONPath syntax:
-- `$` - Root object
-- `@` - Current object
-- `.` - Child operator
-- `..` - Recursive descent
-- `*` - Wildcard
-- `[n]` - Array index
-- `[start:end]` - Array slice
-- `[?(@.field)]` - Filter expression
 
-Example queries:
 ```javascript
 $.store.book[*].title          // All book titles
 $.store.book[?(@.price < 10)]  // Books under $10
-$..author                      // All authors recursively
+$..author                      // All authors (recursive)
+$.store.book[0,1]              // First two books
 ```
-
-## SEO Optimization
-
-The site is optimized for search engines with:
-
-- **Semantic HTML** with proper heading hierarchy
-- **Meta Tags** for each page with targeted keywords
-- **Open Graph** tags for social sharing
-- **Structured Data** with JSON-LD
-- **XML Sitemap** with hreflang alternates
-- **Robots.txt** for crawler guidance
-- **Mobile-Friendly** responsive design
-
-Target Keywords:
-- json utils
-- jsonpath filter
-- schema detect / json schema detector
-- json formatter / json validator
-- format converter
-
-## Browser Support
-
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## Acknowledgments
-
-- Built with industry-standard libraries including CodeMirror, JSONPath Plus, and to-json-schema
-- Inspired by the need for privacy-focused JSON tools
-- Thanks to all contributors and users
-
-## Contact
-
-- Website: [https://www.onlinejsonutils.com](https://www.onlinejsonutils.com)
-- GitHub: [https://github.com/Coder-Upsilon/json-utils](https://github.com/Coder-Upsilon/json-utils)
 
 ---
 
-Made with ❤️ for developers who value privacy and efficiency.
+## 🤝 Contributing
+
+We welcome contributions from the community! Here's how you can help:
+
+### 🐛 Report Bugs
+
+Found a bug? [Create an issue](https://github.com/Coder-Upsilon/json-utils/issues/new) with:
+- Description of the bug
+- Steps to reproduce
+- Expected vs actual behavior
+- Screenshots (if applicable)
+
+### ✨ Request Features
+
+Have an idea? [Open a feature request](https://github.com/Coder-Upsilon/json-utils/issues/new) with:
+- Description of the feature
+- Use case and benefits
+- Mockups or examples (if applicable)
+
+### 💻 Submit Pull Requests
+
+1. Fork the repository
+2. Create your feature branch
+   ```bash
+   git checkout -b feature/AmazingFeature
+   ```
+3. Commit your changes
+   ```bash
+   git commit -m 'Add some AmazingFeature'
+   ```
+4. Push to the branch
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
+5. Open a Pull Request
+
+---
+
+## 📈 SEO & Performance
+
+- ✅ Semantic HTML with proper heading hierarchy
+- ✅ Meta tags optimized for search engines
+- ✅ Open Graph tags for social sharing
+- ✅ Structured data with JSON-LD
+- ✅ XML sitemap with hreflang alternates
+- ✅ Mobile-first responsive design
+- ✅ Lazy loading for optimal performance
+
+---
+
+## 🌐 Browser Support
+
+| Browser | Version |
+|---------|---------|
+| Chrome/Edge | 90+ |
+| Firefox | 88+ |
+| Safari | 14+ |
+| Mobile | iOS Safari, Chrome Mobile |
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+## 🙏 Acknowledgments
+
+- Built with industry-standard libraries
+- Inspired by the need for privacy-focused JSON tools
+- Thanks to all contributors and users! ❤️
+
+---
+
+## 📬 Links
+
+<div align="center">
+
+[![Website](https://img.shields.io/badge/🌐_Website-onlinejsonutils.com-667eea?style=for-the-badge)](https://www.onlinejsonutils.com)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/Coder-Upsilon/json-utils/)
+[![Issues](https://img.shields.io/badge/Report-Issues-red?style=for-the-badge&logo=github)](https://github.com/Coder-Upsilon/json-utils/issues)
+
+</div>
+
+---
+
+<div align="center">
+
+**Made with ❤️ for developers who value privacy and efficiency**
+
+⭐ Star us on GitHub if you find this useful!
+
+</div>

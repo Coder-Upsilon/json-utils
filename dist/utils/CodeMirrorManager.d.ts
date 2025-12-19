@@ -4,9 +4,18 @@ import 'codemirror/addon/edit/matchbrackets';
 import 'codemirror/addon/fold/foldcode';
 import 'codemirror/addon/fold/foldgutter';
 import 'codemirror/addon/fold/brace-fold';
+import 'codemirror/addon/search/search';
+import 'codemirror/addon/search/searchcursor';
+import 'codemirror/addon/search/jump-to-line';
+import 'codemirror/addon/search/match-highlighter';
+import 'codemirror/addon/search/matchesonscrollbar';
+import 'codemirror/addon/dialog/dialog';
+import 'codemirror/addon/scroll/annotatescrollbar';
 import 'codemirror/theme/material-darker.css';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/addon/fold/foldgutter.css';
+import 'codemirror/addon/dialog/dialog.css';
+import 'codemirror/addon/search/matchesonscrollbar.css';
 export interface CodeMirrorConfig {
     mode?: string;
     theme?: string;
@@ -19,6 +28,11 @@ export interface CodeMirrorConfig {
     gutters?: string[];
     extraKeys?: any;
     matchBrackets?: boolean;
+    highlightSelectionMatches?: boolean | {
+        showToken?: RegExp | boolean;
+        annotateScrollbar?: boolean;
+        minChars?: number;
+    };
 }
 export declare class CodeMirrorManager {
     private static instances;

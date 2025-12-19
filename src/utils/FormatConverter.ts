@@ -1,5 +1,6 @@
 import { jsonrepair } from 'jsonrepair';
 import { CodeMirrorManager } from './CodeMirrorManager';
+import { LocalStorageManager, STORAGE_KEYS } from './LocalStorageManager';
 import type * as CodeMirror from 'codemirror';
 
 interface FormatConverterElements {
@@ -22,11 +23,19 @@ export class FormatConverter {
   private inputEditor!: CodeMirror.Editor;
   private outputEditor!: CodeMirror.Editor;
   private parsedData: any = null;
+  private storageManager: LocalStorageManager;
 
   constructor() {
+    this.storageManager = new LocalStorageManager({
+      key: STORAGE_KEYS.FORMAT_CONVERTER,
+      autoSave: true,
+      debounceMs: 500
+    });
     this.initializeElements();
     this.initializeEditors();
     this.attachEventListeners();
+    this.loadSavedContent();
+    this.storageManager.setupSyncEnabledListener(() => this.inputEditor.getValue());
   }
 
   private initializeElements(): void {
@@ -60,6 +69,12 @@ export class FormatConverter {
     if (inputEditor) {
       this.inputEditor = inputEditor;
       this.inputEditor.setOption('readOnly', false);
+      
+      // Set up auto-save on input change
+      this.inputEditor.on('change', () => {
+        const content = this.inputEditor.getValue();
+        this.storageManager.save(content);
+      });
     } else {
       throw new Error('Failed to initialize input editor');
     }
@@ -93,7 +108,7 @@ export class FormatConverter {
       this.autoConvert();
     });
 
-    // Auto-convert on input change
+    // Auto-convert on input change (auto-save is now in initializeEditors)
     this.inputEditor.on('change', () => {
       this.debounce(() => this.autoConvert(), 800)();
     });
@@ -144,6 +159,7 @@ export class FormatConverter {
   private clearInput(): void {
     this.inputEditor.setValue('');
     this.outputEditor.setValue('');
+    this.storageManager.clear();
     this.clearStatus();
     this.parsedData = null;
   }
@@ -637,5 +653,17 @@ export class FormatConverter {
 
   private displayOutput(content: string): void {
     this.outputEditor.setValue(content);
+  }
+
+  /**
+   * Load saved content from localStorage on page load
+   */
+  private loadSavedContent(): void {
+    const savedContent = this.storageManager.load();
+    if (savedContent && savedContent.trim()) {
+      this.inputEditor.setValue(savedContent);
+      // Trigger conversion after loading
+      this.autoConvert();
+    }
   }
 }

@@ -6,6 +6,9 @@
     "schema": "Schema Detector",
     "about": "About"
   },
+  "config": {
+    "shareAcrossPages": "Share JSON across pages"
+  },
   "header": {
     "title": "JSON Utils",
     "subtitle": {
@@ -136,6 +139,21 @@
       "students": "Learn JSON syntax, practice data manipulation, and understand JSONPath query language",
       "apiTesters": "Validate and format API request/response payloads, extract test data using advanced filtering",
       "devOps": "Process configuration files, extract deployment data, and automate JSON data transformations"
+    },
+    "feedback": {
+      "title": "Feedback",
+      "subtitle": "Help Us Improve",
+      "description": "Found a bug or have a suggestion? Let us know on GitHub. Your feedback helps make JSON Utils better.",
+      "submitIssue": "Open an Issue",
+      "githubLink": "https://github.com/Coder-Upsilon/json-utils/issues",
+      "reportBugs": {
+        "title": "Report Bugs",
+        "description": "Found something broken? Create an issue and we'll fix it."
+      },
+      "requestFeatures": {
+        "title": "Request Features",
+        "description": "Have an idea for a new feature? Share it with us."
+      }
     }
   },
   "jsonfilter": {

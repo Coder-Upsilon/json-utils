@@ -98,7 +98,13 @@
     
     <!-- Tailwind CSS (processed by webpack) -->
 </head>
-<body>
+<body class="preload">
+    <script>
+        // Remove preload class after page load to enable transitions
+        window.addEventListener('load', function() {
+            document.body.classList.remove('preload');
+        });
+    </script>
     <div class="container">
         <header class="header">
             <div class="header-content">
@@ -109,27 +115,37 @@
                         <p>Detect schema from JSON data automatically</p>
                     </div>
                 </div>
-                <nav class="header-nav">
-                    <a href="/index.html" class="nav-link">
-                        Home
-                    </a>
-                    <a href="/jsonfilter.html" class="nav-link">
-                        JSONPath Filter
-                    </a>
-                    <a href="/formatconvert.html" class="nav-link">
-                        Format Converter
-                    </a>
-                    <a href="/schema.html" class="nav-link active">
-                        Schema Detector
-                    </a>
-                    <a href="/about.html" class="nav-link">
-                        About
-                    </a>
-                    <select class="language-dropdown-select" onchange="window.location.href=this.value">
-                        <option value="/index.html" selected>English</option>
-                        <option value="/cn/index.html">中文</option>
-                    </select>
-                </nav>
+                <div class="header-right">
+                    <nav class="header-nav">
+                        <a href="/index.html" class="nav-link">
+                            Home
+                        </a>
+                        <a href="/jsonfilter.html" class="nav-link">
+                            JSONPath Filter
+                        </a>
+                        <a href="/formatconvert.html" class="nav-link">
+                            Format Converter
+                        </a>
+                        <a href="/schema.html" class="nav-link active">
+                            Schema Detector
+                        </a>
+                        <a href="/about.html" class="nav-link">
+                            About
+                        </a>
+                    </nav>
+                            <div class="header-config-row">
+                                <label class="config-toggle-compact" title="Share JSON across pages">
+                                    <i class="fas fa-database config-toggle-icon"></i>
+                                    <input type="checkbox" id="shareAcrossPagesToggle" checked>
+                                    <span class="config-toggle-slider-compact"></span>
+                                    <span class="config-toggle-label">Sync input</span>
+                                </label>
+                                <select class="language-dropdown-select" onchange="window.location.href=this.value">
+                                    <option value="/index.html" selected>EN</option>
+                                    <option value="/cn/index.html">中文</option>
+                                </select>
+                            </div>
+                </div>
             </div>
         </header>
 
@@ -191,5 +207,37 @@
             <p>&copy; 2025 JSON Utils - Client-side JSON processing for privacy and speed</p>
         </footer>
     </div>
+    <script>
+    // Handle share across pages toggle
+    (function() {
+        const toggle = document.getElementById('shareAcrossPagesToggle');
+        if (toggle) {
+            // Set initial state from localStorage
+            try {
+                const saved = localStorage.getItem('json_utils_share_across_pages');
+                toggle.checked = saved === null ? true : saved === 'true';
+            } catch (e) {
+                toggle.checked = true;
+            }
+            
+            // Handle toggle change
+            toggle.addEventListener('change', function() {
+                try {
+                    localStorage.setItem('json_utils_share_across_pages', toggle.checked.toString());
+                    
+                    if (!toggle.checked) {
+                        // Clear shared input when sync is disabled
+                        localStorage.removeItem('json_utils_shared_input');
+                    } else {
+                        // Dispatch event to save current content when sync is enabled
+                        window.dispatchEvent(new CustomEvent('syncEnabled'));
+                    }
+                } catch (e) {
+                    console.error('Failed to save preference:', e);
+                }
+            });
+        }
+    })();
+    </script>
 </body>
 </html>

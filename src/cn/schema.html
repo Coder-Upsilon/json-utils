@@ -98,7 +98,13 @@
     
     <!-- Tailwind CSS (processed by webpack) -->
 </head>
-<body>
+<body class="preload">
+    <script>
+        // Remove preload class after page load to enable transitions
+        window.addEventListener('load', function() {
+            document.body.classList.remove('preload');
+        });
+    </script>
     <div class="container">
         <header class="header">
             <div class="header-content">
@@ -109,27 +115,37 @@
                         <p>自动检测 JSON 数据的 Schema</p>
                     </div>
                 </div>
-                <nav class="header-nav">
-                    <a href="/cn/index.html" class="nav-link">
-                        首页
-                    </a>
-                    <a href="/cn/jsonfilter.html" class="nav-link">
-                        JSONPath 过滤器
-                    </a>
-                    <a href="/cn/formatconvert.html" class="nav-link">
-                        格式转换
-                    </a>
-                    <a href="/cn/schema.html" class="nav-link active">
-                        Schema 检测
-                    </a>
-                    <a href="/cn/about.html" class="nav-link">
-                        关于
-                    </a>
-                    <select class="language-dropdown-select" onchange="window.location.href=this.value">
-                        <option value="/index.html">English</option>
-                        <option value="/cn/index.html" selected>中文</option>
-                    </select>
-                </nav>
+                <div class="header-right">
+                    <nav class="header-nav">
+                        <a href="/cn/index.html" class="nav-link">
+                            首页
+                        </a>
+                        <a href="/cn/jsonfilter.html" class="nav-link">
+                            JSONPath 过滤器
+                        </a>
+                        <a href="/cn/formatconvert.html" class="nav-link">
+                            格式转换
+                        </a>
+                        <a href="/cn/schema.html" class="nav-link active">
+                            Schema 检测
+                        </a>
+                        <a href="/cn/about.html" class="nav-link">
+                            关于
+                        </a>
+                    </nav>
+                            <div class="header-config-row">
+                                <label class="config-toggle-compact" title="跨页面共享 JSON">
+                                    <i class="fas fa-database config-toggle-icon"></i>
+                                    <input type="checkbox" id="shareAcrossPagesToggle" checked>
+                                    <span class="config-toggle-slider-compact"></span>
+                                    <span class="config-toggle-label">Sync input</span>
+                                </label>
+                                <select class="language-dropdown-select" onchange="window.location.href=this.value">
+                                    <option value="/index.html">EN</option>
+                                    <option value="/cn/index.html" selected>中文</option>
+                                </select>
+                            </div>
+                </div>
             </div>
         </header>
 
@@ -191,5 +207,37 @@
             <p>&copy; 2025 JSON Utils - Client-side JSON processing for privacy and speed</p>
         </footer>
     </div>
+    <script>
+    // Handle share across pages toggle
+    (function() {
+        const toggle = document.getElementById('shareAcrossPagesToggle');
+        if (toggle) {
+            // Set initial state from localStorage
+            try {
+                const saved = localStorage.getItem('json_utils_share_across_pages');
+                toggle.checked = saved === null ? true : saved === 'true';
+            } catch (e) {
+                toggle.checked = true;
+            }
+            
+            // Handle toggle change
+            toggle.addEventListener('change', function() {
+                try {
+                    localStorage.setItem('json_utils_share_across_pages', toggle.checked.toString());
+                    
+                    if (!toggle.checked) {
+                        // Clear shared input when sync is disabled
+                        localStorage.removeItem('json_utils_shared_input');
+                    } else {
+                        // Dispatch event to save current content when sync is enabled
+                        window.dispatchEvent(new CustomEvent('syncEnabled'));
+                    }
+                } catch (e) {
+                    console.error('Failed to save preference:', e);
+                }
+            });
+        }
+    })();
+    </script>
 </body>
 </html>

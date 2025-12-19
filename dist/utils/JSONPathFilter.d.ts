@@ -4,6 +4,7 @@ export declare class JSONPathFilter {
     private jsonPathInput;
     private resultCount;
     private resultType;
+    private storageManager;
     constructor();
     private initializeElements;
     private initializeEditors;
@@ -24,5 +25,9 @@ export declare class JSONPathFilter {
     private closeDrawer;
     private toggleHelpPanel;
     private setupDynamicHeight;
+    /**
+     * Load saved content from localStorage on page load
+     */
+    private loadSavedContent;
 }
 //# sourceMappingURL=JSONPathFilter.d.ts.map

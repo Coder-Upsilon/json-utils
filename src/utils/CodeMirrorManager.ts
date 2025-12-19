@@ -10,10 +10,21 @@ import 'codemirror/addon/fold/foldcode';
 import 'codemirror/addon/fold/foldgutter';
 import 'codemirror/addon/fold/brace-fold';
 
+// Import search addons
+import 'codemirror/addon/search/search';
+import 'codemirror/addon/search/searchcursor';
+import 'codemirror/addon/search/jump-to-line';
+import 'codemirror/addon/search/match-highlighter';
+import 'codemirror/addon/search/matchesonscrollbar';
+import 'codemirror/addon/dialog/dialog';
+import 'codemirror/addon/scroll/annotatescrollbar';
+
 // Import only required themes and CSS
 import 'codemirror/theme/material-darker.css';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/addon/fold/foldgutter.css';
+import 'codemirror/addon/dialog/dialog.css';
+import 'codemirror/addon/search/matchesonscrollbar.css';
 
 export interface CodeMirrorConfig {
   mode?: string;
@@ -27,6 +38,7 @@ export interface CodeMirrorConfig {
   gutters?: string[];
   extraKeys?: any;
   matchBrackets?: boolean;
+  highlightSelectionMatches?: boolean | { showToken?: RegExp | boolean; annotateScrollbar?: boolean; minChars?: number };
 }
 
 export class CodeMirrorManager {
@@ -74,9 +86,15 @@ export class CodeMirrorManager {
         foldGutter: true,
         gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
         matchBrackets: true, // Enable bracket matching
+        highlightSelectionMatches: {
+          showToken: /\w/, // Highlight whole words when selected
+          annotateScrollbar: true, // Show matches on scrollbar
+          minChars: 2 // Minimum characters to trigger highlighting
+        },
         extraKeys: {
           'Ctrl-Q': (cm: any) => cm.foldCode(cm.getCursor()),
-          'Cmd-Q': (cm: any) => cm.foldCode(cm.getCursor())
+          'Cmd-Q': (cm: any) => cm.foldCode(cm.getCursor()),
+          'Alt-G': 'jumpToLine' // Jump to line with Alt-G
         }
       };
 

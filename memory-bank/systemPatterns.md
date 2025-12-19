@@ -71,10 +71,55 @@ Chinese:  /cn/           → cn/index.html
 - **CSS Processing**: Tailwind CSS with PostCSS processing pipeline
 - **Internationalization**: i18next-based translation system with build-time page generation for multiple languages
 
+### Compact Header Navigation Pattern
+The application implements a space-efficient header design with proper visual hierarchy:
+
+```css
+/* Navigation row with proper spacing */
+.header-nav {
+  @apply flex gap-2 items-center flex-wrap justify-end;
+  margin-bottom: 8px; /* Clear separation from config row */
+}
+
+/* Configuration row */
+.header-config-row {
+  @apply flex items-center justify-end gap-2 flex-wrap;
+  margin-top: 8px; /* Total 16px gap between rows */
+}
+
+/* Compact navigation buttons */
+.nav-link {
+  @apply flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg;
+  /* Reduced from px-5 py-3 text-sm rounded-xl */
+}
+
+/* Compact settings toggle with icon+label */
+.config-toggle-compact {
+  @apply flex items-center gap-1.5 cursor-pointer;
+}
+
+.config-toggle-slider-compact {
+  @apply relative inline-block w-9 h-5 bg-white/20 rounded-full;
+}
+
+.config-toggle-slider-compact::before {
+  content: '';
+  @apply absolute left-0.5 w-4 h-4 bg-white rounded-full;
+  top: 1px; /* Perfectly centered vertically */
+}
+```
+
+**Benefits:**
+- 20% reduction in header vertical space
+- Clear visual separation between navigation and configuration
+- Intuitive toggle with both icon and text indicators
+- Maintained full functionality with improved UX
+
 ### Animation-Free CSS Architecture
-- **No Page Load Animations**: Complete removal of all `transition: all` properties that cause movement during page initialization
+- **No Page Load Animations**: Complete removal of all `transition: all` and `animation` properties that cause movement during page initialization
+- **Static Gradient Background**: Removed animated gradient from header for cleaner, professional appearance
 - **Preserved Hover Effects**: Maintained color and shadow changes for user feedback while removing transform animations
-- **CSS Bundle Optimization**: Reduced bundle size from 62.8 KiB to 61.2 KiB through animation removal
+- **CSS Bundle Optimization**: Reduced bundle size through animation removal
 - **Immediate Page Loads**: Zero movement-based animations ensure instant, clean page rendering
 
 ### Always-On Auto-Fix Pattern
